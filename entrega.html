@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'self'" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Dados de entrega | Churrasco &amp; Brasa</title>
+  <link rel="stylesheet" href="pagamento.css" />
+  <link rel="stylesheet" href="entrega.css" />
+</head>
+<body>
+  <header class="payment-topbar">
+    <a class="payment-brand" href="index.html" aria-label="Voltar para Churrasco &amp; Brasa">
+      <span class="payment-brand-mark"><img src="logo-emblem.png" alt="" aria-hidden="true" decoding="async" /></span>
+      <span>
+        <strong>Churrasco &amp; Brasa</strong>
+        <small>Dados de entrega</small>
+      </span>
+    </a>
+    <span class="payment-step">Etapa 1 de 2</span>
+  </header>
+
+  <main class="payment-main delivery-main">
+    <section class="payment-intro" aria-labelledby="delivery-title">
+      <p class="payment-eyebrow">Dados para entrega</p>
+      <h1 id="delivery-title">Onde devemos entregar?</h1>
+      <p>Informe os dados abaixo para calcular a taxa da sua região e seguir para o pagamento antecipado.</p>
+    </section>
+
+    <div class="payment-layout delivery-layout" id="delivery-content">
+      <section class="order-card" aria-labelledby="delivery-order-title">
+        <div class="card-heading">
+          <div>
+            <p class="card-eyebrow">Resumo</p>
+            <h2 id="delivery-order-title">Sua sacola</h2>
+          </div>
+          <span class="order-region" id="delivery-order-region">Selecione a região</span>
+        </div>
+
+        <div class="order-items" id="delivery-items"></div>
+
+        <dl class="order-totals">
+          <div>
+            <dt>Subtotal</dt>
+            <dd id="delivery-subtotal">R$ 0,00</dd>
+          </div>
+          <div>
+            <dt>Entrega</dt>
+            <dd id="delivery-fee">Selecione a região</dd>
+          </div>
+          <div class="order-total">
+            <dt>Total estimado</dt>
+            <dd id="delivery-total">Selecione a região</dd>
+          </div>
+        </dl>
+
+        <p class="delivery-privacy-note">Seus dados ficam apenas nesta etapa do pedido e são usados para contato e entrega.</p>
+      </section>
+
+      <section class="payment-card" aria-labelledby="delivery-form-title">
+        <div class="card-heading delivery-card-heading">
+          <div>
+            <p class="card-eyebrow">Entrega</p>
+            <h2 id="delivery-form-title">Seus dados</h2>
+          </div>
+          <span class="delivery-secure-mark" aria-hidden="true">OK</span>
+        </div>
+
+        <form id="delivery-form" class="delivery-form" novalidate>
+          <div class="delivery-field">
+            <label for="delivery-name">Nome completo</label>
+            <input id="delivery-name" type="text" maxlength="120" placeholder="Como podemos chamar você?" autocomplete="name" required />
+            <small>Usaremos seu nome para identificar o pedido.</small>
+          </div>
+
+          <div class="delivery-field">
+            <label for="delivery-address">Endereço de entrega</label>
+            <textarea id="delivery-address" rows="3" maxlength="240" placeholder="Cidade, rua, número e complemento" autocomplete="street-address" required></textarea>
+            <small>Não se esqueça do número da residência.</small>
+          </div>
+
+          <div class="delivery-field">
+            <label for="delivery-region">Bairro ou cidade de entrega</label>
+            <select id="delivery-region" required>
+              <option value="" selected disabled>Selecione seu bairro ou cidade</option>
+              <optgroup label="Cascavel — taxa de entrega R$ 12,00">
+                <option value="cascavel-14-de-novembro">14 de Novembro</option>
+                <option value="cascavel-alto-alegre">Alto Alegre</option>
+                <option value="cascavel-brasilia">Brasília</option>
+                <option value="cascavel-brasmadeira">Brasmadeira</option>
+                <option value="cascavel-canada">Canadá</option>
+                <option value="cascavel-cancelli">Cancelli</option>
+                <option value="cascavel-cascavel-velho">Cascavel Velho</option>
+                <option value="cascavel-cataratas">Cataratas</option>
+                <option value="cascavel-centro">Centro</option>
+                <option value="cascavel-coqueiral">Coqueiral</option>
+                <option value="cascavel-country">Country</option>
+                <option value="cascavel-esmeralda">Esmeralda</option>
+                <option value="cascavel-floresta">Floresta</option>
+                <option value="cascavel-guaruja">Guarujá</option>
+                <option value="cascavel-interlagos">Interlagos</option>
+                <option value="cascavel-maria-luiza">Maria Luiza</option>
+                <option value="cascavel-morumbi">Morumbi</option>
+                <option value="cascavel-neva">Neva</option>
+                <option value="cascavel-pacaembu">Pacaembu</option>
+                <option value="cascavel-parque-sao-paulo">Parque São Paulo</option>
+                <option value="cascavel-parque-verde">Parque Verde</option>
+                <option value="cascavel-periolo">Periolo</option>
+                <option value="cascavel-pioneiros-catarinenses">Pioneiros Catarinenses</option>
+                <option value="cascavel-recanto-tropical">Recanto Tropical</option>
+                <option value="cascavel-regiao-do-lago">Região do Lago</option>
+                <option value="cascavel-santa-cruz">Santa Cruz</option>
+                <option value="cascavel-santa-felicidade">Santa Felicidade</option>
+                <option value="cascavel-santo-inacio">Santo Inácio</option>
+                <option value="cascavel-santos-dumont">Santos Dumont</option>
+                <option value="cascavel-sao-cristovao">São Cristóvão</option>
+                <option value="cascavel-universitario">Universitário</option>
+              </optgroup>
+              <option value="toledo">Toledo-PR, Brasil — taxa de entrega R$ 32,00</option>
+            </select>
+            <small id="delivery-fee-preview" aria-live="polite">A taxa será exibida após a seleção.</small>
+          </div>
+
+          <div class="delivery-field">
+            <label for="delivery-phone">Telefone para contato</label>
+            <input id="delivery-phone" type="tel" inputmode="tel" maxlength="20" placeholder="(45) 99999-9999" autocomplete="tel" required />
+            <small>Usaremos este número para confirmar o pedido e combinar a entrega.</small>
+          </div>
+
+          <div class="delivery-payment-notice">
+            <strong>Formas de pagamento</strong>
+            <span>Na próxima etapa você escolherá Pix ou dinheiro. Não utilizamos máquina de cartão por tempo indeterminado.</span>
+          </div>
+
+          <button type="submit" class="payment-primary">Prosseguir para pagamento</button>
+          <a href="index.html" class="payment-back">Voltar para a sacola</a>
+          <p class="payment-error" id="delivery-error" role="alert" hidden></p>
+        </form>
+      </section>
+    </div>
+
+    <section class="payment-missing" id="delivery-missing" hidden>
+      <h2>Sua sacola está vazia</h2>
+      <p>Adicione algum item antes de informar os dados de entrega.</p>
+      <a href="index.html#cardapio" class="payment-primary payment-primary-inline">Voltar ao cardápio</a>
+    </section>
+  </main>
+
+  <footer class="payment-footer">
+    <span>Churrasco &amp; Brasa</span>
+    <span>Entrega em Cascavel e Toledo</span>
+  </footer>
+
+  <script src="entrega.js?v=bravopay-checkout-4" defer></script>
+</body>
+</html>

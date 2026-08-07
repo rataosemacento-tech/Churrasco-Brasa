@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self'; style-src 'self'; img-src 'self' https: data:; connect-src 'self' http://127.0.0.1:4173 http://localhost:4173; form-action 'self'" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Pagamento | Churrasco &amp; Brasa</title>
+  <link rel="stylesheet" href="pagamento.css?v=payment-collapse-2" />
+</head>
+<body>
+  <header class="payment-topbar">
+    <a class="payment-brand" href="index.html" aria-label="Voltar para Churrasco &amp; Brasa">
+      <span class="payment-brand-mark"><img src="logo-emblem.png" alt="" aria-hidden="true" decoding="async" /></span>
+      <span>
+        <strong>Churrasco &amp; Brasa</strong>
+        <small>Pagamento do pedido</small>
+      </span>
+    </a>
+    <div class="payment-topbar-actions">
+      <a class="payment-step-back" href="entrega.html">← Voltar e editar dados</a>
+      <span class="payment-step">Etapa 2 de 2</span>
+    </div>
+  </header>
+
+  <main class="payment-main">
+    <section class="payment-intro" aria-labelledby="payment-title">
+      <p class="payment-eyebrow">Finalização do pedido</p>
+      <h1 id="payment-title">Escolha como pagar</h1>
+      <p>Confira o resumo e selecione a forma de pagamento para confirmar seu pedido com o atendimento.</p>
+      <aside class="first-order-banner" aria-labelledby="first-order-title">
+        <span class="first-order-icon" aria-hidden="true">%</span>
+        <div class="first-order-copy">
+          <p>Condição especial de boas-vindas</p>
+          <h2 id="first-order-title">Primeiro pedido? Ganhe 10% de desconto.</h2>
+          <span>Clique em BRASA10 para copiar o cupom e informe-o no campo abaixo.</span>
+        </div>
+        <button type="button" class="first-order-code" id="copy-first-order-code" aria-label="Copiar cupom BRASA10">BRASA10</button>
+      </aside>
+    </section>
+
+    <div class="payment-layout" id="payment-content">
+      <section class="order-card" aria-labelledby="order-summary-title">
+        <div class="card-heading">
+          <div>
+            <p class="card-eyebrow">Resumo</p>
+            <h2 id="order-summary-title">Seu pedido</h2>
+          </div>
+          <span class="order-region" id="order-region">Cascavel</span>
+        </div>
+
+        <div class="order-items" id="order-items"></div>
+
+        <dl class="order-totals">
+          <div class="order-subtotal">
+            <dt>Subtotal</dt>
+            <dd id="order-subtotal">R$ 0,00</dd>
+          </div>
+          <div>
+            <dt>Entrega</dt>
+            <dd id="order-delivery">R$ 0,00</dd>
+          </div>
+          <div id="order-discount-row" hidden>
+            <dt>Desconto</dt>
+            <dd id="order-discount">- R$ 0,00</dd>
+          </div>
+          <div class="order-total">
+            <dt>Total</dt>
+            <dd id="order-total">R$ 0,00</dd>
+          </div>
+        </dl>
+
+        <div class="customer-summary" aria-label="Dados para contato e entrega">
+          <div>
+            <span>Contato</span>
+            <strong id="customer-name">—</strong>
+            <small id="customer-phone">—</small>
+          </div>
+          <div>
+            <span>Entrega em</span>
+            <strong id="customer-region">—</strong>
+            <small id="customer-address">—</small>
+          </div>
+        </div>
+
+        <section class="coupon-box" aria-labelledby="coupon-title">
+          <div class="coupon-heading">
+            <div>
+              <p class="card-eyebrow">Benefício</p>
+              <h3 id="coupon-title">Cupom de desconto</h3>
+            </div>
+            <span class="coupon-mark" aria-hidden="true">%</span>
+          </div>
+          <form class="coupon-form" id="coupon-form">
+            <label for="coupon-code">Digite seu cupom</label>
+            <div class="coupon-input-row">
+              <input type="text" id="coupon-code" maxlength="32" placeholder="Digite seu cupom" autocomplete="off" />
+              <button type="submit" class="coupon-button">Aplicar</button>
+            </div>
+            <p class="coupon-feedback" id="coupon-feedback" role="status" aria-live="polite">Se você possui um cupom, informe-o para verificar o benefício.</p>
+          </form>
+        </section>
+      </section>
+
+      <section class="payment-card payment-card-collapsible" aria-labelledby="payment-section-toggle">
+        <button type="button" class="payment-section-toggle" id="payment-section-toggle" aria-expanded="false" aria-controls="payment-section-body">
+          <span class="payment-section-toggle-copy">
+            <small>Pagamento</small>
+            <strong>Formas de pagamento</strong>
+          </span>
+          <span class="payment-section-total payment-total" id="payment-total">R$ 0,00</span>
+          <span class="payment-section-toggle-icon" aria-hidden="true">⌄</span>
+        </button>
+
+        <div class="payment-section-body" id="payment-section-body" hidden>
+
+        <div class="payment-methods" role="radiogroup" aria-label="Escolha a forma de pagamento">
+          <label class="payment-method" for="payment-pix">
+            <input type="radio" id="payment-pix" name="payment-method" value="pix" />
+            <span class="method-mark method-mark-pix" aria-hidden="true"><img src="pix-logo.jpg" alt="" /></span>
+            <span class="method-copy">
+              <strong>Pix</strong>
+              <small>Gere o QR Code e copie o código Pix após prosseguir para o pagamento.</small>
+            </span>
+            <span class="method-check" aria-hidden="true"></span>
+          </label>
+
+          <label class="payment-method" for="payment-cash">
+            <input type="radio" id="payment-cash" name="payment-method" value="cash" />
+            <span class="method-mark method-mark-cash" aria-hidden="true">R$</span>
+            <span class="method-copy">
+              <strong>Dinheiro</strong>
+              <small>Dinheiro temporariamente indisponivel. Selecione Pix para concluir.</small>
+            </span>
+            <span class="method-check" aria-hidden="true"></span>
+          </label>
+        </div>
+
+        <div class="payment-instructions" id="payment-instructions" aria-live="polite"></div>
+
+        <section class="pix-payment-panel" id="pix-payment-panel" aria-labelledby="pix-payment-title" hidden>
+          <div class="pix-payment-heading">
+            <div>
+              <p class="card-eyebrow">Pagamento Pix</p>
+              <h3 id="pix-payment-title">Pague pelo QR Code ou copie o código</h3>
+            </div>
+            <span class="pix-payment-status" id="pix-payment-status" aria-live="polite">Aguardando geração</span>
+          </div>
+          <div class="pix-payment-body">
+            <div class="pix-qr-shell">
+              <img id="pix-qr-image" class="pix-qr-image" alt="QR Code para pagamento Pix" hidden />
+              <p id="pix-qr-empty">O QR Code aparecerá aqui após prosseguir.</p>
+            </div>
+            <div class="pix-payment-copy">
+              <label for="pix-copy-code">Pix copia e cola</label>
+              <textarea id="pix-copy-code" rows="4" readonly placeholder="O código será gerado após prosseguir."></textarea>
+              <button type="button" class="pix-copy-button" id="copy-pix-code" disabled>Copiar código Pix</button>
+              <p id="pix-payment-help">Depois de pagar, aguarde a confirmação automática.</p>
+            </div>
+          </div>
+          <p class="pix-payment-error" id="pix-payment-error" role="alert" hidden></p>
+        </section>
+
+        <div class="cash-change" id="cash-change" hidden>
+          <button type="button" class="cash-change-toggle" id="cash-change-toggle" aria-expanded="false" aria-controls="cash-change-fields">
+            Precisa de troco?
+          </button>
+          <div class="cash-change-fields" id="cash-change-fields" hidden>
+            <label for="cash-amount">Vou pagar com</label>
+            <div class="cash-amount-wrap">
+              <span aria-hidden="true">R$</span>
+              <input type="text" id="cash-amount" inputmode="decimal" maxlength="12" placeholder="Ex.: 100,00" autocomplete="off" />
+            </div>
+            <p class="cash-change-result" id="cash-change-result" aria-live="polite">Informe o valor que será entregue em dinheiro.</p>
+          </div>
+        </div>
+
+        <div class="payment-note">
+          <span class="payment-note-icon" aria-hidden="true">i</span>
+            <p>O Pix é a única forma disponível para concluir o pedido. Não estamos utilizando pagamento na máquina por tempo indeterminado.</p>
+        </div>
+
+        <div class="payment-error" id="payment-error" role="alert" hidden></div>
+        <button type="button" class="payment-primary" id="confirm-payment">Prosseguir para o pagamento</button>
+        <a class="payment-back" href="index.html#cardapio">Voltar ao cardápio</a>
+
+        <div class="payment-success" id="payment-success" role="status" hidden>
+          <span class="success-mark" aria-hidden="true">✓</span>
+          <strong>Pedido enviado para o atendimento</strong>
+          <p>Assim que seu pagamento for confirmado, enviaremos atualizações do seu pedido via WhatsApp no momento da entrega!</p>
+        </div>
+        </div>
+      </section>
+    </div>
+
+    <section class="payment-missing" id="payment-missing" aria-live="polite" hidden>
+      <h2>Não encontramos um pedido em andamento</h2>
+      <p>Volte ao cardápio, adicione seus itens à sacola e avance para o pagamento.</p>
+      <a class="payment-primary payment-primary-inline" href="index.html#cardapio">Voltar ao cardápio</a>
+    </section>
+  </main>
+
+  <footer class="payment-footer">
+    <span>Churrasco &amp; Brasa</span>
+    <span>Atendimento para confirmação do pedido</span>
+  </footer>
+
+  <script src="qrcode-generator.js?v=pix-qr-1" defer></script>
+  <script src="pagamento.js?v=pix-qr-7" defer></script>
+</body>
+</html>

@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; media-src 'self'; connect-src 'none'; form-action 'self'; manifest-src 'none'; worker-src 'none'" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Churrasco & Brasa — Delivery de Carnes Assadas</title>
+  <meta name="description" content="Churrasco & Brasa — As melhores carnes assadas na brasa entregues na sua porta. Picanha, costela, frango e muito mais. Peça agora!" />
+  <meta name="keywords" content="churrasco, delivery, carnes assadas, picanha, costela, brasa, churrasqueiro" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" referrerpolicy="no-referrer" />
+  <link rel="preload" as="image" href="site-loading-bg.jpg" fetchpriority="high" />
+  <link rel="stylesheet" href="style.css?v=sobre-video-1" />
+</head>
+<body>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo" id="logo-link">
+        <div class="logo-emblem">
+          <img src="logo-emblem.png" alt="" class="logo-emblem-img" />
+        </div>
+        <div class="logo-text">
+          <div class="logo-wordmark">
+            <span class="logo-main">CHURRASCO</span>
+            <span class="logo-amp">&amp;</span>
+            <span class="logo-sub">BRASA</span>
+          </div>
+          <span class="logo-tagline">CARNES ASSADAS · DELIVERY</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" id="nav-links">
+        <a href="#inicio" class="nav-link active" id="nav-inicio">Início</a>
+        <a href="#cardapio" class="nav-link" id="nav-cardapio">Cardápio</a>
+        <a href="#sobre" class="nav-link" id="nav-sobre">Sobre Nós</a>
+        <a href="#como-funciona" class="nav-link" id="nav-como">Como Funciona</a>
+        <a href="#depoimentos" class="nav-link" id="nav-dep">Depoimentos</a>
+        
+      </nav>
+
+      <a href="#cardapio" class="btn-peça-nav" id="btn-nav-peca"><span class="site-icon site-icon--fire" aria-hidden="true"></span>Peça Agora</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-controls="nav-links" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg">
+      <video class="hero-video" id="hero-bg-video" muted playsinline preload="none" poster="site-loading-bg.jpg" aria-hidden="true">
+        <source data-src="hero-healthy-weekend-2k-muted.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-smoke"></div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow" id="hero-eyebrow">
+        <span class="eyebrow-line"></span>
+        Devagar e com Fogo, Feito para Impressionar
+        <span class="eyebrow-line"></span>
+      </p>
+      <h1 class="hero-title" id="hero-title">
+        <span class="title-white">CHURRASCO</span>
+        <span class="title-red">DE VERDADE.</span>
+      </h1>
+      <p class="hero-desc" id="hero-desc">
+        Carnes selecionadas, assadas lentamente na brasa e entregues fresquinhas na sua porta. Sabor autêntico de churrasqueiro com o conforto do delivery.
+      </p>
+      <article class="hero-offer" id="hero-offer" aria-labelledby="hero-offer-title">
+        <div class="hero-offer-brand">
+          <div class="hero-offer-brand-main">
+            <span class="hero-offer-logo" aria-hidden="true"><img src="logo-emblem.png" alt="" decoding="async" /></span>
+            <div>
+              <strong class="hero-offer-brand-name">CHURRASCO <span>&amp; BRASA</span></strong>
+              <span class="hero-offer-brand-meta">Oferta da casa</span>
+            </div>
+          </div>
+          <span class="hero-offer-badge">KIT<br /><b>BRASA</b></span>
+        </div>
+        <div class="hero-offer-timer" id="hero-offer-timer" role="status" aria-live="polite">
+          <span class="hero-offer-timer-label">Tempo limite para comprar</span>
+          <strong id="hero-offer-countdown" aria-label="Tempo restante: 2 horas, 35 minutos e 47 segundos">02:35:47</strong>
+        </div>
+        <figure class="hero-offer-photo">
+          <img src="hero-offer-kit-2k.jpg?v=2" alt="Kit de carnes grelhadas servido com frango, linguiça, picanha e queijo coalho" loading="eager" fetchpriority="high" decoding="async" />
+          <figcaption>O sabor da brasa em um kit completo</figcaption>
+        </figure>
+        <div class="hero-offer-head">
+          <div>
+            <h2 id="hero-offer-title">Kit Brasa Completo</h2>
+            <p class="hero-offer-subtitle">Carnes selecionadas para compartilhar</p>
+          </div>
+          <div class="hero-offer-price">
+            <del>R$ 168,60</del>
+            <strong>R$ 88,90</strong>
+            <span>Economize R$ 79,70</span>
+          </div>
+        </div>
+        <div class="hero-offer-divider" aria-hidden="true"></div>
+        <p class="hero-offer-includes">Inclui no kit</p>
+        <ul class="hero-offer-items" aria-label="Itens da oferta">
+          <li>Costela bovina 550g</li>
+          <li>Picanha na brasa 400g</li>
+          <li>Costela suína + BBQ</li>
+          <li>Frango na brasa inteiro</li>
+          <li class="hero-offer-gift">1x maionese caseira 290g ou queijo coalho de 180g <em>brinde</em></li>
+          <li class="hero-offer-extra">
+            <span>Coca-Cola 2L <em>+ outra por R$ 6,50</em></span>
+            <button type="button" class="hero-offer-extra-btn" id="btn-hero-offer-coke-extra" disabled>Adicione a oferta primeiro</button>
+          </li>
+        </ul>
+        <div class="hero-offer-actions">
+          <button type="button" class="hero-offer-cta" id="btn-hero-offer">Adicionar oferta à sacola</button>
+        </div>
+      </article>
+
+      <div class="hero-actions" id="hero-actions">
+        <a href="#cardapio" class="btn-primary" id="btn-peca-online"><span class="site-icon site-icon--fire" aria-hidden="true"></span>Peça Agora</a>
+        <a href="#cardapio" class="btn-outline" id="btn-ver-cardapio">Ver Cardápio</a>
+      </div>
+
+      <div class="hero-badges" id="hero-badges">
+        <div class="badge">
+          <span class="badge-num">4.9</span>
+          <span class="badge-label"><span class="site-icon site-icon--star" aria-hidden="true"></span>Avaliação</span>
+        </div>
+        <div class="badge-divider"></div>
+        <div class="badge">
+          <span class="badge-num">+7.000</span>
+          <span class="badge-label"><span class="site-icon site-icon--meat" aria-hidden="true"></span>Pedidos</span>
+        </div>
+        <div class="badge-divider"></div>
+        <div class="badge">
+          <span class="badge-num">Até 2h</span>
+          <span class="badge-label"><span class="site-icon site-icon--delivery" aria-hidden="true"></span>Entrega</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll" id="hero-scroll">
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ===================== STATS BAR ===================== -->
+  <section class="stats-bar" id="stats-bar">
+    <div class="stats-container">
+      <div class="stat-item" id="stat-1">
+        <span class="stat-icon stat-icon-rating" aria-hidden="true"></span>
+        <div>
+          <strong>Avaliação 4.9</strong>
+          <span>+1.000 avaliações</span>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item" id="stat-2">
+        <span class="stat-icon stat-icon-grill" aria-hidden="true"></span>
+        <div>
+          <strong>Feito na Brasa</strong>
+          <span>Sabor que se sente</span>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item" id="stat-3">
+        <span class="stat-icon stat-icon-delivery" aria-hidden="true"></span>
+        <div>
+          <strong>Entrega Rápida</strong>
+          <span>Prazo de até 2h</span>
+        </div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item" id="stat-4">
+        <span class="stat-icon stat-icon-family" aria-hidden="true"></span>
+        <div>
+          <strong>Família &amp; Amigos</strong>
+          <span>Todos são bem-vindos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CARDÁPIO ===================== -->
+  <section class="cardapio" id="cardapio">
+    <div class="section-header">
+      <p class="section-eyebrow"><span class="site-icon site-icon--meat" aria-hidden="true"></span>Nossa Seleção</p>
+      <h2 class="section-title">CARDÁPIO <span class="red">PREMIUM</span></h2>
+      <p class="section-sub">Escolha seu churrasco, bebida ou sobremesa e receba na porta, saindo direto da brasa</p>
+    </div>
+
+    <div class="menu-category-tabs" id="menu-category-tabs" role="tablist" aria-label="Categorias do cardápio">
+      <button type="button" class="menu-category-tab active" data-menu-category="carnes" role="tab" aria-selected="true" aria-controls="menu-grid" id="menu-category-carnes"><span class="site-icon site-icon--meat" aria-hidden="true"></span>Carnes</button>
+      <button type="button" class="menu-category-tab" data-menu-category="bebidas" role="tab" aria-selected="false" aria-controls="menu-grid" id="menu-category-bebidas"><span class="site-icon site-icon--drink" aria-hidden="true"></span>Bebidas</button>
+      <button type="button" class="menu-category-tab" data-menu-category="sobremesas" role="tab" aria-selected="false" aria-controls="menu-grid" id="menu-category-sobremesas"><span class="site-icon site-icon--dessert" aria-hidden="true"></span>Sobremesas</button>
+    </div>
+
+    <p class="menu-filter-label" id="menu-filter-label">Filtre por tipo de carne</p>
+    <div class="filter-tabs" id="filter-tabs" aria-label="Filtros de carnes">
+      <button class="filter-tab active" data-filter="todos" id="filter-todos">Todos</button>
+      <button class="filter-tab" data-filter="bovinos" id="filter-bovinos"><span class="site-icon site-icon--beef" aria-hidden="true"></span>Bovinos</button>
+      <button class="filter-tab" data-filter="suinos" id="filter-suinos"><span class="site-icon site-icon--pork" aria-hidden="true"></span>Suínos</button>
+      <button class="filter-tab" data-filter="frango" id="filter-frango"><span class="site-icon site-icon--chicken" aria-hidden="true"></span>Frango</button>
+      <button class="filter-tab combo-highlight" data-filter="combos" id="filter-combos" aria-label="Combos, opção com mais economia">
+        <span class="combo-tab-icon site-icon site-icon--combo" aria-hidden="true"></span>
+        <span class="combo-tab-copy">
+          <strong>Combos</strong>
+          <small>Mais economia</small>
+        </span>
+      </button>
+    </div>
+
+    <div class="menu-grid" id="menu-grid">
+
+      <!-- Bovinos -->
+      <div class="menu-card" data-category="bovinos" id="card-picanha">
+        <div class="menu-card-img-wrap">
+          <img src="menu_picanha-user-3x4.jpg?v=2" alt="Picanha na Brasa" class="menu-card-img" loading="lazy" decoding="async" />
+          <span class="menu-badge best">Mais Pedido</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h3>Picanha na Brasa</h3>
+            <span class="menu-tag">Bovino</span>
+          </div>
+          <p>Picanha com capa de gordura, temperada no alho e sal grosso, assada lentamente na brasa.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">R$ 39,90 <small>/ 700g</small></span>
+            <button class="btn-add" id="add-picanha" data-cart-name="Picanha na Brasa" data-cart-price="39.90">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-category="bovinos" id="card-costela-bovina">
+        <div class="menu-card-img-wrap">
+          <img src="menu_costela_bovina-2k.jpg" alt="Costela Bovina Assada" class="menu-card-img costela-bovina-img" loading="lazy" decoding="async" />
+          <span class="menu-badge new">Novo</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h3>Costela Bovina Assada</h3>
+            <span class="menu-tag">Bovino</span>
+          </div>
+          <p>Costela bovina assada lentamente, com crosta dourada, suculenta e cheia de sabor.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">R$ 46,90 <small>/ 550g</small></span>
+            <button class="btn-add" id="add-costela-bovina" data-cart-name="Costela Bovina Assada" data-cart-price="46.90">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Suínos -->
+      <div class="menu-card" data-category="suinos" id="card-costela">
+        <div class="menu-card-img-wrap">
+          <img src="menu_ribs_1785709631447-2k.jpg" alt="Costela Suína" class="menu-card-img" loading="lazy" decoding="async" />
+          <span class="menu-badge hot"><span class="site-icon site-icon--fire" aria-hidden="true"></span>Hot</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h3>Costela Suína BBQ</h3>
+            <span class="menu-tag">Suíno</span>
+          </div>
+          <p>Costelas suínas glaceadas com molho BBQ artesanal, assadas até caramelizar perfeitamente.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">R$ 39,90 <small>/ 800g</small></span>
+            <button class="btn-add" id="add-costela" data-cart-name="Costela Suína BBQ" data-cart-price="39.90">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frango -->
+      <div class="menu-card" data-category="frango" id="card-frango">
+        <div class="menu-card-img-wrap">
+          <img src="menu_frango_assado_prato-2k.jpg" alt="Frango inteiro assado na brasa servido no prato" class="menu-card-img frango-assado-img" loading="lazy" decoding="async" />
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h3>Frango na Brasa Inteiro</h3>
+            <span class="menu-tag">Frango</span>
+          </div>
+          <p>Frango caipira temperado com ervas frescas, alho e limão. Assado inteiro na brasa com crocância única.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">R$ 29,90 <small>/ unid</small></span>
+            <button class="btn-add" id="add-frango" data-cart-name="Frango na Brasa" data-cart-price="29.90">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combos -->
+      <div class="menu-card combo-card" data-category="combos" id="card-combo1">
+        <div class="menu-card-img-wrap">
+          <img src="menu_picanha_1785709623213-2k.jpg" alt="Combo Família" class="menu-card-img" loading="lazy" decoding="async" />
+          <span class="menu-badge best">Melhor Valor</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h3>Combo Família</h3>
+            <span class="menu-tag">Combo</span>
+          </div>
+          <p>500g Picanha + 600g Costela + Farofa + Vinagrete + 4 pães de alho. Serve até 4 pessoas.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">R$ 115,90 <small>/ combo</small></span>
+            <button class="btn-add" id="add-combo1" data-cart-name="Combo Família" data-cart-price="115.90">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card combo-card" data-category="combos" id="card-combo2">
+        <div class="menu-card-img-wrap">
+          <img src="menu_ribs_1785709631447-2k.jpg" alt="Combo Churrasqueiro" class="menu-card-img" loading="lazy" decoding="async" />
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h3>Combo Churrasqueiro</h3>
+            <span class="menu-tag">Combo</span>
+          </div>
+          <p>Costela Bovina 400g + Costela Suína 600g + Frango Inteiro + Acompanhamentos. Para 5 a 6 pessoas.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">R$ 149,90 <small>/ combo</small></span>
+            <button class="btn-add" id="add-combo2" data-cart-name="Combo Churrasqueiro" data-cart-price="149.90">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bebidas -->
+      <div class="menu-card" data-category="bebidas" id="card-refrigerante">
+        <div class="menu-card-img-wrap menu-card-visual beverage-visual" aria-hidden="true">
+          <span class="menu-card-visual-icon site-icon site-icon--drink" aria-hidden="true"></span>
+          <span class="menu-badge new">Gelada</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h3>Refrigerante Lata</h3>
+            <span class="menu-tag">Bebida</span>
+          </div>
+          <p>Refri bem gelado para acompanhar seu churrasco do primeiro ao último pedaço.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">A partir de R$ 5,50 <small>/ lata</small></span>
+            <button class="btn-add" id="add-refrigerante" aria-haspopup="dialog" aria-controls="soda-options-modal">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-category="bebidas" id="card-refrigerante-2l">
+        <div class="menu-card-img-wrap menu-card-visual beverage-visual soda-two-liter-visual" aria-hidden="true">
+          <span class="menu-card-visual-icon site-icon site-icon--drink" aria-hidden="true"></span>
+          <span class="menu-badge best">2L</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h3>Refrigerante 2L</h3>
+            <span class="menu-tag">Bebida</span>
+          </div>
+          <p>Garrafas de 2 litros para compartilhar e deixar o churrasco ainda mais completo.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">A partir de R$ 13,50 <small>/ garrafa</small></span>
+            <button class="btn-add" id="add-refrigerante-2l" aria-haspopup="dialog" aria-controls="soda-options-modal">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-category="bebidas" id="card-agua">
+        <div class="menu-card-img-wrap menu-card-visual beverage-visual water-visual" aria-hidden="true">
+          <span class="menu-card-visual-icon site-icon site-icon--water" aria-hidden="true"></span>
+          <span class="menu-badge best">Leve</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h3>Água Mineral</h3>
+            <span class="menu-tag">Bebida</span>
+          </div>
+          <p>Escolha água mineral com gás ou sem gás para deixar sua experiência completa e refrescante.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">R$ 4,90 <small>/ 500ml</small></span>
+            <button class="btn-add" id="add-agua" aria-haspopup="dialog" aria-controls="water-options-modal">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sobremesas -->
+      <div class="menu-card" data-category="sobremesas" id="card-pudim">
+        <div class="menu-card-img-wrap">
+          <img src="menu_pudim_cremoso-2k.jpg" alt="Pudim cremoso com calda de caramelo no copo Churrasco &amp; Brasa" class="menu-card-img pudim-cremoso-img" loading="lazy" decoding="async" />
+          <span class="menu-badge new">Novo</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h3>Pudim Cremoso</h3>
+            <span class="menu-tag">Sobremesa</span>
+          </div>
+          <p>Uma sobremesa cremosa e delicada para fechar o pedido com chave de ouro.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">R$ 12,90 <small>/ unid</small></span>
+            <button class="btn-add" id="add-pudim" data-cart-name="Pudim Cremoso" data-cart-price="12.90">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card" data-category="sobremesas" id="card-brownie">
+        <div class="menu-card-img-wrap">
+          <img src="menu_brownie_bites_55-2k.jpg" alt="Brownie bites cobertos com chocolate 55%" class="menu-card-img brownie-bites-img" loading="lazy" decoding="async" />
+          <span class="menu-badge best">Favorito</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h3>Brownie da Brasa</h3>
+            <span class="menu-tag">Sobremesa</span>
+          </div>
+          <p>Brownie bites com chocolate 55%, macios por dentro e intensos no sabor para fechar o pedido com chave de ouro.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">R$ 14,90 <small>/ unid</small></span>
+            <button class="btn-add" id="add-brownie" data-cart-name="Brownie da Brasa" data-cart-price="14.90">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OPÇÕES DE REFRIGERANTE -->
+  <div class="soda-modal-backdrop" id="soda-options-modal" aria-hidden="true" hidden>
+    <section class="soda-modal" role="dialog" aria-modal="true" aria-labelledby="soda-modal-title" aria-describedby="soda-modal-description">
+      <header class="soda-modal-header">
+        <div>
+          <p class="section-eyebrow"><span class="site-icon site-icon--drink" aria-hidden="true"></span>Bebidas geladas</p>
+          <h2 id="soda-modal-title">Escolha seu refrigerante</h2>
+          <p id="soda-modal-description">Selecione uma opção para adicionar à sua sacola.</p>
+        </div>
+        <button type="button" class="soda-modal-close" id="soda-modal-close" aria-label="Fechar opções de refrigerante">✕</button>
+      </header>
+
+      <div class="soda-option-groups">
+        <div class="soda-option-group" id="soda-group-latas">
+          <h3>Latas</h3>
+          <div class="soda-option-list">
+            <button type="button" class="soda-option" data-soda-name="Coca-Cola Lata" data-soda-price="6.50">
+              <span class="soda-option-copy"><strong>Coca-Cola Lata</strong><small>350ml</small></span>
+              <span class="soda-option-price">R$ 6,50</span>
+            </button>
+            <button type="button" class="soda-option" data-soda-name="Coca-Cola Lata Zero Açúcar" data-soda-price="7.50">
+              <span class="soda-option-copy"><strong>Coca-Cola Lata Zero Açúcar</strong><small>350ml</small></span>
+              <span class="soda-option-price">R$ 7,50</span>
+            </button>
+            <button type="button" class="soda-option" data-soda-name="Sprite Lata" data-soda-price="5.50">
+              <span class="soda-option-copy"><strong>Sprite Lata</strong><small>350ml</small></span>
+              <span class="soda-option-price">R$ 5,50</span>
+            </button>
+            <button type="button" class="soda-option" data-soda-name="Fanta Uva Lata" data-soda-price="6.00">
+              <span class="soda-option-copy"><strong>Fanta Uva Lata</strong><small>350ml</small></span>
+              <span class="soda-option-price">R$ 6,00</span>
+            </button>
+            <button type="button" class="soda-option" data-soda-name="Fanta Laranja Lata" data-soda-price="6.00">
+              <span class="soda-option-copy"><strong>Fanta Laranja Lata</strong><small>350ml</small></span>
+              <span class="soda-option-price">R$ 6,00</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="soda-option-group" id="soda-group-2l">
+          <h3>Garrafas de 2L</h3>
+          <div class="soda-option-list">
+            <button type="button" class="soda-option" data-soda-name="Coca-Cola 2L" data-soda-price="13.50">
+              <span class="soda-option-copy"><strong>Coca-Cola 2L</strong><small>Garrafa</small></span>
+              <span class="soda-option-price">R$ 13,50</span>
+            </button>
+            <button type="button" class="soda-option" data-soda-name="Coca-Cola Zero Açúcar 2L" data-soda-price="13.50">
+              <span class="soda-option-copy"><strong>Coca-Cola Zero Açúcar 2L</strong><small>Garrafa</small></span>
+              <span class="soda-option-price">R$ 13,50</span>
+            </button>
+            <button type="button" class="soda-option" data-soda-name="Sprite 2L" data-soda-price="13.50">
+              <span class="soda-option-copy"><strong>Sprite 2L</strong><small>Garrafa</small></span>
+              <span class="soda-option-price">R$ 13,50</span>
+            </button>
+            <button type="button" class="soda-option" data-soda-name="Fanta Uva 2L" data-soda-price="13.50">
+              <span class="soda-option-copy"><strong>Fanta Uva 2L</strong><small>Garrafa</small></span>
+              <span class="soda-option-price">R$ 13,50</span>
+            </button>
+            <button type="button" class="soda-option" data-soda-name="Fanta Laranja 2L" data-soda-price="13.50">
+              <span class="soda-option-copy"><strong>Fanta Laranja 2L</strong><small>Garrafa</small></span>
+              <span class="soda-option-price">R$ 13,50</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- OPÇÕES DE ÁGUA -->
+  <div class="soda-modal-backdrop water-modal-backdrop" id="water-options-modal" aria-hidden="true" hidden>
+    <section class="soda-modal" role="dialog" aria-modal="true" aria-labelledby="water-modal-title" aria-describedby="water-modal-description">
+      <header class="soda-modal-header">
+        <div>
+          <p class="section-eyebrow"><span class="site-icon site-icon--water" aria-hidden="true"></span>Bebidas geladas</p>
+          <h2 id="water-modal-title">Escolha sua água</h2>
+          <p id="water-modal-description">Selecione uma opção para adicionar à sua sacola.</p>
+        </div>
+        <button type="button" class="soda-modal-close" id="water-modal-close" aria-label="Fechar opções de água">✕</button>
+      </header>
+
+      <div class="soda-option-groups">
+        <div class="soda-option-group">
+          <h3>Água mineral</h3>
+          <div class="soda-option-list">
+            <button type="button" class="soda-option water-option" data-water-name="Água com Gás" data-water-price="4.90">
+              <span class="soda-option-copy"><strong>Água com Gás</strong><small>500ml</small></span>
+              <span class="soda-option-price">R$ 4,90</span>
+            </button>
+            <button type="button" class="soda-option water-option" data-water-name="Água sem Gás" data-water-price="4.90">
+              <span class="soda-option-copy"><strong>Água sem Gás</strong><small>500ml</small></span>
+              <span class="soda-option-price">R$ 4,90</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================== SOBRE ===================== -->
+  <section class="sobre" id="sobre">
+    <div class="sobre-container">
+      <div class="sobre-img-wrap" id="sobre-img-wrap">
+        <video class="sobre-img sobre-video" autoplay muted loop playsinline preload="metadata" poster="about_fire_1785709655282-2k.jpg" data-silent-video aria-label="Fogo e brasa preparando o churrasco">
+          <source src="sobre-historia-brasa.mp4" type="video/mp4" />
+          Seu navegador não suporta vídeo HTML5.
+        </video>
+        <div class="sobre-badge-float" id="sobre-badge">
+          <span class="float-num">12</span>
+          <span class="float-text">anos de experiência</span>
+        </div>
+      </div>
+      <div class="sobre-content" id="sobre-content">
+        <p class="section-eyebrow"><span class="site-icon site-icon--fire" aria-hidden="true"></span>Nossa História</p>
+        <h2 class="section-title">A PAIXÃO PELO <span class="red">FOGO</span></h2>
+        <p class="sobre-desc">
+          Há mais de 12 anos, a família Braga transforma carvão, lenha e carne de qualidade em experiências inesquecíveis. O que começou como um churrasco de domingo virou uma paixão que tomou conta da vida de todos aqui.
+        </p>
+        <p class="sobre-desc">
+          Cada peça é selecionada com carinho, temperada com respeito à tradição e assada com paciência — porque churrasco bom não tem pressa. E agora, esse sabor chega até você pelo nosso delivery.
+        </p>
+        <div class="sobre-features">
+          <div class="feature-item" id="feat-1">
+            <span class="feat-icon"><span class="site-icon site-icon--fire" aria-hidden="true"></span></span>
+            <div>
+              <strong>Brasa de Verdade</strong>
+              <p>Carvão de lei e lenha selecionada para o sabor certo</p>
+            </div>
+          </div>
+          <div class="feature-item" id="feat-2">
+            <span class="feat-icon"><span class="site-icon site-icon--meat" aria-hidden="true"></span></span>
+            <div>
+              <strong>Carnes Premiadas</strong>
+              <p>Cortes especiais selecionados dos melhores frigoríficos</p>
+            </div>
+          </div>
+          <div class="feature-item" id="feat-3">
+            <span class="feat-icon"><span class="site-icon site-icon--delivery" aria-hidden="true"></span></span>
+            <div>
+              <strong>Entrega Expressa</strong>
+              <p>Embalagem térmica especial para chegar quentinho</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VIDEO DA BRASA ===================== -->
+  <section class="video-showcase" id="video-brasa">
+    <div class="video-showcase-container">
+      <div class="video-showcase-copy">
+        <p class="section-eyebrow"><span class="site-icon site-icon--fire" aria-hidden="true"></span>Bastidores da Brasa</p>
+        <h2 class="section-title">BRASA <span class="red">EM MOVIMENTO</span></h2>
+        <p class="video-showcase-desc">Deslize pelo carrossel e acompanhe os bastidores da brasa, os preparos dourados e as inspirações que combinam com o momento de saborear cada pedido.</p>
+        <span class="video-showcase-chip">Assado lentamente · Feito na hora</span>
+      </div>
+      <div class="video-showcase-media">
+        <div class="video-carousel" id="video-carousel" role="region" aria-roledescription="carrossel" aria-label="Vídeos dos bastidores e inspirações da brasa">
+          <article class="video-slide is-active" data-video-slide="0" role="group" aria-roledescription="slide" aria-label="1 de 4: frango na brasa">
+            <video class="video-showcase-video" controls muted playsinline loop preload="metadata" data-autoplay="true" poster="chicken-showcase-poster-2k.jpg" aria-label="Churrasqueiro experiente preparando e embalando frangos na brasa">
+              <source src="chicken-brasa-showcase-new-person-muted.mp4" type="video/mp4" />
+              Seu navegador não suporta vídeo HTML5.
+            </video>
+            <span class="video-showcase-tag"><span class="site-icon site-icon--fire" aria-hidden="true"></span>Da brasa para você</span>
+            <div class="video-slide-caption">
+              <strong>Frango na brasa</strong>
+              <span>Preparo cuidadoso até a embalagem</span>
+            </div>
+          </article>
+
+          <article class="video-slide" data-video-slide="1" role="group" aria-roledescription="slide" aria-label="2 de 4: clima natural">
+            <video class="video-showcase-video" controls muted playsinline loop preload="metadata" data-autoplay="true" poster="carousel-driftwood-poster-2k.jpg" aria-label="Vídeo com clima natural e inspiração à beira-mar">
+              <source src="carousel-driftwood-muted.mp4" type="video/mp4" />
+              Seu navegador não suporta vídeo HTML5.
+            </video>
+            <span class="video-showcase-tag"><span class="site-icon site-icon--leaf" aria-hidden="true"></span>Clima natural</span>
+            <div class="video-slide-caption">
+              <strong>Clima para desacelerar</strong>
+              <span>Inspirações que combinam com bons momentos</span>
+            </div>
+          </article>
+
+          <article class="video-slide" data-video-slide="2" role="group" aria-roledescription="slide" aria-label="3 de 4: inspiração de estilo">
+            <video class="video-showcase-video" controls muted playsinline loop preload="metadata" data-autoplay="true" poster="carousel-outfit-poster-2k.jpg" aria-label="Vídeo de inspiração para looks de fim de semana">
+              <source src="carousel-outfit-muted.mp4" type="video/mp4" />
+              Seu navegador não suporta vídeo HTML5.
+            </video>
+            <span class="video-showcase-tag"><span class="site-icon site-icon--spark" aria-hidden="true"></span>Inspiração</span>
+            <div class="video-slide-caption">
+              <strong>Estilo de fim de semana</strong>
+              <span>Ideias leves para aproveitar o seu momento</span>
+            </div>
+          </article>
+
+          <article class="video-slide" data-video-slide="3" role="group" aria-roledescription="slide" aria-label="4 de 4: clima de viagem">
+            <video class="video-showcase-video" controls muted playsinline loop preload="metadata" data-autoplay="true" aria-label="Vídeo de inspiração para uma pausa na estrada">
+              <source src="carousel-roadtrip.mp4" type="video/mp4" />
+              Seu navegador não suporta vídeo HTML5.
+            </video>
+            <span class="video-showcase-tag">Pausa na estrada</span>
+            <div class="video-slide-caption">
+              <strong>Clima de viagem</strong>
+              <span>Inspiração para desacelerar e aproveitar o momento</span>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="video-carousel-controls">
+          <button type="button" class="video-carousel-btn" id="video-carousel-prev" aria-label="Vídeo anterior">‹</button>
+          <button type="button" class="video-carousel-btn" id="video-carousel-next" aria-label="Próximo vídeo">›</button>
+        </div>
+        <div class="video-carousel-dots" id="video-carousel-dots" role="tablist" aria-label="Selecionar vídeo">
+          <button type="button" class="video-carousel-dot active" data-video-index="0" role="tab" aria-selected="true" aria-label="Mostrar vídeo do frango"></button>
+          <button type="button" class="video-carousel-dot" data-video-index="1" role="tab" aria-selected="false" aria-label="Mostrar vídeo de clima natural"></button>
+          <button type="button" class="video-carousel-dot" data-video-index="2" role="tab" aria-selected="false" aria-label="Mostrar vídeo de inspiração de estilo"></button>
+          <button type="button" class="video-carousel-dot" data-video-index="3" role="tab" aria-selected="false" aria-label="Mostrar vídeo de clima de viagem"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMO FUNCIONA ===================== -->
+  <section class="como-funciona" id="como-funciona">
+    <div class="section-header">
+      <p class="section-eyebrow"><span class="site-icon site-icon--mobile" aria-hidden="true"></span>Simples assim</p>
+      <h2 class="section-title">COMO <span class="red">FUNCIONA</span></h2>
+      <p class="section-sub">Peça em 3 passos e receba o melhor churrasco na sua porta</p>
+    </div>
+    <div class="steps-grid" id="steps-grid">
+      <div class="step-card" id="step-1">
+        <div class="step-number">01</div>
+        <div class="step-icon"><span class="site-icon site-icon--mobile" aria-hidden="true"></span></div>
+        <h3>Escolha no Cardápio</h3>
+        <p>Explore nosso cardápio e monte seu pedido com os cortes que mais te agradam</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step-card" id="step-2">
+        <div class="step-number">02</div>
+        <div class="step-icon"><span class="site-icon site-icon--card" aria-hidden="true"></span></div>
+        <h3>Confirme o Pedido</h3>
+        <p>Insira seu endereço e escolha entre Pix ou dinheiro. Não utilizamos máquina de cartão por tempo indeterminado.</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step-card" id="step-3">
+        <div class="step-number">03</div>
+        <div class="step-icon"><span class="site-icon site-icon--fire" aria-hidden="true"></span></div>
+        <h3>Assamos pra Você</h3>
+        <p>Nossa equipe coloca na brasa e prepara tudo com o cuidado de sempre</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step-card" id="step-4">
+        <div class="step-number">04</div>
+        <div class="step-icon"><span class="site-icon site-icon--delivery" aria-hidden="true"></span></div>
+        <h3>Receba em Casa</h3>
+        <p>Entregamos em embalagem térmica para garantir que chegue bem quentinho até você</p>
+        <div class="delivery-crew" aria-label="Motoboys de confiança">
+          <div class="delivery-crew-person">
+            <img src="entregador-sandro-2k.jpg" alt="Sandro, motoboy de confiança da Churrasco &amp; Brasa" loading="lazy" decoding="async" />
+            <strong>Sandro</strong>
+          </div>
+          <div class="delivery-crew-person">
+            <video class="delivery-crew-video" controls muted playsinline preload="metadata" data-silent-video aria-label="Sr. Luiz, motoboy de confiança da Churrasco &amp; Brasa">
+              <source src="entregador-sr-luiz.mp4" type="video/mp4" />
+              Seu navegador não suporta vídeo HTML5.
+            </video>
+            <strong>Sr. Luiz</strong>
+          </div>
+        </div>
+        <span class="delivery-crew-note">Sandro e Sr. Luiz cuidam da sua entrega.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DEPOIMENTOS ===================== -->
+  <section class="depoimentos" id="depoimentos">
+    <div class="section-header">
+      <p class="section-eyebrow"><span class="site-icon site-icon--chat" aria-hidden="true"></span>O que dizem</p>
+      <h2 class="section-title">NOSSOS <span class="red">CLIENTES</span></h2>
+    </div>
+    <div class="depo-grid" id="depo-grid">
+      <div class="depo-card" id="depo-1">
+        <div class="depo-stars rating-four-half" role="img" aria-label="4,5 de 5 estrelas">
+          <span class="rating-star" aria-hidden="true"></span>
+          <span class="rating-star" aria-hidden="true"></span>
+          <span class="rating-star" aria-hidden="true"></span>
+          <span class="rating-star" aria-hidden="true"></span>
+          <span class="rating-star half-star" aria-hidden="true"></span>
+        </div>
+        <p>"A picanha chegou perfeita, ainda quente e com aquele cheiro incrível de brasa. Nunca mais peço churrasco de outro lugar!"</p>
+        <div class="depo-author">
+          <div class="depo-avatar">
+          <img src="goku-avatar-2k.jpg" alt="Goku" class="depo-avatar-img" loading="lazy" decoding="async" />
+          </div>
+          <div>
+            <strong>Marcos Rocha</strong>
+            <span>Cliente há 2 anos</span>
+          </div>
+        </div>
+      </div>
+      <div class="depo-card featured-depo" id="depo-2">
+        <div class="depo-stars rating-stars" role="img" aria-label="5 de 5 estrelas"><span></span><span></span><span></span><span></span><span></span></div>
+        <p>"Pedi o Combo Família para uma reunião com amigos e todo mundo ficou impressionado! A costela suína simplesmente derrete na boca. Atendimento rápido e simpático. 10/10!"</p>
+        <div class="depo-author">
+          <div class="depo-avatar">AS</div>
+          <div>
+            <strong>Ana Silva</strong>
+            <span>Cliente há 3 anos</span>
+          </div>
+        </div>
+      </div>
+      <div class="depo-card" id="depo-3">
+        <div class="depo-stars rating-stars" role="img" aria-label="5 de 5 estrelas"><span></span><span></span><span></span><span></span><span></span></div>
+        <p>"A entrega levou 1h30 porque o motoboy teve dificuldade para localizar minha casa; seria ótimo reforçar a confirmação do endereço e pedir um ponto de referência. Tirando isso, a comida estava deliciosa, a embalagem manteve tudo quentinho e o atendimento foi muito ágil e atencioso. Vou pedir novamente!"</p>
+        <div class="depo-author">
+          <div class="depo-avatar">JP</div>
+          <div>
+            <strong>João Pereira</strong>
+            <span>Cliente há 4 dias</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="comment-cta-wrap" id="comment-cta">
+      <button type="button" class="comment-trigger" id="btn-open-comment" aria-controls="comment-panel" aria-expanded="false">
+        <span class="site-icon site-icon--chat" aria-hidden="true"></span>Deixar um comentário
+      </button>
+
+      <div class="comment-panel" id="comment-panel" hidden>
+        <div class="comment-panel-header">
+          <div>
+            <p class="comment-panel-eyebrow">Sua experiência</p>
+            <h3>Conte como foi seu pedido</h3>
+          </div>
+          <span class="comment-local-chip">Somente nesta sessão</span>
+        </div>
+        <p class="comment-panel-note">Este espaço é apenas para você escrever uma mensagem. Ela não será publicada, salva ou enviada para o site.</p>
+
+        <form class="comment-form" id="comment-form" autocomplete="off">
+          <div class="comment-field">
+            <label for="comment-name">Seu nome</label>
+            <input type="text" id="comment-name" name="name" maxlength="60" placeholder="Como podemos te chamar?" required />
+          </div>
+          <div class="comment-field">
+            <label for="comment-message">Seu comentário</label>
+            <textarea id="comment-message" name="message" maxlength="500" placeholder="Escreva sua experiência com a Churrasco &amp; Brasa" required></textarea>
+          </div>
+          <div class="comment-form-actions">
+            <button type="submit" class="comment-submit">Registrar comentário</button>
+            <button type="button" class="comment-cancel" id="btn-close-comment">Fechar</button>
+          </div>
+          <p class="comment-local-status" id="comment-local-status" role="status" aria-live="polite" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA BANNER ===================== -->
+  <section class="cta-banner" id="cta-banner">
+    <div class="cta-content">
+      <h2>PRONTO PARA <span class="red">PEDIR?</span></h2>
+      <p>Faça seu pedido agora e receba o melhor churrasco em até 2h</p>
+      <div class="cta-actions">
+        <a href="#cardapio" class="btn-primary large" id="btn-cta-pedir"><span class="site-icon site-icon--fire" aria-hidden="true"></span>Fazer Pedido</a>
+        <div class="cta-whatsapp" id="btn-cta-zap">
+          <button type="button" class="btn-whatsapp" id="btn-open-chat" aria-controls="ai-chat" aria-expanded="false">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Conversar no chat
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="cta-bg-glow"></div>
+  </section>
+
+  <!-- ===================== CONTATO ===================== -->
+  <section class="contato" id="contato" hidden>
+    <div class="contato-container">
+      <div class="contato-info" id="contato-info">
+        <p class="section-eyebrow"><span class="site-icon site-icon--pin" aria-hidden="true"></span>Onde estamos</p>
+        <h2 class="section-title" style="text-align:left">ENTRE EM <span class="red">CONTATO</span></h2>
+        <div class="contato-items">
+          <div class="contato-item" id="cont-addr">
+            <span class="cont-icon"><span class="site-icon site-icon--pin" aria-hidden="true"></span></span>
+            <div>
+              <strong>Endereço</strong>
+              <p>Rua das Brasas, 420 — Bairro Nobre, São Paulo/SP</p>
+            </div>
+          </div>
+          <div class="contato-item" id="cont-phone">
+            <span class="cont-icon"><span class="site-icon site-icon--phone" aria-hidden="true"></span></span>
+            <div>
+              <strong>Telefone / WhatsApp</strong>
+              <p>(11) 99999-9999</p>
+            </div>
+          </div>
+          <div class="contato-item" id="cont-hours">
+            <span class="cont-icon"><span class="site-icon site-icon--clock" aria-hidden="true"></span></span>
+            <div>
+              <strong>Horário de Funcionamento</strong>
+              <p>Segunda a domingo: 10h às 23h</p>
+            </div>
+          </div>
+          <div class="contato-item" id="cont-email">
+            <span class="cont-icon"><span class="site-icon site-icon--mail" aria-hidden="true"></span></span>
+            <div>
+              <strong>E-mail</strong>
+              <p>contato@churrascobrasa.com.br</p>
+            </div>
+          </div>
+        </div>
+        <div class="social-links" id="social-links">
+          <a href="#" class="social-link" id="soc-ig" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="social-link" id="soc-fb" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://wa.me/554599534025" class="social-link" id="soc-wa" aria-label="WhatsApp" rel="noopener noreferrer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <form class="contato-form" id="contato-form" autocomplete="off">
+        <h3>Fale Conosco</h3>
+        <div class="form-group">
+          <label for="form-name">Nome</label>
+          <input type="text" id="form-name" maxlength="80" placeholder="Seu nome completo" required />
+        </div>
+        <div class="form-group">
+          <label for="form-phone">Telefone</label>
+          <input type="tel" id="form-phone" maxlength="20" inputmode="tel" placeholder="(11) 99999-9999" />
+        </div>
+        <div class="form-group">
+          <label for="form-email">E-mail</label>
+          <input type="email" id="form-email" maxlength="160" placeholder="seu@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="form-msg">Mensagem</label>
+          <textarea id="form-msg" rows="4" maxlength="600" placeholder="Como podemos te ajudar?"></textarea>
+        </div>
+        <button type="submit" class="btn-primary full" id="btn-form-send">Enviar Mensagem</button>
+        <div class="form-success" id="form-success" style="display:none">
+          Mensagem enviada! Retornaremos em breve.
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="footer">
+    <div class="footer-container">
+      <div class="footer-brand" id="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-emblem">
+            <img src="logo-emblem.png" alt="" class="logo-emblem-img" loading="lazy" decoding="async" />
+          </div>
+          <div class="logo-text">
+            <div class="logo-wordmark">
+              <span class="logo-main">CHURRASCO</span>
+              <span class="logo-amp">&amp;</span>
+              <span class="logo-sub">BRASA</span>
+            </div>
+          </div>
+        </a>
+        <p>Sabor autêntico de brasa entregue na sua porta. Porque churrasco bom não tem pressa — mas a entrega sim.</p>
+      </div>
+      <div class="footer-links" id="footer-links" hidden>
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#cardapio">Cardápio</a></li>
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="#como-funciona">Como Funciona</a></li>
+        </ul>
+      </div>
+      <div class="footer-links" id="footer-menu" hidden>
+        <h4>Cardápio</h4>
+        <ul>
+          <li><a href="#cardapio">Picanha na Brasa</a></li>
+          <li><a href="#cardapio">Costela Bovina Assada</a></li>
+          <li><a href="#cardapio">Costela Suína BBQ</a></li>
+          <li><a href="#cardapio">Frango na Brasa</a></li>
+          <li><a href="#cardapio">Combos</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact" id="footer-contact">
+        <h4>Contato</h4>
+        <p><span class="site-icon site-icon--pin" aria-hidden="true"></span>R. Tersilio Salgo, 575 — Santo Inácio, Cascavel/PR</p>
+        <p><span class="site-icon site-icon--phone" aria-hidden="true"></span>(45) 9953-4025</p>
+        <p><span class="site-icon site-icon--clock" aria-hidden="true"></span>Segunda a domingo: 10h às 23h</p>
+      </div>
+    </div>
+    <div class="footer-bottom" id="footer-bottom">
+      <p>© 2024 Churrasco &amp; Brasa. Todos os direitos reservados.</p>
+      <p><span class="site-icon site-icon--fire" aria-hidden="true"></span>Feito com carinho e muito amor</p>
+    </div>
+  </footer>
+
+  <!-- ===================== CART WIDGET ===================== -->
+  <div class="cart-widget" id="cart-widget" style="display:none">
+    <button class="cart-btn" id="cart-btn">
+      <span class="site-icon site-icon--bag" aria-hidden="true"></span><span class="cart-count" id="cart-count">0</span>
+      <span class="cart-label">Sacola</span>
+      <span class="cart-total" id="cart-total-mini">R$ 0,00</span>
+    </button>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3><span class="site-icon site-icon--bag" aria-hidden="true"></span>Sua Sacola</h3>
+      <button class="cart-close" id="cart-close">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <div class="cart-empty" id="cart-empty">
+        <span class="site-icon site-icon--meat" aria-hidden="true"></span>
+        <p>Sua sacola está vazia</p>
+        <small>Adicione itens do cardápio</small>
+      </div>
+    </div>
+    <div class="cart-footer" id="cart-footer" style="display:none">
+    <div class="delivery-selector delivery-selector-cta">
+        <div class="delivery-selector-heading">
+          <span class="delivery-selector-icon site-icon site-icon--delivery" aria-hidden="true"></span>
+          <div>
+            <strong>Dados de entrega</strong>
+            <small id="delivery-summary-text">Informe endereço, bairro ou cidade e telefone na próxima etapa.</small>
+          </div>
+        </div>
+        <a href="entrega.html" class="btn-secondary full" id="btn-delivery-data">Adicionar dados de entrega</a>
+      </div>
+      <div class="cart-subtotal">
+        <span>Subtotal:</span>
+        <strong id="cart-total-val" aria-live="polite">R$ 0,00</strong>
+      </div>
+      <div class="cart-taxa">
+        <span id="delivery-fee-label">Taxa de entrega:</span>
+        <strong id="delivery-fee-val">Selecione</strong>
+      </div>
+      <div class="cart-total-final">
+        <span>Total:</span>
+        <strong id="cart-grand-total" aria-live="polite">Selecione o bairro ou cidade</strong>
+      </div>
+      <a href="entrega.html" class="btn-primary full" id="btn-finalizar">Informar dados e continuar</a>
+    </div>
+  </div>
+
+  <!-- ===================== CHECKOUT ===================== -->
+  <div class="checkout-backdrop" id="checkout-backdrop" aria-hidden="true" hidden>
+    <section class="checkout-panel" role="dialog" aria-modal="true" aria-labelledby="checkout-title" aria-describedby="checkout-description">
+      <header class="checkout-header">
+        <div>
+          <p class="section-eyebrow">Finalização do pedido</p>
+          <h2 id="checkout-title">Confirme seus dados</h2>
+          <p id="checkout-description">Preencha seus dados para enviarmos o pedido e entrarmos em contato com você.</p>
+        </div>
+        <button type="button" class="checkout-close" id="checkout-close" aria-label="Fechar finalização do pedido">✕</button>
+      </header>
+
+      <div class="checkout-layout">
+        <aside class="checkout-summary" aria-labelledby="checkout-summary-title">
+          <div class="checkout-summary-heading">
+            <h3 id="checkout-summary-title">Resumo da sacola</h3>
+            <span id="checkout-region-label">Cascavel</span>
+          </div>
+          <div class="checkout-items" id="checkout-items"></div>
+          <div class="checkout-summary-line">
+            <span>Subtotal</span>
+            <strong id="checkout-subtotal">R$ 0,00</strong>
+          </div>
+          <div class="checkout-summary-line">
+            <span>Entrega</span>
+            <strong id="checkout-delivery">R$ 12,00</strong>
+          </div>
+          <div class="checkout-summary-total">
+            <span>Total</span>
+            <strong id="checkout-total">R$ 0,00</strong>
+          </div>
+        </aside>
+
+        <form class="checkout-form" id="checkout-form">
+          <div class="checkout-form-heading">
+            <h3>Seus dados</h3>
+            <p>Usaremos estas informações para confirmar a entrega.</p>
+          </div>
+
+          <label class="checkout-field" for="checkout-name">
+            <span>Nome completo</span>
+            <input type="text" id="checkout-name" name="name" maxlength="80" autocomplete="name" placeholder="Como podemos chamar você?" required />
+          </label>
+
+          <label class="checkout-field checkout-contact-field" for="checkout-phone">
+            <span>Telefone para contato (WhatsApp)</span>
+            <input type="tel" id="checkout-phone" name="phone" maxlength="20" inputmode="tel" autocomplete="tel" aria-describedby="checkout-phone-help" placeholder="(45) 99999-9999" required />
+            <small id="checkout-phone-help" class="checkout-field-hint">Usaremos este número somente para confirmar o pedido e combinar a entrega.</small>
+          </label>
+
+          <label class="checkout-field" for="checkout-address">
+            <span>Endereço de entrega</span>
+            <textarea id="checkout-address" name="address" rows="2" maxlength="240" autocomplete="street-address" placeholder="Rua, número, bairro e complemento" required></textarea>
+          </label>
+
+          <label class="checkout-field" for="checkout-payment">
+            <span>Forma de pagamento</span>
+            <select id="checkout-payment" name="payment" required>
+              <option value="" selected disabled>Selecione uma opção</option>
+              <option value="pix">Pix</option>
+              <option value="cash">Dinheiro</option>
+            </select>
+          </label>
+
+          <div class="checkout-payment-note">
+            <strong>Formas aceitas</strong>
+            <p>Aceitamos Pix ou dinheiro. No Pix, o pagamento é antecipado; em dinheiro, o pagamento acontece no momento da entrega. Não utilizamos máquina de cartão por tempo indeterminado.</p>
+            <small>Ao continuar, seus dados permanecem nesta sessão e só são enviados ao WhatsApp depois que você confirmar o pagamento.</small>
+          </div>
+
+          <button type="submit" class="btn-primary full checkout-submit">Continuar para pagamento</button>
+          <small class="checkout-required-note">Escolha Pix para pagar antecipadamente ou dinheiro para pagar na entrega.</small>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <!-- ACESSO RÁPIDO AO CHAT -->
+  <button type="button" class="chat-float" id="chat-float" aria-controls="ai-chat" aria-expanded="false" aria-label="Abrir conversa no chat">
+    <span class="chat-float-icon" aria-hidden="true"></span>
+    <span class="chat-float-label">Conversar no chat</span>
+  </button>
+
+  <!-- ===================== AI CHAT ===================== -->
+  <div class="chat-backdrop" id="chat-backdrop" aria-hidden="true"></div>
+  <aside class="ai-chat" id="ai-chat" role="dialog" aria-modal="true" aria-labelledby="ai-chat-title" aria-describedby="ai-chat-scope" aria-hidden="true">
+    <header class="ai-chat-header">
+      <div class="ai-chat-profile">
+        <div class="ai-chat-avatar">
+          <img src="logo-emblem.png" alt="" loading="lazy" decoding="async" />
+        </div>
+        <div class="ai-chat-heading">
+          <strong id="ai-chat-title">Brasa Atendimento</strong>
+          <span><i class="chat-online-dot" aria-hidden="true"></i> Atendente IA · online</span>
+        </div>
+      </div>
+      <button type="button" class="chat-close" id="chat-close" aria-label="Fechar chat">✕</button>
+    </header>
+
+    <div class="ai-chat-scope" id="ai-chat-scope">
+      <span class="site-icon site-icon--lock" aria-hidden="true"></span>
+      <span>Atendimento automático exclusivo para pedidos no site</span>
+    </div>
+
+    <div class="ai-chat-messages" id="ai-chat-messages" aria-live="polite" aria-atomic="false">
+      <div class="chat-date-label">HOJE</div>
+      <div class="chat-message incoming">
+        <div class="chat-bubble">
+          <span class="chat-bubble-copy">Olá! Sou a Brasa IA. Posso ajudar com cardápio, preços, pagamento, entrega e como fazer seu pedido.</span>
+          <span class="chat-bubble-meta">agora <span class="chat-ticks" aria-label="Entregue e lida">✓✓</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-quick-replies" id="chat-quick-replies" aria-label="Perguntas rápidas">
+      <button type="button" class="chat-quick-reply" data-chat-question="Quais são as carnes e os preços?">Cardápio e preços</button>
+      <button type="button" class="chat-quick-reply" data-chat-question="Como faço um pedido?">Como pedir?</button>
+      <button type="button" class="chat-quick-reply" data-chat-question="Quais formas de pagamento vocês aceitam?">Pagamento</button>
+      <button type="button" class="chat-quick-reply" data-chat-question="Qual é o prazo de entrega?">Entrega</button>
+    </div>
+
+    <form class="chat-composer" id="chat-form">
+      <div class="chat-compose-row">
+        <span class="chat-compose-emoji site-icon site-icon--smile" aria-hidden="true"></span>
+        <label class="sr-only" for="chat-input">Digite sua dúvida sobre o pedido</label>
+        <input type="text" id="chat-input" class="chat-input" maxlength="240" autocomplete="off" placeholder="Digite uma dúvida sobre seu pedido" required />
+        <button type="submit" class="chat-send" id="chat-send" aria-label="Enviar mensagem">➤</button>
+      </div>
+      <p class="chat-compose-note">A Brasa IA responde apenas dúvidas sobre pedidos no site.</p>
+    </form>
+  </aside>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js?v=sobre-video-1"></script>
+</body>
+</html>

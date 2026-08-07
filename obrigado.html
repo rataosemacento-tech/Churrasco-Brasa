@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'" />
+  <meta name="referrer" content="no-referrer" />
+  <title>Pedido confirmado | Churrasco &amp; Brasa</title>
+  <link rel="stylesheet" href="pagamento.css" />
+  <link rel="stylesheet" href="obrigado.css" />
+</head>
+<body>
+  <header class="payment-topbar">
+    <a class="payment-brand" href="index.html" aria-label="Voltar para Churrasco &amp; Brasa">
+      <span class="payment-brand-mark"><img src="logo-emblem.png" alt="" aria-hidden="true" decoding="async" /></span>
+      <span>
+        <strong>Churrasco &amp; Brasa</strong>
+        <small>Confirmação do pedido</small>
+      </span>
+    </a>
+    <span class="payment-step">Pedido confirmado</span>
+  </header>
+
+  <main class="payment-main thank-you-main">
+    <section class="thank-you-card" aria-labelledby="thank-you-title">
+      <span class="thank-you-mark" aria-hidden="true">✓</span>
+      <p class="payment-eyebrow">Pagamento aprovado</p>
+      <h1 id="thank-you-title">Seu pedido foi confirmado.</h1>
+      <p class="thank-you-lead">Recebemos o pagamento Pix e já estamos preparando tudo com cuidado. Enviaremos as atualizações da entrega pelo WhatsApp.</p>
+      <div class="thank-you-summary">
+        <span>Total pago</span>
+        <strong id="thank-you-total">R$ 0,00</strong>
+        <small id="thank-you-transaction">Transação confirmada</small>
+      </div>
+      <a class="payment-primary payment-primary-inline" href="index.html">Voltar ao início</a>
+    </section>
+  </main>
+
+  <footer class="payment-footer">
+    <span>Churrasco &amp; Brasa</span>
+    <span>Obrigado pela preferência</span>
+  </footer>
+
+  <script src="obrigado.js" defer></script>
+</body>
+</html>
