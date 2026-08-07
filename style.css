@@ -3864,6 +3864,105 @@ body.checkout-open { overflow: hidden; }
   }
 }
 
+/* --- EMOJIS ORIGINAIS DA EXPERIÊNCIA ---
+   Mantém os mesmos emojis usados originalmente no site, inclusive nos
+   elementos que também recebem uma classe de ícone para organização. */
+.site-icon {
+  overflow: visible !important;
+  background: none !important;
+  background-image: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+  transform: none !important;
+}
+.site-icon::before,
+.site-icon::after {
+  position: static !important;
+  display: inline !important;
+  width: auto !important;
+  height: auto !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  clip-path: none !important;
+  filter: none !important;
+  transform: none !important;
+  content: none !important;
+}
+.site-icon--fire::before { content: '🔥' !important; }
+.site-icon--star::before { content: '⭐' !important; }
+.site-icon--meat::before { content: '🥩' !important; }
+.site-icon--beef::before { content: '🐄' !important; }
+.site-icon--pork::before { content: '🐷' !important; }
+.site-icon--chicken::before { content: '🍗' !important; }
+.site-icon--combo::before { content: '🔥' !important; }
+.site-icon--dessert::before { content: '🍮' !important; }
+.site-icon--drink::before { content: '🥤' !important; }
+.site-icon--water::before { content: '💧' !important; }
+.site-icon--delivery::before { content: '🚀' !important; }
+.site-icon--leaf::before { content: '🌿' !important; }
+.site-icon--spark::before { content: '✨' !important; }
+.site-icon--mobile::before { content: '📱' !important; }
+.site-icon--card::before { content: '💳' !important; }
+.site-icon--pin::before { content: '📍' !important; }
+.site-icon--phone::before { content: '📞' !important; }
+.site-icon--clock::before { content: '🕙' !important; }
+.site-icon--mail::before { content: '✉️' !important; }
+.site-icon--bag::before { content: '🛍️' !important; }
+.site-icon--lock::before { content: '🔒' !important; }
+.site-icon--chat::before { content: '💬' !important; }
+.site-icon--smile::before { content: '😊' !important; }
+
+.stat-icon {
+  width: 1.35rem !important;
+  height: 1.35rem !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition: none !important;
+}
+.stat-icon::before,
+.stat-icon::after {
+  position: static !important;
+  display: inline !important;
+  width: auto !important;
+  height: auto !important;
+  border: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  clip-path: none !important;
+  filter: none !important;
+  transform: none !important;
+  content: none !important;
+}
+.stat-icon-rating::before { content: '⭐' !important; }
+.stat-icon-grill::before { content: '🔥' !important; }
+.stat-icon-delivery::before { content: '🚀' !important; }
+.stat-icon-family::before { content: '👨‍👩‍👧‍👦' !important; }
+
+.rating-four-half .rating-star,
+.rating-stars span {
+  width: auto !important;
+  height: auto !important;
+  background: none !important;
+  clip-path: none !important;
+  filter: none !important;
+}
+.rating-four-half .rating-star::before,
+.rating-stars span::before { content: '⭐'; }
+.rating-four-half .half-star::before { opacity: 0.5; }
+.toast::before {
+  width: auto;
+  height: auto;
+  background: none;
+  filter: none;
+  content: '🔥';
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-video {
     transition: none;
