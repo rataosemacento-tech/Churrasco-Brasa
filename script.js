@@ -389,7 +389,7 @@ function addToCart(name, price, details = '') {
   return true;
 }
 
-document.querySelectorAll('.btn-add[data-cart-name]').forEach(button => {
+document.querySelectorAll('.btn-add[data-cart-name], .cart-upsell-button[data-cart-name]').forEach(button => {
   button.addEventListener('click', () => {
     addToCart(button.dataset.cartName, button.dataset.cartPrice, button.dataset.cartDetails || '');
   });
