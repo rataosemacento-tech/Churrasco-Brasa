@@ -215,6 +215,55 @@
       </button>
     </div>
 
+    <aside class="menu-cross-sell" aria-labelledby="menu-cross-sell-title">
+      <div class="menu-cross-sell-heading">
+        <div>
+          <p class="section-eyebrow"><span class="site-icon site-icon--spark" aria-hidden="true"></span>Complete seu pedido</p>
+          <h2 id="menu-cross-sell-title">Da brasa à sobremesa</h2>
+          <p>Escolhas rápidas para deixar seu pedido ainda mais completo.</p>
+        </div>
+        <span class="menu-cross-sell-note">Combinações certeiras</span>
+      </div>
+      <div class="menu-cross-sell-grid">
+        <article class="menu-cross-sell-card">
+          <img src="bebida-coca-2l.jpg" alt="Coca-Cola de 2 litros" loading="lazy" decoding="async" />
+          <div>
+            <span class="menu-cross-sell-kicker">Para acompanhar</span>
+            <h3>Coca-Cola 2L</h3>
+            <p>Gelada e perfeita para compartilhar com a família.</p>
+            <div class="menu-cross-sell-action">
+              <strong>R$ 13,50</strong>
+              <button type="button" class="btn-add" data-cart-name="Coca-Cola 2L" data-cart-price="13.50" data-cart-details="Garrafa de 2 litros para compartilhar.">Adicionar</button>
+            </div>
+          </div>
+        </article>
+        <article class="menu-cross-sell-card">
+          <img src="menu_pudim_cremoso-2k.jpg" alt="Pudim cremoso com calda de caramelo" loading="lazy" decoding="async" />
+          <div>
+            <span class="menu-cross-sell-kicker">Para finalizar</span>
+            <h3>Pudim Cremoso</h3>
+            <p>O toque doce ideal depois de uma refeição na brasa.</p>
+            <div class="menu-cross-sell-action">
+              <strong>R$ 12,90</strong>
+              <button type="button" class="btn-add" data-cart-name="Pudim Cremoso" data-cart-price="12.90" data-cart-details="Sobremesa cremosa com calda de caramelo.">Adicionar</button>
+            </div>
+          </div>
+        </article>
+        <article class="menu-cross-sell-card">
+          <img src="menu_brownie_bites_55-2k.jpg" alt="Brownie bites com chocolate 55%" loading="lazy" decoding="async" />
+          <div>
+            <span class="menu-cross-sell-kicker">Favorito da casa</span>
+            <h3>Brownie da Brasa</h3>
+            <p>Brownie bites com chocolate 55%, macios e intensos.</p>
+            <div class="menu-cross-sell-action">
+              <strong>R$ 14,90</strong>
+              <button type="button" class="btn-add" data-cart-name="Brownie da Brasa" data-cart-price="14.90" data-cart-details="Brownie bites com chocolate 55%.">Adicionar</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </aside>
+
     <div class="menu-grid" id="menu-grid">
 
       <!-- Bovinos -->
@@ -1161,6 +1210,34 @@
         <p>Sua sacola está vazia</p>
         <small>Adicione itens do cardápio</small>
       </div>
+      <aside class="cart-upsell" id="cart-upsell" aria-labelledby="cart-upsell-title" hidden>
+        <div class="cart-upsell-heading">
+          <div>
+            <span class="cart-upsell-kicker">Boa escolha</span>
+            <h4 id="cart-upsell-title">Complete sua sacola</h4>
+          </div>
+          <span class="cart-upsell-spark" aria-hidden="true">+</span>
+        </div>
+        <p class="cart-upsell-intro">Aproveite e adicione algo gelado ou doce antes de finalizar.</p>
+        <div class="cart-upsell-list">
+          <article class="cart-upsell-item">
+            <img src="bebida-coca-2l.jpg" alt="Coca-Cola 2L" loading="lazy" decoding="async" />
+            <div>
+              <strong>Coca-Cola 2L</strong>
+              <small>R$ 13,50 · para compartilhar</small>
+              <button type="button" class="cart-upsell-button" data-cart-name="Coca-Cola 2L" data-cart-price="13.50" data-cart-details="Garrafa de 2 litros para compartilhar.">Adicionar</button>
+            </div>
+          </article>
+          <article class="cart-upsell-item">
+            <img src="menu_pudim_cremoso-2k.jpg" alt="Pudim Cremoso" loading="lazy" decoding="async" />
+            <div>
+              <strong>Pudim Cremoso</strong>
+              <small>R$ 12,90 · para finalizar</small>
+              <button type="button" class="cart-upsell-button" data-cart-name="Pudim Cremoso" data-cart-price="12.90" data-cart-details="Sobremesa cremosa com calda de caramelo.">Adicionar</button>
+            </div>
+          </article>
+        </div>
+      </aside>
     </div>
     <div class="cart-footer" id="cart-footer" style="display:none">
     <div class="delivery-selector delivery-selector-cta">

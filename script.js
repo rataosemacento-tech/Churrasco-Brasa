@@ -391,7 +391,7 @@ function addToCart(name, price, details = '') {
 
 document.querySelectorAll('.btn-add[data-cart-name]').forEach(button => {
   button.addEventListener('click', () => {
-    addToCart(button.dataset.cartName, button.dataset.cartPrice);
+    addToCart(button.dataset.cartName, button.dataset.cartPrice, button.dataset.cartDetails || '');
   });
 });
 
@@ -568,7 +568,18 @@ function updateCartUI() {
 
   const itemsContainer = document.getElementById('cart-items');
   const empty = document.getElementById('cart-empty');
+  const cartUpsell = document.getElementById('cart-upsell');
   const footer = document.getElementById('cart-footer');
+
+  if (cartUpsell) {
+    cartUpsell.hidden = cart.length === 0;
+    cartUpsell.querySelectorAll('[data-cart-name]').forEach(button => {
+      const item = cart.find(cartItem => cartItem.name === button.dataset.cartName);
+      const quantity = item ? Math.max(0, Math.min(99, Number(item.qty) || 0)) : 0;
+      button.textContent = quantity ? `Adicionar mais (${quantity})` : 'Adicionar';
+      button.classList.toggle('is-added', quantity > 0);
+    });
+  }
 
   if (cart.length === 0) {
     itemsContainer.querySelectorAll('.cart-item-row').forEach(row => row.remove());
