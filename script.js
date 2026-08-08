@@ -205,11 +205,23 @@ const productPrices = Object.freeze({
   'Combo Família': 115.90,
   'Combo Churrasqueiro': 149.90,
   'Coca-Cola Lata': 6.50,
+  'Coca-Cola 600ml': 8.50,
   'Coca-Cola Lata Zero Açúcar': 7.50,
   'Sprite Lata': 5.50,
   'Fanta Uva Lata': 6.00,
   'Fanta Laranja Lata': 6.00,
+  'Guaraná Antarctica Lata': 6.00,
+  'Suco de Laranja Prats': 7.90,
+  'Fanta Uva 600ml': 7.50,
+  'Fanta Laranja 600ml': 7.50,
+  'Guaraná Antarctica 600ml': 7.50,
+  'Sprite 1L': 10.90,
+  'Guaraná Antarctica 1L': 11.90,
+  'Coca-Cola Garrafa': 11.90,
   'Coca-Cola 2L': 13.50,
+  'Guaraná Antarctica 2L': 13.50,
+  'Kuat 2L': 11.90,
+  'Tubaína Original 2L': 11.90,
   'Coca-Cola Zero Açúcar 2L': 13.50,
   'Sprite 2L': 13.50,
   'Fanta Uva 2L': 13.50,
@@ -923,6 +935,7 @@ waterOptionButtons.forEach(option => {
 document.getElementById('add-refrigerante')?.addEventListener('click', () => openSodaOptions('latas'));
 document.getElementById('add-refrigerante-2l')?.addEventListener('click', () => openSodaOptions('2l'));
 document.getElementById('add-agua')?.addEventListener('click', openWaterOptions);
+document.getElementById('add-agua-imagem')?.addEventListener('click', openWaterOptions);
 
 // ---- TOAST ----
 function showToast(msg) {

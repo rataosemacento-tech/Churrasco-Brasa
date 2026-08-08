@@ -4195,3 +4195,41 @@ body.checkout-open { overflow: hidden; }
 .stat-icon-family::after {
   content: none !important;
 }
+
+/* Bebidas: cards individuais com as imagens reais enviadas pelo usuário. */
+#card-refrigerante,
+#card-refrigerante-2l,
+#card-agua {
+  display: none !important;
+}
+
+.beverage-product-visual {
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  background: linear-gradient(145deg, #f7f7f7, #dedede);
+}
+
+.beverage-product-img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding: 0.75rem 1.25rem;
+  object-fit: contain !important;
+  background: #f8f8f8;
+  transition: transform 0.5s ease;
+}
+
+.beverage-product-card:hover .beverage-product-img {
+  transform: scale(1.06);
+}
+
+.beverage-product-card .menu-card-body > p {
+  min-height: 3.2em;
+}
+
+@media (max-width: 520px) {
+  .beverage-product-img { padding: 0.65rem 1rem; }
+  .beverage-product-card .menu-card-body > p { min-height: 0; }
+}
