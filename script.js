@@ -204,6 +204,7 @@ const productPrices = Object.freeze({
   'Frango na Brasa': 29.90,
   'Combo Família': 115.90,
   'Combo Churrasqueiro': 126.90,
+  'Combo Iscas da Brasa': 68.90,
   'Coca-Cola Lata': 6.50,
   'Coca-Cola 600ml': 8.50,
   'Coca-Cola Lata Zero Açúcar': 7.50,
@@ -1085,11 +1086,14 @@ function getChatResponse(message) {
   if (/combo\s*churrasqueiro|churrasqueiro.*combo/.test(text)) {
     return 'O Combo Churrasqueiro custa R$ 126,90 e serve de 5 a 6 pessoas, com costela bovina, costela suína, frango e acompanhamentos.';
   }
+  if (/combo\s*iscas|iscas.*brasa|mandioca/.test(text)) {
+    return 'O Combo Iscas da Brasa custa R$ 68,90 e traz iscas de carne douradas na brasa com mandioca macia. É uma opção saborosa para uma refeição individual.';
+  }
   if (/(combo|combos)/.test(text)) {
-    return ['Temos duas opções:', '• Combo Família — R$ 115,90, até 4 pessoas.', '• Combo Churrasqueiro — R$ 126,90, de 5 a 6 pessoas.', 'Quer que eu te ajude a escolher?'].join('\n');
+    return ['Temos três opções:', '• Combo Iscas da Brasa — R$ 68,90, carne com mandioca.', '• Combo Família — R$ 115,90, até 4 pessoas.', '• Combo Churrasqueiro — R$ 126,90, de 5 a 6 pessoas.', 'Quer que eu te ajude a escolher?'].join('\n');
   }
   if (/(cardapio|menu|preco|valor|custa|quanto|carnes|opcoes|opcao)/.test(text) && !/(entrega|prazo|demora|motoboy|taxa|frete|tempo)/.test(text)) {
-    return ['Nosso cardápio está assim:', '• Picanha — R$ 39,90 / 700g', '• Costela Bovina Assada — R$ 46,90 / 720g', '• Costela Suína — R$ 39,90 / 800g', '• Frango — R$ 29,90 / unidade', '• Bebidas — a partir de R$ 4,90', '• Sobremesas — a partir de R$ 12,90', '• Combos — a partir de R$ 115,90'].join('\n');
+    return ['Nosso cardápio está assim:', '• Picanha — R$ 39,90 / 700g', '• Costela Bovina Assada — R$ 46,90 / 720g', '• Costela Suína — R$ 39,90 / 800g', '• Frango — R$ 29,90 / unidade', '• Bebidas — a partir de R$ 4,90', '• Sobremesas — a partir de R$ 12,90', '• Combos — a partir de R$ 68,90'].join('\n');
   }
   if (/(pagamento|pix|cartao|credito|debito|dinheiro|antecip)/.test(text)) {
     return 'Aceitamos Pix ou dinheiro. No Pix, o pagamento é antecipado; em dinheiro, o pagamento acontece no momento da entrega. Não utilizamos máquina de cartão por tempo indeterminado.';
