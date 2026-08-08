@@ -968,9 +968,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hero-offer-items li {
   position: relative;
   padding: 0.36rem 0.45rem 0.36rem 1.05rem;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(245,166,35,0.5);
   border-radius: 0.55rem 0.35rem 0.6rem 0.4rem;
-  background: rgba(0,0,0,0.2);
+  color: var(--white);
+  background: rgba(245,166,35,0.1);
 }
 .hero-offer-items li::before {
   content: '';
