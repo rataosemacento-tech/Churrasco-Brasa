@@ -2379,6 +2379,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .chat-float-cart-offset { bottom: 5.8rem; }
 .chat-float[aria-expanded="true"] { opacity: 0; pointer-events: none; }
+.chat-float.chat-float-cart-open { display: none !important; }
 .sr-only {
   position: absolute;
   width: 1px;

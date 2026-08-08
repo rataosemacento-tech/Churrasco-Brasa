@@ -678,8 +678,10 @@ function toggleCart() {
   const drawer  = document.getElementById('cart-drawer');
   const overlay = document.getElementById('cart-overlay');
   if (!drawer || !overlay) return;
-  drawer.classList.toggle('open');
+  const isOpen = drawer.classList.toggle('open');
   overlay.classList.toggle('open');
+  chatFloat?.classList.toggle('chat-float-cart-open', isOpen);
+  chatFloat?.setAttribute('aria-hidden', String(isOpen));
 }
 
 function updateCheckoutSummary() {
@@ -1545,6 +1547,8 @@ document.addEventListener('keydown', (e) => {
     closeCheckout();
     document.getElementById('cart-drawer').classList.remove('open');
     document.getElementById('cart-overlay').classList.remove('open');
+    chatFloat?.classList.remove('chat-float-cart-open');
+    chatFloat?.setAttribute('aria-hidden', 'false');
     navLinks.classList.remove('open');
   }
 });
