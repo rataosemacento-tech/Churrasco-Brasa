@@ -134,6 +134,8 @@ const regionSummary = document.getElementById('delivery-order-region');
 const subtotalSummary = document.getElementById('delivery-subtotal');
 const feeSummary = document.getElementById('delivery-fee');
 const totalSummary = document.getElementById('delivery-total');
+const upsellStatus = document.getElementById('delivery-upsell-status');
+const upsellButtons = Array.from(document.querySelectorAll('[data-upsell-name]'));
 
 function formatBRL(value) {
   const safeValue = Number.isFinite(Number(value)) ? Math.max(0, Number(value)) : 0;
@@ -187,6 +189,63 @@ const cart = readCart();
 
 function getSubtotal() {
   return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+}
+
+function persistCart() {
+  sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart.map(item => ({
+    name: item.name,
+    details: item.details,
+    qty: item.qty,
+    price: item.price
+  }))));
+}
+
+function renderUpsell() {
+  upsellButtons.forEach(button => {
+    const name = button.dataset.upsellName;
+    const price = Number(button.dataset.upsellPrice);
+    const item = cart.find(cartItem => cartItem.name === name);
+    const quantity = item ? item.qty : 0;
+    button.textContent = quantity
+      ? `Adicionar mais · ${formatBRL(price)} (${quantity} na sacola)`
+      : `Adicionar · ${formatBRL(price)}`;
+    button.classList.toggle('is-added', quantity > 0);
+    button.setAttribute('aria-label', quantity
+      ? `${name}: adicionar mais uma unidade. Já há ${quantity} na sacola.`
+      : `Adicionar ${name} por ${formatBRL(price)}`);
+  });
+}
+
+function addUpsell(button) {
+  const name = cleanText(button.dataset.upsellName, 120);
+  const price = Number(button.dataset.upsellPrice);
+  if (!name || !Number.isFinite(price) || price <= 0) return;
+
+  const existing = cart.find(item => item.name === name);
+  if (existing) {
+    existing.qty = Math.min(99, existing.qty + 1);
+  } else {
+    cart.push({
+      name,
+      price,
+      qty: 1,
+      details: name === 'Pudim Cremoso'
+        ? 'Sobremesa cremosa com calda de caramelo.'
+        : 'Brownie bites com chocolate 55%.'
+    });
+  }
+
+  try {
+    persistCart();
+  } catch {
+    if (upsellStatus) upsellStatus.textContent = 'Não foi possível atualizar a sacola. Tente novamente.';
+    return;
+  }
+
+  renderOrder();
+  renderFee();
+  renderUpsell();
+  if (upsellStatus) upsellStatus.textContent = `${name} foi adicionado à sua sacola. O total foi atualizado.`;
 }
 
 function selectedFee() {
@@ -349,6 +408,7 @@ if (!cart.length) {
   restoreDraft();
   renderOrder();
   renderFee();
+  renderUpsell();
   nameField.addEventListener('input', persistDraft);
   addressField.addEventListener('input', persistDraft);
   phoneField.addEventListener('input', persistDraft);
@@ -356,6 +416,9 @@ if (!cart.length) {
     clearError();
     persistDraft();
     renderFee();
+  });
+  upsellButtons.forEach(button => {
+    button.addEventListener('click', () => addUpsell(button));
   });
   form.addEventListener('submit', saveOrder);
 }
