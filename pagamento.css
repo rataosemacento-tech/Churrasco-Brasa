@@ -188,12 +188,25 @@ input { font: inherit; }
   line-height: 1.2;
 }
 
-.first-order-copy span {
-  display: block;
-  margin-top: 0.3rem;
-  color: var(--payment-muted);
+.first-order-hint {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.28rem;
+  max-width: 100%;
+  margin-top: 0.62rem;
+  padding: 0.48rem 0.65rem;
+  border: 1px solid #a9c8f5;
+  border-radius: 8px;
+  background: #eaf2ff;
+  color: #174f9f;
   font-size: 0.72rem;
-  line-height: 1.4;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.first-order-hint strong {
+  color: var(--payment-blue-dark);
+  font-weight: 900;
 }
 
 .first-order-code {
