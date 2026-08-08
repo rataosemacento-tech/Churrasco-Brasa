@@ -4155,7 +4155,7 @@ body.checkout-open { overflow: hidden; }
 /* Estrela da avaliação: usa o ícone fornecido pela marca no lugar do emoji. */
 .stat-icon-rating {
   padding: 0 !important;
-  background: url('rating-star-icon.png') center / contain no-repeat !important;
+  background: url('rating-star-icon.png?v=transparent-1') center / contain no-repeat !important;
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
