@@ -1036,7 +1036,7 @@ function getChatResponse(message) {
     return 'A Picanha na Brasa custa R$ 39,90 e vem com 700g. Para pedir, toque em + Adicionar no cardápio e depois revise sua sacola.';
   }
   if (/(costela bovina|costela.*bovina)/.test(text)) {
-    return 'A Costela Bovina Assada custa R$ 46,90 e vem com 550g. Ela é assada lentamente, fica suculenta e pode ser adicionada pelo botão + Adicionar.';
+    return 'A Costela Bovina Assada custa R$ 46,90 e vem com 720g. Ela é assada lentamente, fica suculenta e pode ser adicionada pelo botão + Adicionar.';
   }
   if (/(costela|ribs)/.test(text)) {
     return 'A Costela Suína BBQ custa R$ 39,90 e vem com 800g. É uma ótima opção para compartilhar.';
@@ -1063,7 +1063,7 @@ function getChatResponse(message) {
     return ['Temos duas opções:', '• Combo Família — R$ 115,90, até 4 pessoas.', '• Combo Churrasqueiro — R$ 149,90, de 5 a 6 pessoas.', 'Quer que eu te ajude a escolher?'].join('\n');
   }
   if (/(cardapio|menu|preco|valor|custa|quanto|carnes|opcoes|opcao)/.test(text) && !/(entrega|prazo|demora|motoboy|taxa|frete|tempo)/.test(text)) {
-    return ['Nosso cardápio está assim:', '• Picanha — R$ 39,90 / 700g', '• Costela Bovina Assada — R$ 46,90 / 550g', '• Costela Suína — R$ 39,90 / 800g', '• Frango — R$ 29,90 / unidade', '• Bebidas — a partir de R$ 4,90', '• Sobremesas — a partir de R$ 12,90', '• Combos — a partir de R$ 115,90'].join('\n');
+    return ['Nosso cardápio está assim:', '• Picanha — R$ 39,90 / 700g', '• Costela Bovina Assada — R$ 46,90 / 720g', '• Costela Suína — R$ 39,90 / 800g', '• Frango — R$ 29,90 / unidade', '• Bebidas — a partir de R$ 4,90', '• Sobremesas — a partir de R$ 12,90', '• Combos — a partir de R$ 115,90'].join('\n');
   }
   if (/(pagamento|pix|cartao|credito|debito|dinheiro|antecip)/.test(text)) {
     return 'Aceitamos Pix ou dinheiro. No Pix, o pagamento é antecipado; em dinheiro, o pagamento acontece no momento da entrega. Não utilizamos máquina de cartão por tempo indeterminado.';
