@@ -4151,3 +4151,13 @@ body.checkout-open { overflow: hidden; }
   .stat-icon { width: 2rem !important; height: 2rem !important; font-size: 0.94rem !important; }
   .menu-card-visual-icon.site-icon { --emoji-icon-size: 4.6rem; font-size: 2.55rem !important; }
 }
+
+/* Estrela da avaliação: usa o ícone fornecido pela marca no lugar do emoji. */
+.stat-icon-rating {
+  padding: 0 !important;
+  background: url('rating-star-icon.png') center / contain no-repeat !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.stat-icon-rating::before { content: none !important; }
