@@ -203,7 +203,7 @@ const productPrices = Object.freeze({
   'Costela Suína BBQ': 39.90,
   'Frango na Brasa': 29.90,
   'Combo Família': 115.90,
-  'Combo Churrasqueiro': 149.90,
+  'Combo Churrasqueiro': 126.90,
   'Coca-Cola Lata': 6.50,
   'Coca-Cola 600ml': 8.50,
   'Coca-Cola Lata Zero Açúcar': 7.50,
@@ -1070,10 +1070,10 @@ function getChatResponse(message) {
     return 'O Combo Família custa R$ 115,90 e serve até 4 pessoas: 500g de picanha, 600g de costela, farofa, vinagrete e 4 pães de alho.';
   }
   if (/combo\s*churrasqueiro|churrasqueiro.*combo/.test(text)) {
-    return 'O Combo Churrasqueiro custa R$ 149,90 e serve de 5 a 6 pessoas, com costela bovina, costela suína, frango e acompanhamentos.';
+    return 'O Combo Churrasqueiro custa R$ 126,90 e serve de 5 a 6 pessoas, com costela bovina, costela suína, frango e acompanhamentos.';
   }
   if (/(combo|combos)/.test(text)) {
-    return ['Temos duas opções:', '• Combo Família — R$ 115,90, até 4 pessoas.', '• Combo Churrasqueiro — R$ 149,90, de 5 a 6 pessoas.', 'Quer que eu te ajude a escolher?'].join('\n');
+    return ['Temos duas opções:', '• Combo Família — R$ 115,90, até 4 pessoas.', '• Combo Churrasqueiro — R$ 126,90, de 5 a 6 pessoas.', 'Quer que eu te ajude a escolher?'].join('\n');
   }
   if (/(cardapio|menu|preco|valor|custa|quanto|carnes|opcoes|opcao)/.test(text) && !/(entrega|prazo|demora|motoboy|taxa|frete|tempo)/.test(text)) {
     return ['Nosso cardápio está assim:', '• Picanha — R$ 39,90 / 700g', '• Costela Bovina Assada — R$ 46,90 / 720g', '• Costela Suína — R$ 39,90 / 800g', '• Frango — R$ 29,90 / unidade', '• Bebidas — a partir de R$ 4,90', '• Sobremesas — a partir de R$ 12,90', '• Combos — a partir de R$ 115,90'].join('\n');
