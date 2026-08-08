@@ -1498,6 +1498,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .menu-card:hover .menu-card-img { transform: scale(1.08); }
 .costela-bovina-img { object-position: center 48%; }
+.costela-suina-img { object-position: center 52%; }
 .frango-assado-img { object-position: center 56%; }
 .pudim-cremoso-img { object-position: center 58%; }
 .brownie-bites-img { object-position: center 50%; }
