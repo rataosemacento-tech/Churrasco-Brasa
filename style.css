@@ -4161,3 +4161,37 @@ body.checkout-open { overflow: hidden; }
   box-shadow: none !important;
 }
 .stat-icon-rating::before { content: none !important; }
+
+/* Benefícios: ícones fornecidos pelo usuário, tratados para fundo transparente. */
+.stat-icon-grill,
+.stat-icon-delivery,
+.stat-icon-family {
+  padding: 0 !important;
+  background-position: center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.stat-icon-grill {
+  background-image: url('benefit-grill-icon.png') !important;
+}
+
+.stat-icon-delivery {
+  background-image: url('benefit-delivery-icon.png') !important;
+}
+
+.stat-icon-family {
+  background-image: url('benefit-family-icon.png') !important;
+}
+
+.stat-icon-grill::before,
+.stat-icon-delivery::before,
+.stat-icon-family::before,
+.stat-icon-grill::after,
+.stat-icon-delivery::after,
+.stat-icon-family::after {
+  content: none !important;
+}
