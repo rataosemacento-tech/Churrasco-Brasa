@@ -571,17 +571,19 @@ function updateCartUI() {
   const footer = document.getElementById('cart-footer');
 
   if (cart.length === 0) {
-    empty.style.display = 'block';
+    itemsContainer.querySelectorAll('.cart-item-row').forEach(row => row.remove());
+    if (empty) {
+      empty.style.display = 'block';
+      if (empty.parentElement !== itemsContainer) itemsContainer.appendChild(empty);
+    }
     footer.style.display = 'none';
-    itemsContainer.innerHTML = '';
-    itemsContainer.appendChild(empty);
     return;
   }
 
-  empty.style.display = 'none';
+  if (empty) empty.style.display = 'none';
   footer.style.display = 'flex';
 
-  itemsContainer.innerHTML = '';
+  itemsContainer.querySelectorAll('.cart-item-row').forEach(row => row.remove());
   cart.forEach((item, idx) => {
     const row = document.createElement('div');
     row.className = 'cart-item-row';
