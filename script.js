@@ -1075,8 +1075,8 @@ function getChatResponse(message) {
     return 'Aceitamos Pix ou dinheiro. No Pix, o pagamento é antecipado; em dinheiro, o pagamento acontece no momento da entrega. Não utilizamos máquina de cartão por tempo indeterminado.';
   }
   if (/(entrega|prazo|demora|motoboy|taxa|frete|tempo)/.test(text)) {
-    if (/(taxa|frete|custo|valor)/.test(text)) return 'A taxa de entrega é R$ 12,00 para Cascavel e R$ 32,00 para Toledo-PR. O prazo informado é de até 2h.';
-    return 'O prazo de entrega é de até 2h. Entregamos em Cascavel, com taxa de R$ 12,00, e em Toledo-PR, com taxa de R$ 32,00. Para concluir, informe seu endereço e escolha Pix ou dinheiro.';
+    if (/(taxa|frete|custo|valor)/.test(text)) return 'A taxa de entrega é R$ 12,00 para Cascavel e R$ 32,00 para Toledo-PR. O prazo informado é de até 45min.';
+    return 'O prazo de entrega é de até 45min. Entregamos em Cascavel, com taxa de R$ 12,00, e em Toledo-PR, com taxa de R$ 32,00. Para concluir, informe seu endereço e escolha Pix ou dinheiro.';
   }
   if (/(horario|horas|aberto|funciona|sabado|domingo)/.test(text)) {
     return 'Atendemos aos sábados e domingos, das 10h às 23h.';
