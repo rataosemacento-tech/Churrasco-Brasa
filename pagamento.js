@@ -14,6 +14,8 @@
   const orderDiscount = document.getElementById('order-discount');
   const orderTotal = document.getElementById('order-total');
   const paymentTotal = document.getElementById('payment-total');
+  const paymentUpsellButton = document.getElementById('payment-upsell-button');
+  const paymentUpsellStatus = document.getElementById('payment-upsell-status');
   const customerName = document.getElementById('customer-name');
   const customerPhone = document.getElementById('customer-phone');
   const customerRegion = document.getElementById('customer-region');
@@ -64,6 +66,12 @@
   let pixStatusRequest = false;
   let pixCreationRequest = false;
   let redirectedAfterPaid = false;
+
+  const PAYMENT_UPSELL = Object.freeze({
+    name: 'Pudim Cremoso',
+    price: 12.90,
+    details: 'Sobremesa cremosa com calda de caramelo.'
+  });
 
   const currency = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -207,6 +215,70 @@
       row.append(copy, price);
       orderItems.appendChild(row);
     });
+  }
+
+  function renderPaymentUpsell(order) {
+    if (!paymentUpsellButton) return;
+    const item = order.items.find((entry) => cleanText(entry.name, 120) === PAYMENT_UPSELL.name);
+    const quantity = item ? Math.max(0, Math.min(99, Number(item.qty) || 0)) : 0;
+    paymentUpsellButton.textContent = quantity
+      ? `Adicionar mais Â· ${formatMoney(PAYMENT_UPSELL.price)} (${quantity} na sacola)`
+      : `Adicionar sobremesa Â· ${formatMoney(PAYMENT_UPSELL.price)}`;
+    paymentUpsellButton.classList.toggle('is-added', quantity > 0);
+    paymentUpsellButton.setAttribute('aria-label', quantity
+      ? `Adicionar mais uma unidade de ${PAYMENT_UPSELL.name}. JÃ¡ hÃ¡ ${quantity} na sacola.`
+      : `Adicionar ${PAYMENT_UPSELL.name} por ${formatMoney(PAYMENT_UPSELL.price)}`);
+  }
+
+  function recalculateOrder(order) {
+    const subtotal = roundMoney(order.items.reduce((sum, item) => {
+      const price = Number(item.price);
+      const quantity = Math.max(1, Math.min(99, Number(item.qty) || 1));
+      return sum + (Number.isFinite(price) ? price * quantity : 0);
+    }, 0));
+    const coupon = cleanText(order.couponCode, 32).toLocaleLowerCase('pt-BR');
+    const discountAmount = coupon === 'brasa10' ? roundMoney(subtotal * 0.1) : 0;
+    const deliveryFee = coupon === 'taxafree' ? 0 : Math.max(0, Number(order.deliveryFee) || 0);
+
+    order.subtotal = subtotal;
+    order.discountAmount = discountAmount;
+    order.deliveryFee = roundMoney(deliveryFee);
+    order.total = Math.max(0, roundMoney(subtotal - discountAmount + deliveryFee));
+  }
+
+  function addPaymentUpsell(order) {
+    const item = order.items.find((entry) => cleanText(entry.name, 120) === PAYMENT_UPSELL.name);
+    if (item) {
+      item.qty = Math.min(99, Math.max(1, Number(item.qty) || 1) + 1);
+    } else {
+      order.items.push({
+        name: PAYMENT_UPSELL.name,
+        price: PAYMENT_UPSELL.price,
+        qty: 1,
+        details: PAYMENT_UPSELL.details
+      });
+    }
+
+    const hadPix = invalidatePixForPriceChange(order);
+    recalculateOrder(order);
+    if (!persistOrder(order)) return;
+
+    try {
+      sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(order.items));
+    } catch {
+      if (paymentUpsellStatus) paymentUpsellStatus.textContent = 'NÃ£o foi possÃ­vel atualizar a sacola. Tente novamente.';
+      return;
+    }
+
+    renderOrder(order);
+    renderPaymentUpsell(order);
+    renderInstructions(getSelectedPayment(), order);
+    syncPixPaymentVisibility(getSelectedPayment(), order);
+    if (paymentUpsellStatus) {
+      paymentUpsellStatus.textContent = hadPix
+        ? 'Sobremesa adicionada. O Pix anterior foi atualizado; gere um novo cÃ³digo com o valor correto.'
+        : 'Sobremesa adicionada à sua sacola. O total foi atualizado.';
+    }
   }
 
   function getSelectedPayment() {
@@ -843,6 +915,7 @@
   }
 
   renderOrder(order);
+  renderPaymentUpsell(order);
   if (order.couponCode === 'taxafree') {
     lockCouponInput('Cupom aplicado: taxa de entrega grátis.');
   } else if (order.couponCode === 'brasa10') {
@@ -876,5 +949,6 @@
     event.preventDefault();
     applyCoupon(order);
   });
+  paymentUpsellButton?.addEventListener('click', () => addPaymentUpsell(order));
   confirmPayment.addEventListener('click', () => confirmOrder(order));
 }());
