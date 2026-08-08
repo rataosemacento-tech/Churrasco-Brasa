@@ -3979,3 +3979,173 @@ body.checkout-open { overflow: hidden; }
     transition: none;
   }
 }
+
+/* --- ICONES EMOJI DA MARCA ---
+   Os emojis originais agora aparecem dentro de um sistema visual unico,
+   com moldura, contraste e tamanhos responsivos. */
+.site-icon {
+  --emoji-icon-size: 1.45em;
+  display: inline-grid !important;
+  width: var(--emoji-icon-size) !important;
+  height: var(--emoji-icon-size) !important;
+  min-width: var(--emoji-icon-size) !important;
+  min-height: var(--emoji-icon-size) !important;
+  box-sizing: border-box !important;
+  place-items: center !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 0.42em 0 0 !important;
+  padding: 0.18em !important;
+  overflow: visible !important;
+  color: #fff !important;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+  font-size: 0.82em !important;
+  line-height: 1 !important;
+  vertical-align: middle !important;
+  background: linear-gradient(145deg, rgba(245, 166, 35, 0.3), rgba(199, 16, 54, 0.28)) !important;
+  border: 1px solid rgba(245, 166, 35, 0.62) !important;
+  border-radius: 0.5em !important;
+  box-shadow: 0 0.24em 0.65em rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+.site-icon::before {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  position: static !important;
+  line-height: 1 !important;
+  font-family: inherit !important;
+  font-size: 1em !important;
+  transform: none !important;
+}
+
+.site-icon--fire,
+.site-icon--combo,
+.site-icon--meat,
+.site-icon--beef,
+.site-icon--pork,
+.site-icon--chicken {
+  background: linear-gradient(145deg, rgba(220, 24, 61, 0.45), rgba(245, 166, 35, 0.24)) !important;
+}
+
+.site-icon--delivery,
+.site-icon--mobile,
+.site-icon--phone,
+.site-icon--chat {
+  background: linear-gradient(145deg, rgba(32, 196, 116, 0.34), rgba(13, 105, 84, 0.3)) !important;
+}
+
+.site-icon--drink,
+.site-icon--water,
+.site-icon--dessert,
+.site-icon--leaf,
+.site-icon--spark {
+  background: linear-gradient(145deg, rgba(52, 162, 210, 0.34), rgba(111, 67, 150, 0.28)) !important;
+}
+
+.site-icon--pin,
+.site-icon--clock,
+.site-icon--mail,
+.site-icon--card,
+.site-icon--bag,
+.site-icon--lock,
+.site-icon--star,
+.site-icon--smile {
+  background: linear-gradient(145deg, rgba(245, 166, 35, 0.3), rgba(121, 69, 17, 0.34)) !important;
+}
+
+.combo-tab-icon {
+  --emoji-icon-size: 1.35rem;
+  margin: 0 !important;
+  font-size: 0.74rem !important;
+}
+
+.feat-icon .site-icon {
+  --emoji-icon-size: 1.9rem;
+  margin: 0 !important;
+  font-size: 0.98rem !important;
+}
+
+.step-icon .site-icon {
+  --emoji-icon-size: 2.45rem;
+  margin: 0 !important;
+  font-size: 1.28rem !important;
+}
+
+.cont-icon .site-icon {
+  --emoji-icon-size: 1.65rem;
+  margin: 0 !important;
+  font-size: 0.82rem !important;
+}
+
+.menu-card-visual-icon.site-icon {
+  --emoji-icon-size: 5.1rem;
+  margin: 0 !important;
+  font-size: 2.85rem !important;
+  border-radius: 1.2rem !important;
+}
+
+.stat-icon {
+  display: grid !important;
+  width: 2.18rem !important;
+  height: 2.18rem !important;
+  place-items: center !important;
+  box-sizing: border-box !important;
+  color: #fff !important;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+  font-size: 1.04rem !important;
+  line-height: 1 !important;
+  background: linear-gradient(145deg, rgba(245, 166, 35, 0.3), rgba(199, 16, 54, 0.28)) !important;
+  border: 1px solid rgba(245, 166, 35, 0.62) !important;
+  border-radius: 0.72rem !important;
+  box-shadow: 0 0.24rem 0.65rem rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  transform: none !important;
+}
+
+.stat-icon::before {
+  display: block !important;
+  position: static !important;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+  font-size: 1em !important;
+  line-height: 1 !important;
+}
+
+.rating-stars span {
+  display: inline-block !important;
+  width: auto !important;
+  height: auto !important;
+  clip-path: none !important;
+  background: none !important;
+  filter: drop-shadow(0 0 0.18rem rgba(245, 166, 35, 0.5)) !important;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+  font-size: 0.95rem !important;
+  line-height: 1 !important;
+}
+
+.rating-stars span::before {
+  display: inline !important;
+  font-family: inherit !important;
+  content: '⭐' !important;
+}
+
+.toast::before {
+  display: inline-grid !important;
+  width: 1.55rem !important;
+  height: 1.55rem !important;
+  place-items: center !important;
+  background: linear-gradient(145deg, rgba(220, 24, 61, 0.45), rgba(245, 166, 35, 0.24)) !important;
+  border: 1px solid rgba(245, 166, 35, 0.62) !important;
+  border-radius: 0.5rem !important;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+  font-size: 0.95rem !important;
+  line-height: 1 !important;
+  filter: none !important;
+}
+
+@media (max-width: 520px) {
+  .site-icon { --emoji-icon-size: 1.35em; }
+  .stat-icon { width: 2rem !important; height: 2rem !important; font-size: 0.94rem !important; }
+  .menu-card-visual-icon.site-icon { --emoji-icon-size: 4.6rem; font-size: 2.55rem !important; }
+}
