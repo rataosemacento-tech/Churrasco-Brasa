@@ -596,14 +596,6 @@ function updateCartUI() {
       </button>
     `;
     itemsContainer.appendChild(row);
-    row.querySelectorAll('[data-cart-action]').forEach((button) => {
-      button.addEventListener('click', (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        performCartAction(button);
-      });
-    });
-
   });
 }
 
