@@ -1419,7 +1419,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .menu-cross-sell-card {
   display: grid;
-  grid-template-columns: 76px minmax(0, 1fr);
+  grid-template-columns: 112px minmax(0, 1fr);
   gap: 0.7rem;
   align-items: center;
   padding: 0.65rem;
@@ -1428,7 +1428,27 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: rgba(10,10,10,0.62);
 }
 
-.menu-cross-sell-card > img { width: 76px; height: 76px; border-radius: 10px; object-fit: cover; }
+.menu-cross-sell-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.28rem;
+  width: 112px;
+  height: 76px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #16110f;
+}
+.menu-cross-sell-images img {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  object-fit: cover;
+}
+.menu-cross-sell-images .menu-cross-sell-image--coke {
+  padding: 0.18rem;
+  object-fit: contain;
+  background: #f7f7f7;
+}
 .menu-cross-sell-card > div { min-width: 0; }
 .menu-cross-sell-kicker { color: var(--yellow); font-size: 0.58rem; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase; }
 .menu-cross-sell-card h3 { margin: 0.18rem 0 0; color: var(--white); font-size: 0.88rem; }
@@ -1436,6 +1456,47 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .menu-cross-sell-action { display: flex; align-items: center; justify-content: space-between; gap: 0.45rem; }
 .menu-cross-sell-action strong { color: var(--yellow-light); font-size: 0.78rem; white-space: nowrap; }
 .menu-cross-sell-action .btn-add { min-height: 32px; padding: 0.45rem 0.55rem; font-size: 0.62rem; }
+
+.menu-cross-sell-card--featured {
+  border-color: rgba(245,166,35,0.65);
+  background: linear-gradient(135deg, rgba(102,37,14,0.88), rgba(20,13,10,0.96));
+  box-shadow: 0 0 0 1px rgba(215,16,54,0.16), 0 12px 26px rgba(0,0,0,0.28);
+}
+
+.menu-cross-sell-card--featured > .menu-cross-sell-images { box-shadow: 0 0 0 2px rgba(245,166,35,0.22); }
+.menu-cross-sell-card--featured .menu-cross-sell-kicker { color: var(--yellow-light); }
+.menu-cross-sell-price-stack { display: grid; gap: 0.08rem; min-width: 0; }
+.menu-cross-sell-price-stack del { color: var(--gray-mid); font-size: 0.58rem; white-space: nowrap; }
+.menu-cross-sell-price-stack .menu-cross-sell-featured-price { color: #59d98b; font-size: 0.88rem; }
+
+.menu-cross-sell-promo {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.42rem 0.5rem;
+  align-items: center;
+  margin-top: 0.55rem;
+  padding: 0.48rem;
+  border: 1px solid rgba(245,166,35,0.52);
+  border-radius: 0.55rem;
+  background: linear-gradient(135deg, rgba(245,166,35,0.14), rgba(98,30,16,0.36));
+}
+
+.menu-cross-sell-promo-badge {
+  padding: 0.22rem 0.35rem;
+  border-radius: 0.32rem;
+  color: #2a1607;
+  background: var(--yellow);
+  font-size: 0.52rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.menu-cross-sell-promo > div { display: grid; min-width: 0; gap: 0.08rem; }
+.menu-cross-sell-promo > div strong { color: var(--white); font-size: 0.68rem; line-height: 1.15; }
+.menu-cross-sell-promo > div small { color: var(--gray-light); font-size: 0.58rem; line-height: 1.2; }
+.menu-cross-sell-promo-price { color: var(--yellow-light); font-size: 0.72rem; white-space: nowrap; }
+.menu-cross-sell-promo-button { grid-column: 1 / -1; width: 100%; min-height: 29px; padding: 0.38rem 0.5rem; font-size: 0.6rem; }
 
 .filter-tabs {
   display: flex;
@@ -1556,7 +1617,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .menu-card:hover .menu-card-img { transform: scale(1.08); }
 .costela-bovina-img { object-position: center 48%; }
 .costela-suina-img { object-position: center 52%; }
-.combo-familia-img { object-position: center 52%; }
+.combo-familia-img { object-position: center 58%; }
+.combo-churrasqueiro-img { object-position: center 47%; }
 .combo-iscas-img { object-position: center 52%; }
 .frango-assado-img { object-position: center 56%; }
 .pudim-cremoso-img { object-position: center 58%; }
@@ -2846,12 +2908,16 @@ body.chat-open { overflow: hidden; }
    ============================================ */
 .cart-widget {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: max(1.5rem, env(safe-area-inset-bottom));
+  right: max(1.5rem, env(safe-area-inset-right));
   z-index: 900;
 }
 .cart-btn {
-  background: var(--red);
+  position: relative;
+  min-width: 192px;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.3);
+  background: linear-gradient(135deg, #e3123d 0%, var(--red) 58%, #9b0b27 100%);
   color: var(--white);
   font-family: var(--font-body);
   font-weight: 700;
@@ -2861,14 +2927,23 @@ body.chat-open { overflow: hidden; }
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  box-shadow: var(--shadow-red), var(--shadow-md);
+  box-shadow: var(--shadow-red), var(--shadow-md), 0 0 0 3px rgba(245,166,35,0.18);
   transition: var(--transition);
   animation: pulse-cart 2s infinite;
 }
-.cart-btn:hover { transform: scale(1.05); background: var(--red-light); }
+.cart-btn::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: inherit;
+  pointer-events: none;
+}
+.cart-btn:hover,
+.cart-btn:focus-visible { transform: scale(1.06); background: linear-gradient(135deg, var(--red-light), var(--red)); }
 @keyframes pulse-cart {
-  0%, 100% { box-shadow: var(--shadow-red), 0 0 0 0 rgba(200,16,46,0.5); }
-  50%       { box-shadow: var(--shadow-red), 0 0 0 10px rgba(200,16,46,0); }
+  0%, 100% { box-shadow: var(--shadow-red), var(--shadow-md), 0 0 0 3px rgba(245,166,35,0.18); }
+  50%       { box-shadow: var(--shadow-red), var(--shadow-md), 0 0 0 10px rgba(200,16,46,0); }
 }
 .cart-count {
   background: var(--yellow);
@@ -2881,9 +2956,11 @@ body.chat-open { overflow: hidden; }
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.16);
 }
-.cart-label { font-size: 0.8rem; letter-spacing: 0.03em; }
-.cart-total { color: var(--yellow-light); font-size: 0.78rem; margin-left: 0.1rem; }
+.cart-label { font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+.cart-total { color: #ffe29b; font-size: 0.82rem; font-weight: 800; margin-left: 0.1rem; white-space: nowrap; }
 
 .cart-overlay {
   position: fixed;
@@ -3802,8 +3879,8 @@ body.checkout-open { overflow: hidden; }
   .footer-brand .logo-sub { font-size: 1.05rem; }
   .footer-bottom { padding: 1rem; }
 
-  .cart-widget { right: 1rem; bottom: max(1rem, env(safe-area-inset-bottom)); }
-  .cart-btn { min-height: 48px; padding: 0.75rem 1rem; font-size: 0.8rem; }
+  .cart-widget { right: 0.75rem; bottom: max(1rem, env(safe-area-inset-bottom)); }
+  .cart-btn { min-width: 178px; min-height: 52px; padding: 0.75rem 0.9rem; font-size: 0.8rem; }
   .chat-float { right: 0.75rem; bottom: max(0.75rem, env(safe-area-inset-bottom)); }
   .chat-float-cart-offset { bottom: max(5.8rem, calc(env(safe-area-inset-bottom) + 5.2rem)); }
   .cart-drawer { width: 100%; max-width: none; }
@@ -4316,6 +4393,16 @@ body.checkout-open { overflow: hidden; }
   transform: scale(1.06);
 }
 
+.beverage-product-card--featured {
+  border-color: rgba(245,166,35,0.72);
+  box-shadow: 0 18px 42px rgba(0,0,0,0.28), 0 0 0 1px rgba(245,166,35,0.16), 0 0 28px rgba(245,166,35,0.12);
+}
+
+.beverage-product-card--featured:hover {
+  border-color: var(--yellow);
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(245,166,35,0.28), 0 0 34px rgba(245,166,35,0.18);
+}
+
 .beverage-product-card .menu-card-body > p {
   min-height: 3.2em;
 }
@@ -4333,7 +4420,226 @@ body.checkout-open { overflow: hidden; }
   .menu-cross-sell { margin-top: 1rem; padding: 0.85rem; }
   .menu-cross-sell-heading { align-items: flex-start; }
   .menu-cross-sell-note { display: none; }
-  .menu-cross-sell-card { grid-template-columns: 64px minmax(0, 1fr); padding: 0.55rem; }
-  .menu-cross-sell-card > img { width: 64px; height: 64px; }
+  .menu-cross-sell-card { grid-template-columns: 96px minmax(0, 1fr); padding: 0.55rem; }
+  .menu-cross-sell-images { width: 96px; height: 64px; }
   .menu-cross-sell-card p { margin-bottom: 0.45rem; }
+}
+
+/* Ícones um pouco maiores no celular para melhorar a leitura sem aumentar os textos. */
+@media (max-width: 520px) {
+  .hero-badges .site-icon,
+  .section-eyebrow .site-icon,
+  .menu-category-tab .site-icon,
+  .filter-tab .site-icon,
+  .menu-badge .site-icon,
+  .cart-btn .site-icon {
+    --emoji-icon-size: 1.62em;
+    font-size: 1em !important;
+  }
+
+  .badge-label .site-icon {
+    --emoji-icon-size: 1.78em;
+  }
+
+  .stat-icon {
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    font-size: 1.08rem !important;
+  }
+
+  .feat-icon {
+    width: 2.65rem;
+    height: 2.65rem;
+  }
+
+  .feat-icon .site-icon {
+    --emoji-icon-size: 2.12rem;
+    font-size: 1.08rem !important;
+  }
+
+  .cont-icon .site-icon {
+    --emoji-icon-size: 1.8rem;
+    font-size: 0.92rem !important;
+  }
+}
+
+/* Oferta recorrente para pedidos agendados. */
+.schedule-promo {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.9rem;
+  align-items: center;
+  width: min(100%, 680px);
+  margin: -0.55rem 0 1.35rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(245, 166, 35, 0.68);
+  border-radius: 0.9rem;
+  background: linear-gradient(100deg, rgba(76, 9, 20, 0.95), rgba(28, 12, 13, 0.9));
+  box-shadow: 0 0 0 2px rgba(200, 16, 46, 0.22), 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
+.schedule-promo-badge {
+  display: grid;
+  place-items: center;
+  min-width: 4.6rem;
+  min-height: 3.1rem;
+  padding: 0.35rem;
+  border-radius: 0.65rem;
+  color: #2a1100;
+  background: linear-gradient(145deg, #ffe08a, #f5a623);
+  box-shadow: 2px 2px 0 rgba(122, 7, 27, 0.85);
+  font-size: 0.62rem;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.schedule-promo-copy { min-width: 0; }
+.schedule-promo-kicker {
+  margin: 0 0 0.18rem;
+  color: var(--yellow);
+  font-size: 0.56rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.schedule-promo h2 {
+  margin: 0;
+  color: var(--white);
+  font-size: clamp(0.92rem, 2.1vw, 1.18rem);
+  line-height: 1.1;
+}
+.schedule-promo-copy > p:last-child {
+  margin: 0.3rem 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+.schedule-promo-copy strong { color: #ffcf54; }
+.schedule-promo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.3rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--yellow);
+  border-radius: 0.55rem;
+  color: var(--yellow);
+  background: rgba(200, 16, 46, 0.18);
+  font-size: 0.63rem;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+.schedule-promo-link:hover,
+.schedule-promo-link:focus-visible {
+  color: var(--white);
+  background: var(--red);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 560px) {
+  .schedule-promo {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.65rem;
+    margin-top: -0.2rem;
+    padding: 0.72rem;
+  }
+  .schedule-promo-badge { min-width: 3.9rem; min-height: 2.7rem; font-size: 0.52rem; }
+  .schedule-promo-copy > p:last-child { font-size: 0.64rem; }
+  .schedule-promo-link { grid-column: 1 / -1; width: 100%; }
+}
+
+/* Cards visuais para recomendações e upsells oferecidos pela IA. */
+.chat-recommendations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  max-width: 100%;
+  margin-top: 0.55rem;
+  padding-bottom: 0.12rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 168, 132, 0.65) transparent;
+}
+.chat-recommendations-label {
+  flex: 0 0 100%;
+  color: #f6c453;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.chat-recommendation {
+  flex: 0 0 7.1rem;
+  overflow: hidden;
+  border: 1px solid rgba(0, 168, 132, 0.35);
+  border-radius: 0.55rem;
+  background: #111b21;
+}
+.chat-recommendation > img {
+  display: block;
+  width: 100%;
+  height: 4.55rem;
+  object-fit: cover;
+  background: #202c33;
+}
+.chat-recommendation-body {
+  display: grid;
+  gap: 0.22rem;
+  padding: 0.42rem;
+}
+.chat-recommendation-name {
+  min-height: 2.15em;
+  color: #e9edef;
+  font-size: 0.65rem;
+  line-height: 1.12;
+}
+.chat-recommendation-details {
+  min-height: 2.55em;
+  color: #aebac1;
+  font-size: 0.55rem;
+  line-height: 1.18;
+}
+.chat-recommendation-price {
+  color: #f6c453;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+.chat-recommendation-add {
+  width: 100%;
+  padding: 0.3rem 0.22rem;
+  color: #d8fff5;
+  background: #006b58;
+  border: 1px solid rgba(0, 168, 132, 0.7);
+  border-radius: 0.32rem;
+  font: inherit;
+  font-size: 0.58rem;
+  font-weight: 800;
+  line-height: 1.1;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+.chat-recommendation-add:hover,
+.chat-recommendation-add:focus-visible {
+  background: #00a884;
+  border-color: #52e0c1;
+  outline: none;
+  transform: translateY(-1px);
+}
+.chat-recommendation-add:disabled {
+  cursor: default;
+  transform: none;
+}
+.chat-recommendation-add.is-added {
+  color: #ffffff;
+  background: #008069;
+  border-color: #00a884;
+}
+
+@media (max-width: 480px) {
+  .chat-recommendation { flex-basis: 6.7rem; }
+  .chat-recommendation > img { height: 4.2rem; }
 }

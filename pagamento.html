@@ -30,7 +30,7 @@
       <p class="payment-eyebrow">Finalização do pedido</p>
       <h1 id="payment-title">Escolha como pagar</h1>
       <p>Confira o resumo e selecione a forma de pagamento para confirmar seu pedido com o atendimento.</p>
-      <aside class="first-order-banner" aria-labelledby="first-order-title">
+      <aside class="first-order-banner" id="first-order-banner" aria-labelledby="first-order-title">
         <span class="first-order-icon" aria-hidden="true">%</span>
         <div class="first-order-copy">
           <p>Condição especial de boas-vindas</p>
@@ -38,6 +38,13 @@
           <span class="first-order-hint"><strong>Como usar:</strong> clique em BRASA10 para copiar e cole o cupom no campo abaixo.</span>
         </div>
         <button type="button" class="first-order-code" id="copy-first-order-code" aria-label="Copiar cupom BRASA10">BRASA10</button>
+      </aside>
+      <aside class="schedule-checkout-banner" id="schedule-checkout-banner" hidden>
+        <span class="schedule-checkout-mark">15%</span>
+        <div>
+          <strong>Pedido agendado com desconto garantido</strong>
+          <span>Pagamento integral antecipado via Pix. O desconto de 15% ja foi aplicado aos itens do seu pedido.</span>
+        </div>
       </aside>
     </section>
 
@@ -62,8 +69,16 @@
             <dt>Entrega</dt>
             <dd id="order-delivery">R$ 0,00</dd>
           </div>
+          <div id="order-schedule-row" hidden>
+            <dt>Agendamento</dt>
+            <dd id="order-schedule-label">Nao agendado</dd>
+          </div>
+          <div id="order-schedule-discount-row" hidden>
+            <dt>Desconto de agendamento (15%)</dt>
+            <dd id="order-schedule-discount">- R$ 0,00</dd>
+          </div>
           <div id="order-discount-row" hidden>
-            <dt>Desconto</dt>
+            <dt>Cupom de desconto</dt>
             <dd id="order-discount">- R$ 0,00</dd>
           </div>
           <div class="order-total">
@@ -85,7 +100,7 @@
           </div>
         </div>
 
-        <section class="coupon-box" aria-labelledby="coupon-title">
+        <section class="coupon-box" id="coupon-box" aria-labelledby="coupon-title">
           <div class="coupon-heading">
             <div>
               <p class="card-eyebrow">Benefício</p>

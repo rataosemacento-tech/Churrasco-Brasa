@@ -106,8 +106,8 @@
         <div class="hero-offer-divider" aria-hidden="true"></div>
         <p class="hero-offer-includes">Inclui no kit</p>
         <ul class="hero-offer-items" aria-label="Itens da oferta">
-          <li>Costela bovina 550g</li>
-          <li>Picanha na brasa 400g</li>
+          <li>Costela bovina 680g</li>
+          <li>Picanha na brasa 730g</li>
           <li>Costela suína + BBQ</li>
           <li>Frango na brasa inteiro</li>
           <li class="hero-offer-gift">1x maionese caseira 290g ou queijo coalho de 180g <em>brinde</em></li>
@@ -120,6 +120,16 @@
           <button type="button" class="hero-offer-cta" id="btn-hero-offer">Adicionar oferta à sacola</button>
         </div>
       </article>
+
+      <aside class="schedule-promo" aria-labelledby="schedule-promo-title">
+        <div class="schedule-promo-badge">15% DE DESCONTO</div>
+        <div class="schedule-promo-copy">
+          <p class="schedule-promo-kicker">Planeje seu churrasco</p>
+          <h2 id="schedule-promo-title">Agende seu pedido e economize</h2>
+          <p>Escolha a data e o horario, pague o valor integral antecipadamente via Pix e garanta <strong>15% de desconto nos itens</strong>.</p>
+        </div>
+        <a class="schedule-promo-link" href="#cardapio">Escolher itens</a>
+      </aside>
 
       <div class="hero-actions" id="hero-actions">
         <a href="#cardapio" class="btn-primary" id="btn-peca-online"><span class="site-icon site-icon--fire" aria-hidden="true"></span>Peça Agora</a>
@@ -191,13 +201,13 @@
     <div class="section-header">
       <p class="section-eyebrow"><span class="site-icon site-icon--meat" aria-hidden="true"></span>Nossa Seleção</p>
       <h2 class="section-title">CARDÁPIO <span class="red">PREMIUM</span></h2>
-      <p class="section-sub">Escolha seu churrasco, bebida ou sobremesa e receba na porta, saindo direto da brasa</p>
+      <p class="section-sub">Escolha seu churrasco, bebida ou doce e receba na porta, saindo direto da brasa</p>
     </div>
 
     <div class="menu-category-tabs" id="menu-category-tabs" role="tablist" aria-label="Categorias do cardápio">
       <button type="button" class="menu-category-tab active" data-menu-category="carnes" role="tab" aria-selected="true" aria-controls="menu-grid" id="menu-category-carnes"><span class="site-icon site-icon--meat" aria-hidden="true"></span>Carnes</button>
       <button type="button" class="menu-category-tab" data-menu-category="bebidas" role="tab" aria-selected="false" aria-controls="menu-grid" id="menu-category-bebidas"><span class="site-icon site-icon--drink" aria-hidden="true"></span>Bebidas</button>
-      <button type="button" class="menu-category-tab" data-menu-category="sobremesas" role="tab" aria-selected="false" aria-controls="menu-grid" id="menu-category-sobremesas"><span class="site-icon site-icon--dessert" aria-hidden="true"></span>Sobremesas</button>
+      <button type="button" class="menu-category-tab" data-menu-category="sobremesas" role="tab" aria-selected="false" aria-controls="menu-grid" id="menu-category-sobremesas"><span class="site-icon site-icon--dessert" aria-hidden="true"></span>Doces</button>
     </div>
 
     <p class="menu-filter-label" id="menu-filter-label">Filtre por tipo de carne</p>
@@ -219,12 +229,30 @@
       <div class="menu-cross-sell-heading">
         <div>
           <p class="section-eyebrow"><span class="site-icon site-icon--spark" aria-hidden="true"></span>Complete seu pedido</p>
-          <h2 id="menu-cross-sell-title">Da brasa à sobremesa</h2>
+          <h2 id="menu-cross-sell-title">Da brasa ao doce</h2>
           <p>Escolhas rápidas para deixar seu pedido ainda mais completo.</p>
         </div>
         <span class="menu-cross-sell-note">Combinações certeiras</span>
       </div>
       <div class="menu-cross-sell-grid">
+        <article class="menu-cross-sell-card menu-cross-sell-card--featured">
+          <div class="menu-cross-sell-images" role="group" aria-label="Brownie bites e Coca-Cola 2L">
+            <img src="menu_brownie_bites_55-2k.jpg" alt="Brownie bites com chocolate 55%" loading="lazy" decoding="async" />
+            <img class="menu-cross-sell-image--coke" src="bebida-coca-2l.jpg" alt="Coca-Cola 2L gelada" loading="lazy" decoding="async" />
+          </div>
+          <div>
+            <span class="menu-cross-sell-kicker">Destaque dos doces</span>
+            <h3>Coca-Cola 2L + Brownie Bites</h3>
+            <p>A dupla perfeita para terminar a refeição: bebida gelada e brownie com chocolate 55%.</p>
+            <div class="menu-cross-sell-action">
+              <div class="menu-cross-sell-price-stack">
+                <del>R$ 28,40</del>
+                <strong class="menu-cross-sell-featured-price">R$ 21,90</strong>
+              </div>
+              <button type="button" class="btn-add" data-cart-name="Combo Coca-Cola 2L + Brownie Bites" data-cart-price="21.90" data-cart-details="Combo promocional com Coca-Cola 2L e Brownie bites com chocolate 55%.">Adicionar</button>
+            </div>
+          </div>
+        </article>
         <article class="menu-cross-sell-card">
           <img src="bebida-coca-2l.jpg" alt="Coca-Cola de 2 litros" loading="lazy" decoding="async" />
           <div>
@@ -232,8 +260,8 @@
             <h3>Coca-Cola 2L</h3>
             <p>Gelada e perfeita para compartilhar com a família.</p>
             <div class="menu-cross-sell-action">
-              <strong>R$ 13,50</strong>
-              <button type="button" class="btn-add" data-cart-name="Coca-Cola 2L" data-cart-price="13.50" data-cart-details="Garrafa de 2 litros para compartilhar.">Adicionar</button>
+              <strong>R$ 14,80</strong>
+              <button type="button" class="btn-add" data-cart-name="Coca-Cola 2L" data-cart-price="14.80" data-cart-details="Garrafa de 2 litros para compartilhar.">Adicionar</button>
             </div>
           </div>
         </article>
@@ -247,6 +275,15 @@
               <strong>R$ 12,90</strong>
               <button type="button" class="btn-add" data-cart-name="Pudim Cremoso" data-cart-price="12.90" data-cart-details="Sobremesa cremosa com calda de caramelo.">Adicionar</button>
             </div>
+            <div class="menu-cross-sell-promo" aria-label="Oferta de dois pudins cremosos">
+              <span class="menu-cross-sell-promo-badge">Oferta</span>
+              <div>
+                <strong>2 Pudins Cremosos</strong>
+                <small>Leve 2 e economize</small>
+              </div>
+              <strong class="menu-cross-sell-promo-price">R$ 20,90</strong>
+              <button type="button" class="btn-add menu-cross-sell-promo-button" data-cart-name="Pudim Cremoso - Oferta 2 unidades" data-cart-price="20.90" data-cart-details="Oferta com 2 Pudins Cremosos e calda de caramelo.">Adicionar oferta</button>
+            </div>
           </div>
         </article>
         <article class="menu-cross-sell-card">
@@ -259,12 +296,39 @@
               <strong>R$ 14,90</strong>
               <button type="button" class="btn-add" data-cart-name="Brownie da Brasa" data-cart-price="14.90" data-cart-details="Brownie bites com chocolate 55%.">Adicionar</button>
             </div>
+            <div class="menu-cross-sell-promo" aria-label="Oferta de dois Brownies da Brasa">
+              <span class="menu-cross-sell-promo-badge">Oferta</span>
+              <div>
+                <strong>2 Brownies da Brasa</strong>
+                <small>Leve 2 e economize R$ 4,90</small>
+              </div>
+              <strong class="menu-cross-sell-promo-price">R$ 24,90</strong>
+              <button type="button" class="btn-add menu-cross-sell-promo-button" data-cart-name="Brownie da Brasa - Oferta 2 unidades" data-cart-price="24.90" data-cart-details="Oferta com 2 Brownies bites com chocolate 55%.">Adicionar oferta</button>
+            </div>
           </div>
         </article>
       </div>
     </aside>
 
     <div class="menu-grid" id="menu-grid">
+
+      <div class="menu-card combo-card combo-card-featured" data-category="acompanhamentos" id="card-vinagrete">
+        <div class="menu-card-img-wrap">
+          <img src="acompanhamento-vinagrete-380g.jpg" alt="Vinagrete fresco com tomate, cebola e ervas" class="menu-card-img vinagrete-img" loading="lazy" decoding="async" />
+          <span class="menu-badge hot">Oferta</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h3>Vinagrete da Brasa</h3>
+            <span class="menu-tag">Acompanhamento</span>
+          </div>
+          <p>Fresco, colorido e cheio de sabor: o toque leve que deixa qualquer carne na brasa ainda melhor.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">R$ 9,90 <small>/ 380g</small></span>
+            <button class="btn-add" id="add-vinagrete" data-cart-name="Vinagrete da Brasa" data-cart-price="9.90" data-cart-details="Vinagrete fresco com tomate, cebola e ervas, 380g.">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
 
       <!-- Bovinos -->
       <div class="menu-card" data-category="bovinos" id="card-picanha">
@@ -297,8 +361,8 @@
           </div>
           <p>Costela bovina assada lentamente, com crosta dourada, suculenta e cheia de sabor.</p>
           <div class="menu-card-footer">
-            <span class="menu-price">R$ 46,90 <small>/ 720g</small></span>
-            <button class="btn-add" id="add-costela-bovina" data-cart-name="Costela Bovina Assada" data-cart-price="46.90">+ Adicionar</button>
+            <span class="menu-price">R$ 43,90 <small>/ 720g</small></span>
+            <button class="btn-add" id="add-costela-bovina" data-cart-name="Costela Bovina Assada" data-cart-price="43.90">+ Adicionar</button>
           </div>
         </div>
       </div>
@@ -334,8 +398,8 @@
           </div>
           <p>Frango caipira temperado com ervas frescas, alho e limão. Assado inteiro na brasa com crocância única.</p>
           <div class="menu-card-footer">
-            <span class="menu-price">R$ 29,90 <small>/ unid</small></span>
-            <button class="btn-add" id="add-frango" data-cart-name="Frango na Brasa" data-cart-price="29.90">+ Adicionar</button>
+            <span class="menu-price">R$ 26,90 <small>/ unid</small></span>
+            <button class="btn-add" id="add-frango" data-cart-name="Frango na Brasa" data-cart-price="26.90">+ Adicionar</button>
           </div>
         </div>
       </div>
@@ -343,7 +407,7 @@
       <!-- Combos -->
       <div class="menu-card combo-card" data-category="combos" id="card-combo1">
         <div class="menu-card-img-wrap">
-          <img src="combo-familia-churrasco.jpg" alt="Combo Família com carnes assadas" class="menu-card-img combo-familia-img" loading="lazy" decoding="async" />
+          <img src="combo-familia-prato.jpg" alt="Combo Família com carnes assadas" class="menu-card-img combo-familia-img" loading="lazy" decoding="async" />
           <span class="menu-badge best">Melhor Valor</span>
         </div>
         <div class="menu-card-body">
@@ -351,7 +415,7 @@
             <h3>Combo Família</h3>
             <span class="menu-tag">Combo</span>
           </div>
-          <p>710g Picanha + 600g Costela + Farofa + Vinagrete + 4 pães de alho + Coca-Cola 2L. Serve até 8 pessoas.</p>
+          <p>710g Picanha + 600g Costela + Farofa + Vinagrete + 4 pães de alho + Coca-Cola 2L. Serve até 4 pessoas.</p>
           <div class="menu-card-footer">
             <span class="menu-price">R$ 115,90 <small>/ combo</small></span>
             <button class="btn-add" id="add-combo1" data-cart-name="Combo Família" data-cart-price="115.90">+ Adicionar</button>
@@ -361,17 +425,17 @@
 
       <div class="menu-card combo-card" data-category="combos" id="card-combo2">
         <div class="menu-card-img-wrap">
-          <img src="menu_ribs_1785709631447-2k.jpg" alt="Combo Churrasqueiro" class="menu-card-img" loading="lazy" decoding="async" />
+          <img src="combo-churrasqueiro-prato.jpg" alt="Combo Churrasqueiro com carnes, linguiça e queijo coalho" class="menu-card-img combo-churrasqueiro-img" loading="lazy" decoding="async" />
         </div>
         <div class="menu-card-body">
           <div class="menu-card-header">
             <h3>Combo Churrasqueiro</h3>
             <span class="menu-tag">Combo</span>
           </div>
-          <p>Costela Bovina 400g + Costela Suína 600g + Frango Inteiro + Acompanhamentos + 2 refrigerantes de 2L. Para 5 a 6 pessoas.</p>
+          <p>Costela Bovina 860g + Costela Suína 600g + Frango Inteiro + Acompanhamentos + 2 refrigerantes de 2L. Para 5 a 6 pessoas.</p>
           <div class="menu-card-footer">
-            <span class="menu-price">R$ 126,90 <small>/ combo</small></span>
-            <button class="btn-add" id="add-combo2" data-cart-name="Combo Churrasqueiro" data-cart-price="126.90">+ Adicionar</button>
+            <span class="menu-price">R$ 142,90 <small>/ combo</small></span>
+            <button class="btn-add" id="add-combo2" data-cart-name="Combo Churrasqueiro" data-cart-price="142.90" data-cart-details="Costela Bovina 860g + Costela Suína 600g + Frango Inteiro + Acompanhamentos + 2 refrigerantes de 2L.">+ Adicionar</button>
           </div>
         </div>
       </div>
@@ -388,13 +452,37 @@
           </div>
           <p>Iscas de carne douradas na brasa com mandioca macia: sabor marcante para matar a fome sem esperar.</p>
           <div class="menu-card-footer">
-            <span class="menu-price">R$ 68,90 <small>/ combo</small></span>
-            <button class="btn-add" id="add-combo3" data-cart-name="Combo Iscas da Brasa" data-cart-price="68.90" data-cart-details="Iscas de carne grelhadas com mandioca macia.">+ Adicionar</button>
+            <span class="menu-price">R$ 41,90 <small>/ combo</small></span>
+            <button class="btn-add" id="add-combo3" data-cart-name="Combo Iscas da Brasa" data-cart-price="41.90" data-cart-details="Iscas de carne grelhadas com mandioca macia.">+ Adicionar</button>
           </div>
         </div>
       </div>
 
       <!-- Bebidas -->
+      <div class="menu-card beverage-product-card beverage-product-card--featured" data-category="bebidas" id="card-beverage-budweiser">
+        <div class="menu-card-img-wrap beverage-product-visual">
+          <img src="bebida-budweiser-330ml.jpg" alt="Garrafa de Budweiser gelada de 330ml" class="menu-card-img beverage-product-img" loading="lazy" decoding="async" />
+          <span class="menu-badge hot">Oferta</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header"><h3>Budweiser 330ml</h3><span class="menu-tag">Bebida</span></div>
+          <p>Budweiser gelada, com sabor marcante para acompanhar sua carne na brasa.</p>
+          <div class="menu-card-footer"><span class="menu-price">R$ 4,60 <small>/ garrafa</small></span><button class="btn-add" data-cart-name="Budweiser 330ml" data-cart-price="4.60" data-cart-details="Garrafa de Budweiser 330ml gelada.">+ Adicionar</button></div>
+        </div>
+      </div>
+
+      <div class="menu-card beverage-product-card beverage-product-card--featured" data-category="bebidas" id="card-beverage-budweiser-pack">
+        <div class="menu-card-img-wrap beverage-product-visual">
+          <img src="bebida-budweiser-pack-12.jpg" alt="Pack com 12 latas de Budweiser de 350ml" class="menu-card-img beverage-product-img" loading="lazy" decoding="async" />
+          <span class="menu-badge hot">Super oferta</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header"><h3>Pack Budweiser 12x350ml</h3><span class="menu-tag">Bebida</span></div>
+          <p>12 latas para deixar a resenha completa: Budweiser gelada para compartilhar do primeiro brinde ao último.</p>
+          <div class="menu-card-footer"><span class="menu-price">R$ 38,90 <small>/ pack</small></span><button class="btn-add" data-cart-name="Pack Budweiser 12x350ml" data-cart-price="38.90" data-cart-details="Pack com 12 latas de Budweiser de 350ml.">+ Adicionar</button></div>
+        </div>
+      </div>
+
       <div class="menu-card beverage-product-card" data-category="bebidas" id="card-beverage-coca-600">
         <div class="menu-card-img-wrap beverage-product-visual">
           <img src="bebida-coca-600ml.jpg" alt="Coca-Cola gelada em garrafa de 600ml" class="menu-card-img beverage-product-img" loading="lazy" decoding="async" />
@@ -529,13 +617,13 @@
 
       <div class="menu-card beverage-product-card" data-category="bebidas" id="card-beverage-coca-garrafa">
         <div class="menu-card-img-wrap beverage-product-visual">
-          <img src="bebida-coca-1l.jpg" alt="Coca-Cola em garrafa" class="menu-card-img beverage-product-img" loading="lazy" decoding="async" />
-          <span class="menu-badge best">Garrafa</span>
+          <img src="bebida-coca-1l.jpg" alt="Coca-Cola em garrafa de 600ml" class="menu-card-img beverage-product-img" loading="lazy" decoding="async" />
+          <span class="menu-badge best">600ml</span>
         </div>
         <div class="menu-card-body">
-          <div class="menu-card-header"><h3>Coca-Cola Garrafa</h3><span class="menu-tag">Bebida</span></div>
-          <p>Coca-Cola original em garrafa para compartilhar.</p>
-          <div class="menu-card-footer"><span class="menu-price">R$ 11,90 <small>/ garrafa</small></span><button class="btn-add" data-cart-name="Coca-Cola Garrafa" data-cart-price="11.90">+ Adicionar</button></div>
+          <div class="menu-card-header"><h3>Coca-Cola 600ml</h3><span class="menu-tag">Bebida</span></div>
+          <p>Coca-Cola original gelada em garrafa de 600ml para compartilhar.</p>
+          <div class="menu-card-footer"><span class="menu-price">R$ 8,50 <small>/ 600ml</small></span><button class="btn-add" data-cart-name="Coca-Cola 600ml" data-cart-price="8.50">+ Adicionar</button></div>
         </div>
       </div>
 
@@ -547,7 +635,7 @@
         <div class="menu-card-body">
           <div class="menu-card-header"><h3>Coca-Cola 2L</h3><span class="menu-tag">Bebida</span></div>
           <p>A garrafa ideal para dividir e completar o churrasco.</p>
-          <div class="menu-card-footer"><span class="menu-price">R$ 13,50 <small>/ garrafa</small></span><button class="btn-add" data-cart-name="Coca-Cola 2L" data-cart-price="13.50">+ Adicionar</button></div>
+          <div class="menu-card-footer"><span class="menu-price">R$ 14,80 <small>/ garrafa</small></span><button class="btn-add" data-cart-name="Coca-Cola 2L" data-cart-price="14.80">+ Adicionar</button></div>
         </div>
       </div>
 
@@ -875,15 +963,15 @@
             </div>
           </article>
 
-          <article class="video-slide" data-video-slide="1" role="group" aria-roledescription="slide" aria-label="2 de 4: clima natural">
+          <article class="video-slide" data-video-slide="1" role="group" aria-roledescription="slide" aria-label="2 de 4: fogo baixo, sabor profundo">
             <video class="video-showcase-video" controls muted playsinline loop preload="metadata" data-autoplay="true" poster="carousel-driftwood-poster-2k.jpg" aria-label="Vídeo com clima natural e inspiração à beira-mar">
               <source src="carousel-driftwood-muted.mp4" type="video/mp4" />
               Seu navegador não suporta vídeo HTML5.
             </video>
-            <span class="video-showcase-tag"><span class="site-icon site-icon--leaf" aria-hidden="true"></span>Clima natural</span>
+            <span class="video-showcase-tag"><span class="site-icon site-icon--leaf" aria-hidden="true"></span>Fogo lento</span>
             <div class="video-slide-caption">
-              <strong>Clima para desacelerar</strong>
-              <span>Inspirações que combinam com bons momentos</span>
+              <strong>Fogo baixo, sabor profundo</strong>
+              <span>Crosta dourada, suculência no centro e o sabor que só a brasa entrega.</span>
             </div>
           </article>
 
@@ -894,20 +982,20 @@
             </video>
             <span class="video-showcase-tag"><span class="site-icon site-icon--spark" aria-hidden="true"></span>Inspiração</span>
             <div class="video-slide-caption">
-              <strong>Estilo de fim de semana</strong>
-              <span>Ideias leves para aproveitar o seu momento</span>
+              <strong>Do fogo ao ponto perfeito</strong>
+              <span>Carnes suculentas, seladas na brasa para transformar seu momento em sabor.</span>
             </div>
           </article>
 
-          <article class="video-slide" data-video-slide="3" role="group" aria-roledescription="slide" aria-label="4 de 4: clima de viagem">
-            <video class="video-showcase-video" controls muted playsinline loop preload="metadata" data-autoplay="true" aria-label="Vídeo de inspiração para uma pausa na estrada">
+          <article class="video-slide" data-video-slide="3" role="group" aria-roledescription="slide" aria-label="4 de 4: brownie bites da brasa">
+            <video class="video-showcase-video" controls muted playsinline loop preload="metadata" data-autoplay="true" aria-label="Vídeo dos brownie bites da Brasa">
               <source src="carousel-roadtrip.mp4" type="video/mp4" />
               Seu navegador não suporta vídeo HTML5.
             </video>
-            <span class="video-showcase-tag">Pausa na estrada</span>
+            <span class="video-showcase-tag">Doce da brasa</span>
             <div class="video-slide-caption">
-              <strong>Clima de viagem</strong>
-              <span>Inspiração para desacelerar e aproveitar o momento</span>
+              <strong>Brownie bites da Brasa</strong>
+              <span>Chocolate 55% para encerrar o churrasco com um toque intenso e irresistível</span>
             </div>
           </article>
 
@@ -919,9 +1007,9 @@
         </div>
         <div class="video-carousel-dots" id="video-carousel-dots" role="tablist" aria-label="Selecionar vídeo">
           <button type="button" class="video-carousel-dot active" data-video-index="0" role="tab" aria-selected="true" aria-label="Mostrar vídeo do frango"></button>
-          <button type="button" class="video-carousel-dot" data-video-index="1" role="tab" aria-selected="false" aria-label="Mostrar vídeo de clima natural"></button>
+          <button type="button" class="video-carousel-dot" data-video-index="1" role="tab" aria-selected="false" aria-label="Mostrar vídeo do fogo lento"></button>
           <button type="button" class="video-carousel-dot" data-video-index="2" role="tab" aria-selected="false" aria-label="Mostrar vídeo de inspiração de estilo"></button>
-          <button type="button" class="video-carousel-dot" data-video-index="3" role="tab" aria-selected="false" aria-label="Mostrar vídeo de clima de viagem"></button>
+          <button type="button" class="video-carousel-dot" data-video-index="3" role="tab" aria-selected="false" aria-label="Mostrar vídeo do brownie da brasa"></button>
         </div>
       </div>
     </div>
@@ -1208,9 +1296,9 @@
 
   <!-- ===================== CART WIDGET ===================== -->
   <div class="cart-widget" id="cart-widget" style="display:none">
-    <button class="cart-btn" id="cart-btn">
+    <button class="cart-btn" id="cart-btn" aria-label="Abrir sua sacola e revisar o pedido">
       <span class="site-icon site-icon--bag" aria-hidden="true"></span><span class="cart-count" id="cart-count">0</span>
-      <span class="cart-label">Sacola</span>
+      <span class="cart-label">Ver sacola</span>
       <span class="cart-total" id="cart-total-mini">R$ 0,00</span>
     </button>
   </div>
@@ -1392,13 +1480,14 @@
       <div class="chat-date-label">HOJE</div>
       <div class="chat-message incoming">
         <div class="chat-bubble">
-          <span class="chat-bubble-copy">Olá! Sou a Brasa IA. Posso ajudar com cardápio, preços, pagamento, entrega e como fazer seu pedido.</span>
+          <span class="chat-bubble-copy">Olá! Sou a Brasa IA. Diga quantas pessoas vão comer e eu indico a melhor opção para o seu pedido.</span>
           <span class="chat-bubble-meta">agora <span class="chat-ticks" aria-label="Entregue e lida">✓✓</span></span>
         </div>
       </div>
     </div>
 
     <div class="chat-quick-replies" id="chat-quick-replies" aria-label="Perguntas rápidas">
+      <button type="button" class="chat-quick-reply" data-chat-question="Me ajude a escolher a melhor opção">Melhor opção</button>
       <button type="button" class="chat-quick-reply" data-chat-question="Quais são as carnes e os preços?">Cardápio e preços</button>
       <button type="button" class="chat-quick-reply" data-chat-question="Como faço um pedido?">Como pedir?</button>
       <button type="button" class="chat-quick-reply" data-chat-question="Quais formas de pagamento vocês aceitam?">Pagamento</button>

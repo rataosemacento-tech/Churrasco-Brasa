@@ -249,3 +249,99 @@
   .delivery-upsell { padding: 1rem; }
   .upsell-options { grid-template-columns: 1fr; }
 }
+
+.schedule-card {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid #e8b44e;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #fff8e8 0%, #fff 78%);
+  box-shadow: 0 10px 26px rgba(151, 96, 18, 0.11);
+}
+
+.schedule-card-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+
+.schedule-card-heading h3 {
+  margin: 0;
+  color: var(--payment-ink);
+  font-size: 1rem;
+  letter-spacing: -0.025em;
+}
+
+.schedule-card-badge {
+  display: grid;
+  place-items: center;
+  min-width: 3.8rem;
+  min-height: 2.55rem;
+  padding: 0.35rem;
+  border-radius: 9px;
+  color: #713400;
+  background: #ffd66d;
+  font-size: 0.62rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+.schedule-card-copy {
+  margin: 0;
+  color: var(--payment-muted);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.schedule-toggle {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.72rem;
+  border: 1px solid #ecd8aa;
+  border-radius: 10px;
+  color: var(--payment-ink);
+  background: rgba(255, 248, 232, 0.75);
+  cursor: pointer;
+}
+
+.schedule-toggle input {
+  flex: 0 0 auto;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0.1rem 0 0;
+  accent-color: var(--payment-blue);
+}
+
+.schedule-toggle span { display: grid; gap: 0.22rem; }
+.schedule-toggle strong { font-size: 0.76rem; }
+.schedule-toggle small,
+.schedule-fields-note {
+  color: var(--payment-muted);
+  font-size: 0.66rem;
+  line-height: 1.4;
+}
+
+.schedule-fields {
+  display: grid;
+  gap: 0.7rem;
+  padding: 0.8rem;
+  border: 1px dashed #e4bb61;
+  border-radius: 10px;
+  background: #fffdf8;
+}
+
+.schedule-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.schedule-fields .delivery-field { gap: 0.28rem; }
+.schedule-fields .delivery-field input { min-height: 42px; }
+
+@media (max-width: 520px) {
+  .schedule-card { padding: 0.85rem; }
+  .schedule-field-grid { grid-template-columns: 1fr; }
+}

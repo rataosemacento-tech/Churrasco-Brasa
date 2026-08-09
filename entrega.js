@@ -3,6 +3,7 @@
 const CART_STORAGE_KEY = 'churrasco-brasa-cart-draft';
 const DELIVERY_DRAFT_KEY = 'churrascoDeliveryDraft';
 const PAYMENT_ORDER_KEY = 'churrascoPaymentOrder';
+const SCHEDULE_DISCOUNT_RATE = 0.15;
 const ATTRIBUTION_STORAGE_KEY = 'churrasco-brasa-attribution';
 const ATTRIBUTION_URL_KEYS = Object.freeze([
   'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
@@ -97,17 +98,21 @@ const DELIVERY_REGION_LABELS = Object.freeze({
 
 const PRODUCT_PRICES = Object.freeze({
   'Picanha na Brasa': 39.90,
-  'Costela Bovina Assada': 46.90,
+  'Costela Bovina Assada': 43.90,
   'Costela Suína BBQ': 39.90,
-  'Frango na Brasa': 29.90,
+  'Frango na Brasa': 26.90,
   'Combo Família': 115.90,
-  'Combo Churrasqueiro': 149.90,
+  'Combo Churrasqueiro': 142.90,
+  'Combo Iscas da Brasa': 41.90,
+  'Vinagrete da Brasa': 9.90,
   'Coca-Cola Lata': 6.50,
   'Coca-Cola Lata Zero Açúcar': 7.50,
   'Sprite Lata': 5.50,
   'Fanta Uva Lata': 6.00,
   'Fanta Laranja Lata': 6.00,
-  'Coca-Cola 2L': 13.50,
+  'Coca-Cola 2L': 14.80,
+  'Budweiser 330ml': 4.60,
+  'Pack Budweiser 12x350ml': 38.90,
   'Coca-Cola Zero Açúcar 2L': 13.50,
   'Sprite 2L': 13.50,
   'Fanta Uva 2L': 13.50,
@@ -116,7 +121,10 @@ const PRODUCT_PRICES = Object.freeze({
   'Água com Gás': 4.90,
   'Água sem Gás': 4.90,
   'Pudim Cremoso': 12.90,
+  'Pudim Cremoso - Oferta 2 unidades': 20.90,
   'Brownie da Brasa': 14.90,
+  'Brownie da Brasa - Oferta 2 unidades': 24.90,
+  'Combo Coca-Cola 2L + Brownie Bites': 21.90,
   'Kit Brasa Completo': 88.90
 });
 
@@ -125,6 +133,10 @@ const nameField = document.getElementById('delivery-name');
 const addressField = document.getElementById('delivery-address');
 const regionField = document.getElementById('delivery-region');
 const phoneField = document.getElementById('delivery-phone');
+const scheduleToggle = document.getElementById('schedule-order');
+const scheduleFields = document.getElementById('schedule-fields');
+const scheduleDateField = document.getElementById('schedule-date');
+const scheduleTimeField = document.getElementById('schedule-time');
 const feePreview = document.getElementById('delivery-fee-preview');
 const errorMessage = document.getElementById('delivery-error');
 const deliveryContent = document.getElementById('delivery-content');
@@ -134,12 +146,65 @@ const regionSummary = document.getElementById('delivery-order-region');
 const subtotalSummary = document.getElementById('delivery-subtotal');
 const feeSummary = document.getElementById('delivery-fee');
 const totalSummary = document.getElementById('delivery-total');
+const scheduleSummaryRow = document.getElementById('delivery-schedule-row');
+const scheduleSummaryLabel = document.getElementById('delivery-schedule-label');
+const discountSummaryRow = document.getElementById('delivery-discount-row');
+const discountSummary = document.getElementById('delivery-discount');
 const upsellStatus = document.getElementById('delivery-upsell-status');
 const upsellButtons = Array.from(document.querySelectorAll('[data-upsell-name]'));
 
 function formatBRL(value) {
   const safeValue = Number.isFinite(Number(value)) ? Math.max(0, Number(value)) : 0;
   return `R$ ${safeValue.toFixed(2).replace('.', ',')}`;
+}
+
+const productDisplayNames = Object.freeze({
+  'Coca-Cola Garrafa': 'Coca-Cola 600ml'
+});
+
+function getProductDisplayName(name) {
+  return productDisplayNames[name] || name;
+}
+
+function roundMoney(value) {
+  return Math.round((Number(value) + Number.EPSILON) * 100) / 100;
+}
+
+function isScheduledOrder() {
+  return Boolean(scheduleToggle?.checked);
+}
+
+function getScheduleDiscount(subtotal) {
+  return isScheduledOrder() ? roundMoney(subtotal * SCHEDULE_DISCOUNT_RATE) : 0;
+}
+
+function formatScheduleLabel() {
+  if (!isScheduledOrder() || !scheduleDateField?.value || !scheduleTimeField?.value) return 'Nao agendado';
+  const [year, month, day] = scheduleDateField.value.split('-');
+  return `${day}/${month}/${year} as ${scheduleTimeField.value}`;
+}
+
+function syncScheduleFields() {
+  const active = isScheduledOrder();
+  if (scheduleFields) scheduleFields.hidden = !active;
+  if (scheduleDateField) {
+    scheduleDateField.required = active;
+    if (!scheduleDateField.min) scheduleDateField.min = new Date().toISOString().slice(0, 10);
+  }
+  if (scheduleTimeField) scheduleTimeField.required = active;
+  renderFee();
+  persistDraft();
+}
+
+function isValidSchedule() {
+  if (!isScheduledOrder()) return true;
+  const date = scheduleDateField?.value || '';
+  const time = scheduleTimeField?.value || '';
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^\d{2}:\d{2}$/.test(time)) return false;
+  const scheduledAt = new Date(`${date}T${time}:00`);
+  if (!Number.isFinite(scheduledAt.getTime()) || scheduledAt.getTime() <= Date.now()) return false;
+  const hour = Number(time.slice(0, 2));
+  return hour >= 10 && hour <= 23;
 }
 
 function cleanText(value, maxLength = 240) {
@@ -266,7 +331,7 @@ function renderOrder() {
     const copy = document.createElement('div');
     copy.className = 'order-item-copy';
     const name = document.createElement('strong');
-    name.textContent = `${item.qty}x ${item.name}`;
+    name.textContent = `${item.qty}x ${getProductDisplayName(item.name)}`;
     copy.appendChild(name);
     if (item.details) {
       const details = document.createElement('small');
@@ -306,6 +371,21 @@ function restoreDraft() {
   if (typeof draft.phone === 'string') phoneField.value = cleanText(draft.phone, 20);
 }
 
+// Restaura tambem a modalidade e os dados do agendamento.
+function restoreDraft() {
+  const draft = readDeliveryDraft();
+  if (!draft) return;
+  if (typeof draft.name === 'string') nameField.value = cleanText(draft.name, 120);
+  if (Object.prototype.hasOwnProperty.call(DELIVERY_FEES, draft.region)) regionField.value = draft.region;
+  if (typeof draft.address === 'string') addressField.value = cleanText(draft.address, 240);
+  if (typeof draft.phone === 'string') phoneField.value = cleanText(draft.phone, 20);
+  const savedSchedule = draft.schedule && typeof draft.schedule === 'object' ? draft.schedule : draft;
+  if (scheduleToggle) scheduleToggle.checked = draft.orderMode === 'scheduled' || savedSchedule.mode === 'scheduled';
+  if (scheduleDateField && typeof savedSchedule.date === 'string') scheduleDateField.value = cleanText(savedSchedule.date, 10);
+  if (scheduleTimeField && typeof savedSchedule.time === 'string') scheduleTimeField.value = cleanText(savedSchedule.time, 5);
+  syncScheduleFields();
+}
+
 function persistDraft() {
   try {
     sessionStorage.setItem(DELIVERY_DRAFT_KEY, JSON.stringify({
@@ -318,6 +398,52 @@ function persistDraft() {
   } catch {
     // A sessão indisponível não impede o preenchimento desta etapa.
   }
+}
+
+// Persiste a modalidade e os dados do agendamento para a etapa de pagamento.
+function persistDraft() {
+  try {
+    sessionStorage.setItem(DELIVERY_DRAFT_KEY, JSON.stringify({
+      name: cleanText(nameField.value, 120),
+      address: cleanText(addressField.value, 240),
+      region: regionField.value,
+      regionLabel: DELIVERY_REGION_LABELS[regionField.value] || '',
+      phone: cleanText(phoneField.value, 20),
+      orderMode: isScheduledOrder() ? 'scheduled' : 'immediate',
+      schedule: {
+        mode: isScheduledOrder() ? 'scheduled' : 'immediate',
+        date: isScheduledOrder() ? cleanText(scheduleDateField?.value, 10) : '',
+        time: isScheduledOrder() ? cleanText(scheduleTimeField?.value, 5) : ''
+      }
+    }));
+  } catch {
+    // A sessao pode estar indisponivel em alguns navegadores.
+  }
+}
+
+// Atualiza o resumo com a tarifa fixa e o desconto dos pedidos agendados.
+function renderFee() {
+  const fee = selectedFee();
+  const subtotal = getSubtotal();
+  const discount = getScheduleDiscount(subtotal);
+  const hasRegion = fee > 0;
+  const label = DELIVERY_REGION_LABELS[regionField.value] || '';
+
+  regionSummary.textContent = hasRegion ? label : 'Selecione a regiao';
+  feePreview.textContent = hasRegion
+    ? `Taxa de entrega: ${formatBRL(fee)} · ${label}`
+    : 'A taxa sera exibida apos a selecao.';
+  feePreview.classList.toggle('is-ready', hasRegion);
+  feeSummary.textContent = hasRegion ? formatBRL(fee) : 'Selecione a regiao';
+  if (scheduleSummaryRow && scheduleSummaryLabel) {
+    scheduleSummaryRow.hidden = !isScheduledOrder();
+    scheduleSummaryLabel.textContent = formatScheduleLabel();
+  }
+  if (discountSummaryRow && discountSummary) {
+    discountSummaryRow.hidden = discount <= 0;
+    discountSummary.textContent = `- ${formatBRL(discount)}`;
+  }
+  totalSummary.textContent = hasRegion ? formatBRL(subtotal - discount + fee) : 'Selecione a regiao';
 }
 
 function showError(message) {
@@ -362,7 +488,14 @@ function saveOrder(event) {
     return;
   }
   const subtotal = getSubtotal();
+  if (!isValidSchedule()) {
+    showError('Escolha uma data e um horario futuros entre 10h e 23h para agendar.');
+    scheduleDateField?.focus();
+    return;
+  }
   const deliveryFee = DELIVERY_FEES[region];
+  const scheduled = isScheduledOrder();
+  const scheduleDiscountAmount = scheduled ? roundMoney(getSubtotal() * SCHEDULE_DISCOUNT_RATE) : 0;
   const safeItems = cart.map(item => ({
     name: item.name,
     details: item.details,
@@ -380,7 +513,18 @@ function saveOrder(event) {
     items: safeItems,
     subtotal,
     deliveryFee,
-    total: subtotal + deliveryFee
+    orderMode: scheduled ? 'scheduled' : 'immediate',
+    schedule: {
+      mode: scheduled ? 'scheduled' : 'immediate',
+      date: scheduled ? scheduleDateField.value : '',
+      time: scheduled ? scheduleTimeField.value : ''
+    },
+    scheduleDiscountRate: scheduled ? SCHEDULE_DISCOUNT_RATE : 0,
+    scheduleDiscountAmount,
+    // O desconto do agendamento tem uma linha própria no resumo; o campo
+    // discountAmount fica reservado para cupons aplicados no pagamento.
+    discountAmount: 0,
+    total: roundMoney(subtotal - scheduleDiscountAmount + deliveryFee)
   };
 
   try {
@@ -390,7 +534,9 @@ function saveOrder(event) {
       address,
       region,
       regionLabel: DELIVERY_REGION_LABELS[region],
-      phone: phoneDigits
+      phone: phoneDigits,
+      orderMode: paymentOrder.orderMode,
+      schedule: paymentOrder.schedule
     }));
     sessionStorage.setItem(PAYMENT_ORDER_KEY, JSON.stringify(paymentOrder));
   } catch {
@@ -412,6 +558,20 @@ if (!cart.length) {
   nameField.addEventListener('input', persistDraft);
   addressField.addEventListener('input', persistDraft);
   phoneField.addEventListener('input', persistDraft);
+  scheduleToggle?.addEventListener('change', () => {
+    clearError();
+    syncScheduleFields();
+  });
+  scheduleDateField?.addEventListener('change', () => {
+    clearError();
+    persistDraft();
+    renderFee();
+  });
+  scheduleTimeField?.addEventListener('change', () => {
+    clearError();
+    persistDraft();
+    renderFee();
+  });
   regionField.addEventListener('change', () => {
     clearError();
     persistDraft();

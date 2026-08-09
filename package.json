@@ -1,0 +1,13 @@
+{
+  "name": "churrasco-brasa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site e API de pedidos do Churrasco & Brasa",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -31,26 +31,36 @@ const DELIVERY_FEES = Object.freeze(
 
 const CATALOG = Object.freeze([
   ['Picanha na Brasa', 39.90],
-  ['Costela Bovina Assada', 46.90],
+  ['Costela Bovina Assada', 43.90],
   ['Costela Suína BBQ', 39.90],
-  ['Frango na Brasa', 29.90],
+  ['Frango na Brasa', 26.90],
   ['Combo Família', 115.90],
-  ['Combo Churrasqueiro', 149.90],
+  ['Combo Churrasqueiro', 142.90],
+  ['Combo Iscas da Brasa', 41.90],
+  ['Vinagrete da Brasa', 9.90],
   ['Coca-Cola Lata', 6.50],
+  ['Coca-Cola 600ml', 8.50],
+  ['Budweiser 330ml', 4.60],
+  ['Pack Budweiser 12x350ml', 38.90],
   ['Coca-Cola Lata Zero Açúcar', 7.50],
   ['Sprite Lata', 5.50],
   ['Fanta Uva Lata', 6.00],
   ['Fanta Laranja Lata', 6.00],
-  ['Coca-Cola 2L', 13.50],
+  ['Coca-Cola 2L', 14.80],
   ['Coca-Cola Zero Açúcar 2L', 13.50],
   ['Sprite 2L', 13.50],
   ['Fanta Uva 2L', 13.50],
   ['Fanta Laranja 2L', 13.50],
   ['Coca-Cola 2L Extra da Oferta', 6.50],
+  // Mantém pedidos antigos salvos no carrinho compatíveis com o catálogo atual.
+  ['Coca-Cola Garrafa', 8.50],
   ['Água com Gás', 4.90],
   ['Água sem Gás', 4.90],
   ['Pudim Cremoso', 12.90],
+  ['Pudim Cremoso - Oferta 2 unidades', 20.90],
   ['Brownie da Brasa', 14.90],
+  ['Brownie da Brasa - Oferta 2 unidades', 24.90],
+  ['Combo Coca-Cola 2L + Brownie Bites', 21.90],
   ['Kit Brasa Completo', 88.90]
 ].map(([name, price]) => Object.freeze({ name, price })));
 
@@ -66,6 +76,7 @@ const UTM_FIELDS = Object.freeze([
   ['gclid', 'gclid']
 ]);
 const MAX_ORDER_AMOUNT_CENTS = 10000000;
+const SCHEDULE_DISCOUNT_RATE = 0.15;
 
 function normalizeName(value) {
   return cleanText(value, 120)
@@ -115,14 +126,18 @@ function normalizeCoupon(value) {
   return cleanText(value, 32).toLocaleLowerCase('pt-BR');
 }
 
-function calculatePricing(items, region, coupon) {
+function calculatePricing(items, region, coupon, orderMode) {
   if (!Object.prototype.hasOwnProperty.call(DELIVERY_FEES, region)) {
     throw createError('Selecione uma região de entrega válida.', 'INVALID_ORDER', 400);
   }
   const subtotal = roundMoney(items.reduce((sum, item) => sum + item.price * item.qty, 0));
-  const discountAmount = coupon === 'brasa10' ? roundMoney(subtotal * 0.1) : 0;
+  const scheduled = orderMode === 'scheduled';
+  const effectiveCoupon = scheduled ? '' : coupon;
+  const scheduleDiscountAmount = scheduled ? roundMoney(subtotal * SCHEDULE_DISCOUNT_RATE) : 0;
+  const couponDiscountAmount = effectiveCoupon === 'brasa10' ? roundMoney(subtotal * 0.1) : 0;
+  const discountAmount = roundMoney(scheduleDiscountAmount + couponDiscountAmount);
   const privateCoupon = normalizeCoupon(process.env.TAXAFREE_COUPON || 'taxafree');
-  const freeDelivery = Boolean(coupon && coupon === privateCoupon);
+  const freeDelivery = Boolean(effectiveCoupon && effectiveCoupon === privateCoupon);
   const deliveryFee = freeDelivery ? 0 : DELIVERY_FEES[region];
   const total = roundMoney(Math.max(0, subtotal - discountAmount + deliveryFee));
   const amountCents = Math.round(total * 100);
@@ -133,9 +148,12 @@ function calculatePricing(items, region, coupon) {
     subtotal,
     deliveryFee,
     discountAmount,
+    scheduleDiscountAmount,
+    scheduleDiscountRate: scheduled ? SCHEDULE_DISCOUNT_RATE : 0,
+    couponDiscountAmount,
     total,
     amountCents,
-    couponApplied: coupon === 'brasa10' || freeDelivery ? coupon : ''
+    couponApplied: effectiveCoupon === 'brasa10' || freeDelivery ? effectiveCoupon : ''
   };
 }
 
@@ -207,7 +225,13 @@ module.exports = async function createBravoPayTransaction(req, res) {
     const items = normalizeItems(body.items);
     const region = cleanText(body.region, 80);
     const coupon = normalizeCoupon(body.couponCode);
-    const pricing = calculatePricing(items, region, coupon);
+    const orderMode = cleanText(body.orderMode, 20).toLocaleLowerCase('pt-BR') === 'scheduled'
+      ? 'scheduled'
+      : 'immediate';
+    const schedule = body.schedule && typeof body.schedule === 'object' ? body.schedule : {};
+    const scheduleDate = cleanText(schedule.date, 10);
+    const scheduleTime = cleanText(schedule.time, 5);
+    const pricing = calculatePricing(items, region, coupon, orderMode);
     const customer = normalizeCustomer(body.customer);
     const externalReference = cleanText(body.externalReference, 120) || `churrasco-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
     const utm = normalizeUtm(body.utm);
@@ -220,7 +244,11 @@ module.exports = async function createBravoPayTransaction(req, res) {
       external_reference: externalReference,
       metadata: {
         delivery_region: region,
-        coupon: pricing.couponApplied || ''
+        coupon: pricing.couponApplied || '',
+        order_mode: orderMode,
+        schedule_date: orderMode === 'scheduled' ? scheduleDate : '',
+        schedule_time: orderMode === 'scheduled' ? scheduleTime : '',
+        schedule_discount_rate: pricing.scheduleDiscountRate
       },
       utm
     };

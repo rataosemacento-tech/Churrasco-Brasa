@@ -71,7 +71,7 @@ const filterTabs = document.querySelectorAll('.filter-tab');
 const filterTabsContainer = document.getElementById('filter-tabs');
 const menuFilterLabel = document.getElementById('menu-filter-label');
 const menuCards = document.querySelectorAll('.menu-card');
-const meatCategories = new Set(['bovinos', 'suinos', 'frango', 'combos']);
+const meatCategories = new Set(['bovinos', 'suinos', 'frango', 'combos', 'acompanhamentos']);
 
 function updateMenuCards(matchesCard) {
   menuCards.forEach(card => {
@@ -199,14 +199,17 @@ const deliveryRegionLabels = Object.freeze({
 });
 const productPrices = Object.freeze({
   'Picanha na Brasa': 39.90,
-  'Costela Bovina Assada': 46.90,
+  'Costela Bovina Assada': 43.90,
   'Costela Suína BBQ': 39.90,
-  'Frango na Brasa': 29.90,
+  'Frango na Brasa': 26.90,
   'Combo Família': 115.90,
-  'Combo Churrasqueiro': 126.90,
-  'Combo Iscas da Brasa': 68.90,
+  'Combo Churrasqueiro': 142.90,
+  'Combo Iscas da Brasa': 41.90,
+  'Vinagrete da Brasa': 9.90,
   'Coca-Cola Lata': 6.50,
   'Coca-Cola 600ml': 8.50,
+  'Budweiser 330ml': 4.60,
+  'Pack Budweiser 12x350ml': 38.90,
   'Coca-Cola Lata Zero Açúcar': 7.50,
   'Sprite Lata': 5.50,
   'Fanta Uva Lata': 6.00,
@@ -218,8 +221,8 @@ const productPrices = Object.freeze({
   'Guaraná Antarctica 600ml': 7.50,
   'Sprite 1L': 10.90,
   'Guaraná Antarctica 1L': 11.90,
-  'Coca-Cola Garrafa': 11.90,
-  'Coca-Cola 2L': 13.50,
+  'Coca-Cola Garrafa': 8.50,
+  'Coca-Cola 2L': 14.80,
   'Guaraná Antarctica 2L': 13.50,
   'Kuat 2L': 11.90,
   'Tubaína Original 2L': 11.90,
@@ -231,9 +234,20 @@ const productPrices = Object.freeze({
   'Água com Gás': 4.90,
   'Água sem Gás': 4.90,
   'Pudim Cremoso': 12.90,
+  'Pudim Cremoso - Oferta 2 unidades': 20.90,
   'Brownie da Brasa': 14.90,
+  'Brownie da Brasa - Oferta 2 unidades': 24.90,
+  'Combo Coca-Cola 2L + Brownie Bites': 21.90,
   'Kit Brasa Completo': 88.90
 });
+const productDisplayNames = Object.freeze({
+  'Coca-Cola Garrafa': 'Coca-Cola 600ml'
+});
+
+function getProductDisplayName(name) {
+  return productDisplayNames[name] || name;
+}
+
 const deliveryRegion = document.getElementById('delivery-region');
 const deliveryAddress = document.getElementById('delivery-address');
 const deliveryFeeCallout = document.getElementById('delivery-fee-callout');
@@ -360,12 +374,13 @@ restoreCartDraft();
 restoreDeliveryDraft();
 restoreCheckoutDraft();
 
-function addToCart(name, price, details = '') {
+function addToCart(name, price, details = '', quantity = 1) {
   const safeName = cleanUserText(name, 120);
   const numericPrice = Number(price);
   const hasCatalogPrice = Object.prototype.hasOwnProperty.call(productPrices, safeName);
   const safePrice = hasCatalogPrice ? productPrices[safeName] : Math.round(numericPrice * 100) / 100;
   const safeDetails = cleanUserText(details, 400);
+  const safeQuantity = Math.min(99, Math.max(1, Math.floor(Number(quantity) || 1)));
 
   if (!safeName || !hasCatalogPrice || !Number.isFinite(numericPrice) || !Number.isFinite(safePrice) || safePrice < 0 || safePrice > 10000) {
     showToast('Não foi possível adicionar este item.');
@@ -374,18 +389,18 @@ function addToCart(name, price, details = '') {
 
   const existing = cart.find(i => i.name === safeName);
   if (existing) {
-    existing.qty = Math.min(99, existing.qty + 1);
+    existing.qty = Math.min(99, existing.qty + safeQuantity);
     if (safeDetails) existing.details = safeDetails;
   } else {
     if (cart.length >= 50) {
       showToast('A sacola atingiu o limite de itens.');
       return false;
     }
-    cart.push({ name: safeName, price: safePrice, qty: 1, details: safeDetails });
+    cart.push({ name: safeName, price: safePrice, qty: safeQuantity, details: safeDetails });
   }
   persistCartDraft();
   updateCartUI();
-  showToast(`${safeName} adicionado à sacola!`);
+  showToast(`${safeQuantity > 1 ? `${safeQuantity}x ` : ''}${safeName} adicionado à sacola!`);
   document.getElementById('cart-widget')?.style.setProperty('display', 'block');
   return true;
 }
@@ -480,7 +495,7 @@ function addOfferToCart() {
     showToast('O prazo desta oferta terminou.');
     return;
   }
-  const details = 'Costela bovina 550g · Picanha na brasa 400g · Costela suína + BBQ · Frango na brasa inteiro · 1x maionese caseira 290g ou queijo coalho de 180g (brinde) · Coca-Cola 2L inclusa · Coca-Cola 2L extra por R$ 6,50 na oferta';
+  const details = 'Costela bovina 680g · Picanha na brasa 730g · Costela suína + BBQ · Frango na brasa inteiro · 1x maionese caseira 290g ou queijo coalho de 180g (brinde) · Coca-Cola 2L inclusa · Coca-Cola 2L extra por R$ 6,50 na oferta';
   addToCart('Kit Brasa Completo', 88.90, details);
 }
 
@@ -600,7 +615,7 @@ function updateCartUI() {
     const row = document.createElement('div');
     row.className = 'cart-item-row';
     row.id = `cart-item-${idx}`;
-    const safeItemName = escapeHTML(item.name);
+    const safeItemName = escapeHTML(getProductDisplayName(item.name));
     const safeItemDetails = item.details
       ? `<small class="cart-item-details">${escapeHTML(item.details)}</small>`
       : '';
@@ -657,7 +672,7 @@ function removeFromCart(idx) {
   invalidatePendingPaymentOrder();
   persistCartDraft();
   updateCartUI();
-  showToast(`${item.name} removido da sacola.`);
+  showToast(`${getProductDisplayName(item.name)} removido da sacola.`);
 }
 
 function performCartAction(target) {
@@ -715,7 +730,7 @@ function updateCheckoutSummary() {
   checkoutItems.innerHTML = cart.map(item => `
     <div class="checkout-item">
       <div class="checkout-item-copy">
-        <span>${escapeHTML(item.qty)}x ${escapeHTML(item.name)}</span>
+        <span>${escapeHTML(item.qty)}x ${escapeHTML(getProductDisplayName(item.name))}</span>
         ${item.details ? `<small>${escapeHTML(item.details)}</small>` : ''}
       </div>
       <strong>${escapeHTML(formatBRL(item.price * item.qty))}</strong>
@@ -992,7 +1007,7 @@ function scrollChatToBottom() {
   });
 }
 
-function appendChatMessage(text, type = 'incoming') {
+function appendChatMessage(text, type = 'incoming', recommendations = []) {
   if (!chatMessages) return;
 
   const message = document.createElement('div');
@@ -1017,7 +1032,65 @@ function appendChatMessage(text, type = 'incoming') {
     meta.append(' ', ticks);
   }
 
-  bubble.append(copy, meta);
+  bubble.appendChild(copy);
+
+  if (Array.isArray(recommendations) && recommendations.length) {
+    const recommendationList = document.createElement('div');
+    recommendationList.className = 'chat-recommendations';
+    recommendationList.setAttribute('aria-label', 'Ofertas recomendadas');
+
+    const recommendationLabel = document.createElement('span');
+    recommendationLabel.className = 'chat-recommendations-label';
+    recommendationLabel.textContent = recommendations.length === 1
+      ? 'Oferta recomendada'
+      : 'Opcoes recomendadas';
+    recommendationList.appendChild(recommendationLabel);
+
+    recommendations.slice(0, 3).forEach((product) => {
+      const card = document.createElement('article');
+      card.className = 'chat-recommendation';
+
+      const image = document.createElement('img');
+      image.src = product.image;
+      image.alt = product.name;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+
+      const body = document.createElement('div');
+      body.className = 'chat-recommendation-body';
+
+      const name = document.createElement('strong');
+      name.className = 'chat-recommendation-name';
+      name.textContent = product.name;
+
+      const details = document.createElement('span');
+      details.className = 'chat-recommendation-details';
+      details.textContent = product.details || '';
+
+      const price = document.createElement('span');
+      price.className = 'chat-recommendation-price';
+      price.textContent = formatBRL(product.price);
+
+      const addButton = document.createElement('button');
+      addButton.type = 'button';
+      addButton.className = 'chat-recommendation-add';
+      addButton.textContent = 'Adicionar';
+      addButton.addEventListener('click', () => {
+        if (!addToCart(product.name, product.price, product.details || '')) return;
+        addButton.disabled = true;
+        addButton.classList.add('is-added');
+        addButton.textContent = 'Adicionado';
+      });
+
+      body.append(name, details, price, addButton);
+      card.append(image, body);
+      recommendationList.appendChild(card);
+    });
+
+    bubble.appendChild(recommendationList);
+  }
+
+  bubble.appendChild(meta);
   message.appendChild(bubble);
   chatMessages.appendChild(message);
   scrollChatToBottom();
@@ -1056,44 +1129,50 @@ function setChatBusy(isBusy) {
   });
 }
 
-function getChatResponse(message) {
+function getBaseChatResponse(message) {
   const text = normalizeChatText(message);
 
   if (/picanha/.test(text)) {
     return 'A Picanha na Brasa custa R$ 39,90 e vem com 700g. Para pedir, toque em + Adicionar no cardápio e depois revise sua sacola.';
   }
   if (/(costela bovina|costela.*bovina)/.test(text)) {
-    return 'A Costela Bovina Assada custa R$ 46,90 e vem com 720g. Ela é assada lentamente, fica suculenta e pode ser adicionada pelo botão + Adicionar.';
+    return 'A Costela Bovina Assada custa R$ 43,90 e vem com 720g. Ela é assada lentamente, fica suculenta e pode ser adicionada pelo botão + Adicionar.';
   }
   if (/(costela|ribs)/.test(text)) {
     return 'A Costela Suína BBQ custa R$ 39,90 e vem com 800g. É uma ótima opção para compartilhar.';
   }
   if (/(frango|galeto)/.test(text)) {
-    return 'O Frango na Brasa custa R$ 29,90 por unidade. Você pode adicionar quantas unidades quiser à sacola.';
+    return 'O Frango na Brasa custa R$ 26,90 por unidade. Você pode adicionar quantas unidades quiser à sacola.';
+  }
+  if (/(vinagrete|acompanhamento)/.test(text)) {
+    return 'O Vinagrete da Brasa custa R$ 9,90 e vem com 380g. É fresco, leve e combina muito bem com qualquer carne do cardápio.';
   }
   if (/(bebida|bebidas|refrigerante|agua)/.test(text)) {
-    return 'Na aba Bebidas, os refrigerantes estão separados em Latas e 2L. As garrafas de 2L custam a partir de R$ 13,50. Também há Água com Gás e Água sem Gás por R$ 4,90 cada. Toque em + Adicionar na categoria desejada para escolher a opção e revisar a sacola.';
+    return 'Na aba Bebidas, os refrigerantes estão separados em Latas e 2L. A Coca-Cola 2L custa R$ 14,80. Também temos Budweiser 330ml por R$ 4,60, o Pack Budweiser com 12 latas por R$ 38,90 e Água com Gás e Água sem Gás por R$ 4,90 cada. Toque em + Adicionar na categoria desejada para escolher a opção e revisar a sacola.';
   }
   if (/(sobremesa|sobremesas|pudim|brownie)/.test(text)) {
-    return 'Na aba Sobremesas temos Pudim Cremoso por R$ 12,90 e Brownie da Brasa: brownie bites com chocolate 55%, por R$ 14,90. Escolha seu doce e toque em + Adicionar para colocar na sacola.';
+    return 'Na aba Doces temos Pudim Cremoso por R$ 12,90 ou 2 por R$ 20,90, além do Brownie da Brasa: brownie bites com chocolate 55% por R$ 14,90 ou 2 por R$ 24,90. Escolha seu doce e toque em + Adicionar para colocar na sacola.';
   }
   if (/(oferta|promocao|promoção|kit.*brasa|88,90|88\.90)/.test(text)) {
-    return 'A Oferta Principal de Carnes sai de R$ 168,60 por R$ 88,90, uma economia de R$ 79,70, e inclui costela bovina 550g, picanha na brasa 400g, costela suína + BBQ, frango na brasa inteiro, 1x maionese caseira 290g ou queijo coalho de 180g como brinde e Coca-Cola 2L. Se levar outra Coca-Cola 2L junto com a oferta, ela sai por R$ 6,50. Toque em Adicionar oferta à sacola no hero para pedir.';
+    return 'A Oferta Principal de Carnes sai de R$ 168,60 por R$ 88,90, uma economia de R$ 79,70, e inclui costela bovina 680g, picanha na brasa 730g, costela suína + BBQ, frango na brasa inteiro, 1x maionese caseira 290g ou queijo coalho de 180g como brinde e Coca-Cola 2L. Se levar outra Coca-Cola 2L junto com a oferta, ela sai por R$ 6,50. Toque em Adicionar oferta à sacola no hero para pedir.';
   }
   if (/combo\s*familia|familia.*combo/.test(text)) {
     return 'O Combo Família custa R$ 115,90 e serve até 4 pessoas: 500g de picanha, 600g de costela, farofa, vinagrete e 4 pães de alho.';
   }
   if (/combo\s*churrasqueiro|churrasqueiro.*combo/.test(text)) {
-    return 'O Combo Churrasqueiro custa R$ 126,90 e serve de 5 a 6 pessoas, com costela bovina, costela suína, frango e acompanhamentos.';
+    return 'O Combo Churrasqueiro custa R$ 142,90 e serve de 5 a 6 pessoas, com costela bovina de 860g, costela suína, frango e acompanhamentos.';
   }
   if (/combo\s*iscas|iscas.*brasa|mandioca/.test(text)) {
-    return 'O Combo Iscas da Brasa custa R$ 68,90 e traz iscas de carne douradas na brasa com mandioca macia. É uma opção saborosa para uma refeição individual.';
+    return 'O Combo Iscas da Brasa custa R$ 41,90 e traz iscas de carne douradas na brasa com mandioca macia. É uma opção saborosa para uma refeição individual.';
   }
   if (/(combo|combos)/.test(text)) {
-    return ['Temos três opções:', '• Combo Iscas da Brasa — R$ 68,90, carne com mandioca.', '• Combo Família — R$ 115,90, até 4 pessoas.', '• Combo Churrasqueiro — R$ 126,90, de 5 a 6 pessoas.', 'Quer que eu te ajude a escolher?'].join('\n');
+    return ['Temos três opções:', '• Combo Iscas da Brasa — R$ 41,90, carne com mandioca.', '• Combo Família — R$ 115,90, até 4 pessoas.', '• Combo Churrasqueiro — R$ 142,90, de 5 a 6 pessoas.', 'Quer que eu te ajude a escolher?'].join('\n');
+  }
+  if (/(melhor|escolh|decid|recomend|indica)/.test(text)) {
+    return 'Claro! Vou considerar quantidade de pessoas, preferência e orçamento para indicar a melhor opção para o seu pedido.';
   }
   if (/(cardapio|menu|preco|valor|custa|quanto|carnes|opcoes|opcao)/.test(text) && !/(entrega|prazo|demora|motoboy|taxa|frete|tempo)/.test(text)) {
-    return ['Nosso cardápio está assim:', '• Picanha — R$ 39,90 / 700g', '• Costela Bovina Assada — R$ 46,90 / 720g', '• Costela Suína — R$ 39,90 / 800g', '• Frango — R$ 29,90 / unidade', '• Bebidas — a partir de R$ 4,90', '• Sobremesas — a partir de R$ 12,90', '• Combos — a partir de R$ 68,90'].join('\n');
+    return ['Nosso cardápio está assim:', '• Picanha — R$ 39,90 / 700g', '• Costela Bovina Assada — R$ 43,90 / 720g', '• Costela Suína — R$ 39,90 / 800g', '• Frango — R$ 26,90 / unidade', '• Bebidas — a partir de R$ 4,90', '• Doces — a partir de R$ 12,90', '• Combos — a partir de R$ 41,90'].join('\n');
   }
   if (/(pagamento|pix|cartao|credito|debito|dinheiro|antecip)/.test(text)) {
     return 'Aceitamos Pix ou dinheiro. No Pix, o pagamento é antecipado; em dinheiro, o pagamento acontece no momento da entrega. Não utilizamos máquina de cartão por tempo indeterminado.';
@@ -1127,6 +1206,212 @@ function getChatResponse(message) {
   return 'Posso ajudar somente com dúvidas sobre pedidos no site: cardápio, preços, pagamento, entrega, sacola e finalização. Tente perguntar, por exemplo: “qual o preço da picanha?”';
 }
 
+function getChatDecisionGuide(normalizedText) {
+  const peopleMatch = normalizedText.match(/\b(\d{1,2})\s*pessoas?\b/);
+  const people = peopleMatch ? Number(peopleMatch[1]) : null;
+
+  if (people >= 5) {
+    return 'Para 5 pessoas ou mais, o Combo Churrasqueiro é a escolha mais completa: carnes variadas, acompanhamentos e 2 refrigerantes de 2L.';
+  }
+  if (people >= 3) {
+    return 'Para 3 ou 4 pessoas, o Combo Família costuma ser o melhor equilíbrio entre variedade e quantidade.';
+  }
+  if (people === 2) {
+    return 'Para 2 pessoas, recomendo a Picanha na Brasa para compartilhar ou o Combo Família se quiser mais variedade.';
+  }
+  if (people === 1) {
+    return 'Para uma pessoa, o Combo Iscas da Brasa é prático e saboroso; se quiser uma refeição mais farta, escolha uma carne individual.';
+  }
+  if (/(melhor|escolh|decid|recomend|indica|opcao|qual)/.test(normalizedText)) {
+    return 'Para indicar a melhor opção, me diga quantas pessoas vão comer e se você prefere variedade, uma carne específica ou algo mais econômico.';
+  }
+  return 'Se você me disser quantas pessoas vão comer, eu comparo as opções e indico o pedido mais adequado para você.';
+}
+
+function getChatUpsell(normalizedText) {
+  if (/(sobremesa|sobremesas|pudim|brownie)/.test(normalizedText)) {
+    return 'Para acompanhar o doce, o destaque é o combo Coca-Cola 2L + Brownie Bites: de R$ 28,40 por R$ 21,90.';
+  }
+  if (/(bebida|bebidas|refrigerante|agua)/.test(normalizedText)) {
+    return 'Para fechar com chave de ouro, sugiro o combo Coca-Cola 2L + Brownie Bites: de R$ 28,40 por R$ 21,90.';
+  }
+  if (/(oferta|promocao|kit.*brasa)/.test(normalizedText)) {
+    return 'Na oferta, você também pode adicionar outra Coca-Cola 2L por apenas R$ 6,50; para a sobremesa, o Brownie da Brasa custa R$ 14,90.';
+  }
+  return 'Para completar o pedido, sugiro o combo Coca-Cola 2L + Brownie Bites: de R$ 28,40 por R$ 21,90. É só tocar em + Adicionar.';
+}
+
+function getChatUpsellProducts(normalizedText) {
+  const drink = {
+    name: 'Coca-Cola 2L',
+    price: productPrices['Coca-Cola 2L'],
+    image: 'bebida-coca-2l.jpg',
+    details: 'Garrafa de 2 litros para compartilhar.'
+  };
+  const offerDrink = {
+    name: 'Coca-Cola 2L Extra da Oferta',
+    price: productPrices['Coca-Cola 2L Extra da Oferta'],
+    image: 'bebida-coca-2l.jpg',
+    details: 'Coca-Cola 2L extra por R$ 6,50 na oferta.'
+  };
+  const pudding = {
+    name: 'Pudim Cremoso',
+    price: productPrices['Pudim Cremoso'],
+    image: 'menu_pudim_cremoso-2k.jpg',
+    details: 'Sobremesa cremosa com calda de caramelo.'
+  };
+  const brownie = {
+    name: 'Brownie da Brasa',
+    price: productPrices['Brownie da Brasa'],
+    image: 'menu_brownie_bites_55-2k.jpg',
+    details: 'Brownie bites com chocolate 55%.'
+  };
+  const dessertCombo = {
+    name: 'Combo Coca-Cola 2L + Brownie Bites',
+    price: productPrices['Combo Coca-Cola 2L + Brownie Bites'],
+    image: 'menu_brownie_bites_55-2k.jpg',
+    details: 'Combo promocional com Coca-Cola 2L e Brownie bites com chocolate 55%.'
+  };
+
+  if (/(sobremesa|sobremesas|pudim|brownie)/.test(normalizedText)) return [dessertCombo];
+  if (/(bebida|bebidas|refrigerante|agua)/.test(normalizedText)) return [dessertCombo, pudding];
+  if (/(oferta|promocao|kit.*brasa)/.test(normalizedText)) return [offerDrink, brownie];
+  return [drink, dessertCombo, pudding];
+}
+
+function getChatCatalogProduct(name, image, details) {
+  const catalogName = Object.keys(productPrices).find((item) => normalizeChatText(item) === normalizeChatText(name));
+  if (!catalogName) return null;
+
+  return {
+    name: catalogName,
+    price: productPrices[catalogName],
+    image,
+    details
+  };
+}
+
+function getChatRecommendationProducts(normalizedText, actionResponse = '') {
+  if (actionResponse) return getChatUpsellProducts(normalizedText);
+
+  const peopleMatch = normalizedText.match(/\b(\d{1,2})\s*pessoas?\b/);
+  const people = peopleMatch ? Number(peopleMatch[1]) : null;
+  const comboFamily = getChatCatalogProduct(
+    'combo familia',
+    'combo-familia-prato.jpg',
+    'Picanha, costela, acompanhamentos e Coca-Cola 2L. Serve ate 4 pessoas.'
+  );
+  const comboChurrasqueiro = getChatCatalogProduct(
+    'combo churrasqueiro',
+    'combo-churrasqueiro-prato.jpg',
+    'Costela bovina, costela suina, frango, acompanhamentos e 2 refrigerantes de 2L.'
+  );
+  const comboIscas = getChatCatalogProduct(
+    'combo iscas da brasa',
+    'menu_combo_iscas_mandioca.jpg',
+    'Iscas de carne douradas na brasa com mandioca macia.'
+  );
+
+  if (people >= 5 || /combo\s*churrasqueiro|churrasqueiro.*combo/.test(normalizedText)) {
+    return comboChurrasqueiro ? [comboChurrasqueiro] : [];
+  }
+  if ((people >= 3 && people <= 4) || /combo\s*familia|familia.*combo/.test(normalizedText)) {
+    return comboFamily ? [comboFamily] : [];
+  }
+  if (/combo\s*iscas|iscas.*brasa|mandioca/.test(normalizedText)) {
+    return comboIscas ? [comboIscas] : [];
+  }
+  if (/\bcombos?\b/.test(normalizedText)) {
+    return [comboFamily, comboChurrasqueiro, comboIscas].filter(Boolean);
+  }
+
+  return [];
+}
+
+const chatOrderCatalog = Object.freeze([
+  { name: 'Picanha na Brasa', aliases: ['picanha'] },
+  { name: 'Costela Bovina Assada', aliases: ['costela bovina assada', 'costela bovina'] },
+  { name: 'Costela Suína BBQ', aliases: ['costela suina bbq', 'costela suina'] },
+  { name: 'Frango na Brasa', aliases: ['frango na brasa', 'frango', 'galeto'] },
+  { name: 'Combo Família', aliases: ['combo familia'] },
+  { name: 'Combo Churrasqueiro', aliases: ['combo churrasqueiro'] },
+  { name: 'Combo Iscas da Brasa', aliases: ['combo iscas', 'iscas da brasa'] },
+  { name: 'Vinagrete da Brasa', aliases: ['vinagrete', 'acompanhamento', 'acompanhamentos'] },
+  { name: 'Coca-Cola 2L', aliases: ['coca cola 2l', 'coca 2l'] },
+  { name: 'Coca-Cola Lata', aliases: ['coca cola lata', 'coca lata'] },
+  { name: 'Budweiser 330ml', aliases: ['budweiser', 'bud 330ml', 'budweiser 330'] },
+  { name: 'Pack Budweiser 12x350ml', aliases: ['pack budweiser', 'budweiser pack', '12 latas budweiser', 'pack de budweiser'] },
+  { name: 'Água com Gás', aliases: ['agua com gas'] },
+  { name: 'Água sem Gás', aliases: ['agua sem gas'] },
+  { name: 'Pudim Cremoso', aliases: ['pudim'] },
+  { name: 'Brownie da Brasa', aliases: ['brownie'] },
+  { name: 'Combo Coca-Cola 2L + Brownie Bites', aliases: ['combo coca brownie', 'coca cola brownie', 'coca brownie'] }
+]);
+
+function getChatOrderQuantity(text, matchIndex) {
+  const beforeItem = text.slice(0, matchIndex);
+  const numberMatch = beforeItem.match(/(?:^|\s)(\d{1,2})\s*x?\s*$/);
+  if (numberMatch) return Math.min(99, Math.max(1, Number(numberMatch[1])));
+
+  const numberWords = { um: 1, uma: 1, dois: 2, duas: 2, tres: 3, quatro: 4, cinco: 5, seis: 6, sete: 7, oito: 8, nove: 9, dez: 10 };
+  const wordMatch = beforeItem.match(/(?:^|\s)(um|uma|dois|duas|tres|quatro|cinco|seis|sete|oito|nove|dez)\s*$/);
+  return wordMatch ? numberWords[wordMatch[1]] : 1;
+}
+
+function parseSimpleChatOrder(message) {
+  const text = normalizeChatText(message);
+  const purchaseVerb = /(adicionar|add|colocar|incluir|quero|comprar|pedir|pedido|manda|mandar|leva|levar|separa|separar|bota|botar|me ve)/.test(text);
+  const explicitAddVerb = /(adicionar|add|colocar|incluir|comprar|pedir|pedido|manda|mandar|leva|levar|separa|separar|bota|botar|me ve)/.test(text);
+  const informationQuestion = /\b(quanto|preco|valor|custa|saber|duvida|informacao|qual|porque|por que)\b/.test(text);
+  if (informationQuestion && !explicitAddVerb) return [];
+
+  const matches = [];
+  chatOrderCatalog.forEach((product) => {
+    const match = product.aliases
+      .map(alias => ({ alias, index: text.indexOf(alias) }))
+      .filter(item => item.index >= 0)
+      .sort((left, right) => right.alias.length - left.alias.length)[0];
+    if (match) matches.push({ name: product.name, quantity: getChatOrderQuantity(text, match.index) });
+  });
+
+  if (!matches.length) return [];
+  const simpleItemOnly = text.split(/\s+/).length <= 4 && !/[?!]/.test(text);
+  const numericOrder = /\b\d{1,2}\s*x?\s*(?:unidades?|unid|porcoes?|porcao)?\b/.test(text);
+  if (!purchaseVerb && !simpleItemOnly && !numericOrder) return [];
+  return matches;
+}
+
+function executeSimpleChatOrder(message) {
+  const orders = parseSimpleChatOrder(message);
+  if (!orders.length) return '';
+
+  const added = orders.filter(order => addToCart(order.name, productPrices[order.name], '', order.quantity));
+  if (!added.length) return '';
+
+  const summary = added.map(order => `${order.quantity}x ${order.name}`).join(', ');
+  return `Feito: adicionei ${summary} à sua sacola. Abra a sacola para conferir o pedido e ajustar as quantidades antes de finalizar.`;
+}
+
+function getChatResponse(message, actionResponse = '') {
+  const normalizedText = normalizeChatText(message);
+  const baseResponse = actionResponse || getBaseChatResponse(message);
+  const decisionGuide = actionResponse
+    ? 'Boa escolha. Se quiser comparar este item com um combo mais completo, me diga quantas pessoas vão comer.'
+    : getChatDecisionGuide(normalizedText);
+  const upsell = getChatUpsell(normalizedText);
+
+  // A IA sÃ³ oferece complementos depois de confirmar um item na sacola.
+  if (!actionResponse) {
+    return [baseResponse, decisionGuide].join('\n\n');
+  }
+
+  return [
+    baseResponse,
+    `Para te ajudar a decidir: ${decisionGuide}`,
+    `Sugestão para completar: ${upsell}`
+  ].join('\n\n');
+}
+
 function sendChatMessage(rawMessage) {
   const message = String(rawMessage || '').trim();
   if (!message || !chatInput || chatInput.disabled) return;
@@ -1138,7 +1423,9 @@ function sendChatMessage(rawMessage) {
   window.clearTimeout(chatReplyTimer);
   chatReplyTimer = window.setTimeout(() => {
     setChatTyping(false);
-    appendChatMessage(getChatResponse(message), 'incoming');
+    const actionResponse = executeSimpleChatOrder(message);
+    const recommendations = getChatRecommendationProducts(normalizeChatText(message), actionResponse);
+    appendChatMessage(getChatResponse(message, actionResponse), 'incoming', recommendations);
     setChatBusy(false);
     if (aiChat?.classList.contains('open')) chatInput.focus({ preventScroll: true });
   }, 720);

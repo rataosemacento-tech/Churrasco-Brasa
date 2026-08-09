@@ -10,6 +10,10 @@
   const orderRegion = document.getElementById('order-region');
   const orderSubtotal = document.getElementById('order-subtotal');
   const orderDelivery = document.getElementById('order-delivery');
+  const orderScheduleRow = document.getElementById('order-schedule-row');
+  const orderScheduleLabel = document.getElementById('order-schedule-label');
+  const orderScheduleDiscountRow = document.getElementById('order-schedule-discount-row');
+  const orderScheduleDiscount = document.getElementById('order-schedule-discount');
   const orderDiscountRow = document.getElementById('order-discount-row');
   const orderDiscount = document.getElementById('order-discount');
   const orderTotal = document.getElementById('order-total');
@@ -20,9 +24,11 @@
   const customerPhone = document.getElementById('customer-phone');
   const customerRegion = document.getElementById('customer-region');
   const customerAddress = document.getElementById('customer-address');
+  const couponBox = document.getElementById('coupon-box');
   const couponForm = document.getElementById('coupon-form');
   const couponCode = document.getElementById('coupon-code');
   const couponFeedback = document.getElementById('coupon-feedback');
+  const firstOrderBanner = document.getElementById('first-order-banner');
   const copyFirstOrderCode = document.getElementById('copy-first-order-code');
   const paymentInstructions = document.getElementById('payment-instructions');
   const cashChange = document.getElementById('cash-change');
@@ -45,8 +51,11 @@
   const pixPaymentHelp = document.getElementById('pix-payment-help');
   const pixPaymentError = document.getElementById('pix-payment-error');
   const paymentRadios = Array.from(document.querySelectorAll('input[name="payment-method"]'));
+  const cashPaymentRadio = document.getElementById('payment-cash');
+  const scheduleCheckoutBanner = document.getElementById('schedule-checkout-banner');
   const API_BASE = window.location.protocol === 'file:' ? 'http://127.0.0.1:4173' : '';
   const CASH_PAYMENT_ERROR = 'ERRO #3994 - network connection failed';
+  const SCHEDULE_DISCOUNT_RATE = 0.15;
   const ATTRIBUTION_STORAGE_KEY = 'churrasco-brasa-attribution';
   const ATTRIBUTION_KEYS = Object.freeze([
     ['utm_source', 'source'],
@@ -85,6 +94,14 @@
       .slice(0, maxLength);
   }
 
+  const productDisplayNames = Object.freeze({
+    'Coca-Cola Garrafa': 'Coca-Cola 600ml'
+  });
+
+  function getProductDisplayName(name) {
+    return productDisplayNames[name] || name;
+  }
+
   function readAttribution() {
     const attribution = {};
     try {
@@ -110,6 +127,24 @@
   function roundMoney(value) {
     const number = Number(value);
     return Number.isFinite(number) ? Math.round((number + Number.EPSILON) * 100) / 100 : 0;
+  }
+
+  function isScheduledOrder(order) {
+    return order?.orderMode === 'scheduled' || order?.schedule?.mode === 'scheduled';
+  }
+
+  function formatScheduleLabel(order) {
+    const schedule = order?.schedule && typeof order.schedule === 'object' ? order.schedule : {};
+    if (!isScheduledOrder(order) || !/^\d{4}-\d{2}-\d{2}$/.test(schedule.date || '') || !/^\d{2}:\d{2}$/.test(schedule.time || '')) {
+      return 'Nao agendado';
+    }
+    const [year, month, day] = schedule.date.split('-');
+    return `${day}/${month}/${year} as ${schedule.time}`;
+  }
+
+  function getScheduleDiscount(order, subtotal) {
+    if (!isScheduledOrder(order)) return 0;
+    return roundMoney(Number(subtotal) * SCHEDULE_DISCOUNT_RATE);
   }
 
   function fallbackCopyText(value) {
@@ -200,7 +235,7 @@
       const copy = document.createElement('div');
       copy.className = 'order-item-copy';
       const nameElement = document.createElement('strong');
-      nameElement.textContent = `${Math.max(1, Math.min(99, Number(item.qty) || 1))}x ${cleanText(item.name, 120)}`;
+      nameElement.textContent = `${Math.max(1, Math.min(99, Number(item.qty) || 1))}x ${getProductDisplayName(cleanText(item.name, 120))}`;
       copy.appendChild(nameElement);
       if (item.details) {
         const details = document.createElement('small');
@@ -212,6 +247,59 @@
       price.className = 'order-item-price';
       price.textContent = formatMoney((Number(item.price) || 0) * (Number(item.qty) || 1));
 
+      row.append(copy, price);
+      orderItems.appendChild(row);
+    });
+  }
+
+  function renderOrder(order) {
+    const regionLabel = cleanText(order.regionLabel, 60) || 'Cascavel';
+    const name = cleanText(order.name, 80) || 'Cliente';
+    const address = cleanText(order.address, 240) || 'Endereco informado no pedido';
+    const couponDiscount = Math.max(0, Number(order.discountAmount) || 0);
+    const scheduled = isScheduledOrder(order);
+    const scheduleDiscount = getScheduleDiscount(order, order.subtotal);
+
+    orderRegion.textContent = regionLabel;
+    customerName.textContent = name;
+    customerPhone.textContent = formatPhone(order.phone);
+    customerRegion.textContent = regionLabel;
+    customerAddress.textContent = address;
+    orderSubtotal.textContent = formatMoney(order.subtotal);
+    orderDelivery.textContent = formatMoney(order.deliveryFee);
+    if (orderScheduleRow && orderScheduleLabel) {
+      orderScheduleRow.hidden = !scheduled;
+      orderScheduleLabel.textContent = formatScheduleLabel(order);
+    }
+    if (orderScheduleDiscountRow && orderScheduleDiscount) {
+      orderScheduleDiscountRow.hidden = scheduleDiscount <= 0;
+      orderScheduleDiscount.textContent = `- ${formatMoney(scheduleDiscount)}`;
+    }
+    if (orderDiscountRow && orderDiscount) {
+      orderDiscountRow.hidden = couponDiscount <= 0;
+      orderDiscount.textContent = `- ${formatMoney(couponDiscount)}`;
+    }
+    orderTotal.textContent = formatMoney(order.total);
+    paymentTotal.textContent = formatMoney(order.total);
+    if (scheduleCheckoutBanner) scheduleCheckoutBanner.hidden = !scheduled;
+
+    clearChildren(orderItems);
+    order.items.slice(0, 40).forEach((item) => {
+      const row = document.createElement('div');
+      row.className = 'order-item';
+      const copy = document.createElement('div');
+      copy.className = 'order-item-copy';
+      const nameElement = document.createElement('strong');
+      nameElement.textContent = `${Math.max(1, Math.min(99, Number(item.qty) || 1))}x ${getProductDisplayName(cleanText(item.name, 120))}`;
+      copy.appendChild(nameElement);
+      if (item.details) {
+        const details = document.createElement('small');
+        details.textContent = cleanText(item.details, 400);
+        copy.appendChild(details);
+      }
+      const price = document.createElement('strong');
+      price.className = 'order-item-price';
+      price.textContent = formatMoney((Number(item.price) || 0) * (Number(item.qty) || 1));
       row.append(copy, price);
       orderItems.appendChild(row);
     });
@@ -236,7 +324,7 @@
       const quantity = Math.max(1, Math.min(99, Number(item.qty) || 1));
       return sum + (Number.isFinite(price) ? price * quantity : 0);
     }, 0));
-    const coupon = cleanText(order.couponCode, 32).toLocaleLowerCase('pt-BR');
+    const coupon = isScheduledOrder(order) ? '' : cleanText(order.couponCode, 32).toLocaleLowerCase('pt-BR');
     const discountAmount = coupon === 'brasa10' ? roundMoney(subtotal * 0.1) : 0;
     const deliveryFee = coupon === 'taxafree' ? 0 : Math.max(0, Number(order.deliveryFee) || 0);
 
@@ -244,6 +332,25 @@
     order.discountAmount = discountAmount;
     order.deliveryFee = roundMoney(deliveryFee);
     order.total = Math.max(0, roundMoney(subtotal - discountAmount + deliveryFee));
+  }
+
+  function recalculateOrder(order) {
+    const subtotal = roundMoney(order.items.reduce((sum, item) => {
+      const price = Number(item.price);
+      const quantity = Math.max(1, Math.min(99, Number(item.qty) || 1));
+      return sum + (Number.isFinite(price) ? price * quantity : 0);
+    }, 0));
+    const coupon = isScheduledOrder(order) ? '' : cleanText(order.couponCode, 32).toLocaleLowerCase('pt-BR');
+    const couponDiscount = coupon === 'brasa10' ? roundMoney(subtotal * 0.1) : 0;
+    const scheduleDiscount = isScheduledOrder(order) ? roundMoney(subtotal * SCHEDULE_DISCOUNT_RATE) : 0;
+    const deliveryFee = coupon === 'taxafree' ? 0 : Math.max(0, Number(order.deliveryFee) || 0);
+
+    order.subtotal = subtotal;
+    order.scheduleDiscountRate = isScheduledOrder(order) ? SCHEDULE_DISCOUNT_RATE : 0;
+    order.scheduleDiscountAmount = scheduleDiscount;
+    order.discountAmount = couponDiscount;
+    order.deliveryFee = roundMoney(deliveryFee);
+    order.total = Math.max(0, roundMoney(subtotal - couponDiscount - scheduleDiscount + deliveryFee));
   }
 
   function addPaymentUpsell(order) {
@@ -287,6 +394,11 @@
   }
 
   function renderInstructions(method, order) {
+    if (paymentNote && isScheduledOrder(order)) {
+      paymentNote.textContent = 'Pedido agendado: pagamento integral antecipado via Pix. O desconto de 15% foi aplicado aos itens; a taxa de entrega permanece a mesma.';
+    } else if (paymentNote) {
+      paymentNote.textContent = 'Pagamento disponivel somente via Pix. O QR Code sera gerado nesta pagina e o valor deve ser pago integralmente. Nao estamos utilizando pagamento na maquina por tempo indeterminado.';
+    }
     clearChildren(paymentInstructions);
     paymentInstructions.hidden = method === 'cash';
     const heading = document.createElement('strong');
@@ -296,7 +408,13 @@
       return;
     } else {
       heading.textContent = 'Pagamento via Pix';
+      if (isScheduledOrder(order)) {
+        text.textContent = `Pedido agendado para ${formatScheduleLabel(order)}. O valor integral de ${formatMoney(order.total)} deve ser pago antecipadamente via Pix.`;
+      }
       text.textContent = `Ao prosseguir, geraremos o QR Code e o código Pix de ${formatMoney(order.total)}. O pagamento deve ser integral.`;
+    }
+    if (isScheduledOrder(order)) {
+      text.textContent = `Pedido agendado para ${formatScheduleLabel(order)}. O valor integral de ${formatMoney(order.total)} deve ser pago antecipadamente via Pix.`;
     }
     paymentInstructions.append(heading, text);
     syncCashChangeVisibility(method, order);
@@ -360,6 +478,25 @@
       return null;
     }
     return { requested: true, paidAmount, change: paidAmount - total };
+  }
+
+  function syncScheduledPayment(order) {
+    const scheduled = isScheduledOrder(order);
+    if (cashPaymentRadio) {
+      cashPaymentRadio.disabled = scheduled;
+      if (scheduled) cashPaymentRadio.checked = false;
+      const cashCard = cashPaymentRadio.closest('.payment-method');
+      if (cashCard) {
+        cashCard.classList.toggle('is-disabled', scheduled);
+        cashCard.setAttribute('aria-disabled', String(scheduled));
+      }
+    }
+    if (scheduled) {
+      const pixRadio = paymentRadios.find((radio) => radio.value === 'pix');
+      if (pixRadio) pixRadio.checked = true;
+      order.payment = 'pix';
+      cashChangeRequested = false;
+    }
   }
 
   function syncPaymentSelection() {
@@ -563,7 +700,13 @@
 
     order.subtotal = roundMoney(subtotal);
     order.deliveryFee = roundMoney(deliveryFee);
-    order.discountAmount = roundMoney(Math.max(0, discountAmount));
+    const serverScheduleDiscount = roundMoney(Math.max(0, Number(pricing.scheduleDiscountAmount) || 0));
+    const serverCouponDiscount = Number.isFinite(Number(pricing.couponDiscountAmount))
+      ? roundMoney(Math.max(0, Number(pricing.couponDiscountAmount)))
+      : roundMoney(Math.max(0, discountAmount - serverScheduleDiscount));
+    order.discountAmount = serverCouponDiscount;
+    order.scheduleDiscountAmount = serverScheduleDiscount;
+    order.scheduleDiscountRate = isScheduledOrder(order) ? SCHEDULE_DISCOUNT_RATE : 0;
     order.total = roundMoney(Math.max(0, total));
     const appliedCoupon = cleanText(pricing.couponApplied, 32).toLocaleLowerCase('pt-BR');
     if (order.couponCode && !appliedCoupon) {
@@ -646,6 +789,8 @@
           items: order.items,
           region: order.region,
           couponCode: order.couponCode || '',
+          orderMode: isScheduledOrder(order) ? 'scheduled' : 'immediate',
+          schedule: order.schedule || { mode: 'immediate', date: '', time: '' },
           externalReference: getExternalReference(order),
           customer: {
             name: cleanText(order.name, 120),
@@ -751,6 +896,31 @@
     setCouponFeedback(message, 'success');
   }
 
+  function syncCouponAvailability(order) {
+    const restricted = isScheduledOrder(order);
+    const alreadyApplied = Boolean(order?.couponCode);
+    const applyButton = couponForm?.querySelector('button');
+
+    if (couponBox) {
+      couponBox.classList.toggle('is-restricted', restricted);
+      couponBox.setAttribute('aria-disabled', String(restricted));
+    }
+    if (firstOrderBanner) firstOrderBanner.hidden = restricted;
+    if (couponCode) {
+      couponCode.disabled = restricted || alreadyApplied;
+      if (restricted) {
+        couponCode.value = '';
+        couponCode.placeholder = 'Disponível apenas para entrega no mesmo dia';
+      } else if (!alreadyApplied) {
+        couponCode.placeholder = 'Digite seu cupom';
+      }
+    }
+    if (applyButton) applyButton.disabled = restricted || alreadyApplied;
+    if (restricted) {
+      setCouponFeedback('Cupons de desconto são válidos apenas para pedidos entregues no mesmo dia.', 'error');
+    }
+  }
+
   function persistOrder(order) {
     try {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(order));
@@ -763,6 +933,11 @@
 
   function applyCoupon(order) {
     const code = cleanText(couponCode?.value, 32).toLocaleLowerCase('pt-BR');
+    if (isScheduledOrder(order)) {
+      if (couponCode) couponCode.value = '';
+      setCouponFeedback('Cupons de desconto são válidos apenas para pedidos entregues no mesmo dia.', 'error');
+      return;
+    }
     if (order.couponCode) {
       setCouponFeedback('Um cupom já foi aplicado a este pedido.', 'error');
       return;
@@ -775,6 +950,7 @@
       order.couponCode = 'brasa10';
       order.discountAmount = roundMoney(subtotal * 0.1);
       order.total = Math.max(0, roundMoney(subtotal - order.discountAmount + deliveryFee));
+      recalculateOrder(order);
       const hadPix = invalidatePixForPriceChange(order);
       if (!persistOrder(order)) return;
 
@@ -798,6 +974,7 @@
     order.discountAmount = 0;
     order.deliveryFee = 0;
     order.total = subtotal;
+    recalculateOrder(order);
     const hadPix = invalidatePixForPriceChange(order);
     if (!persistOrder(order)) return;
 
@@ -830,6 +1007,7 @@
       '',
       `Endereço de entrega: ${cleanText(order.address, 240)}`,
       `Região de entrega: ${cleanText(order.regionLabel, 60)}`,
+      ...(isScheduledOrder(order) ? [`Pedido agendado para: ${formatScheduleLabel(order)}`, 'Pagamento integral antecipado via Pix'] : []),
       `Forma de pagamento: ${methodLabel}`,
       ...(Number(order.discountAmount) > 0 ? [`Desconto aplicado: -${formatMoney(order.discountAmount)}`] : []),
       ...(order.couponCode ? [`Cupom de desconto: ${cleanText(order.couponCode, 32).toUpperCase()}`] : []),
@@ -864,6 +1042,11 @@
     const method = getSelectedPayment();
     if (!['pix', 'cash'].includes(method)) {
       showError('Selecione uma forma de pagamento para continuar.');
+      return;
+    }
+
+    if (isScheduledOrder(order) && method !== 'pix') {
+      showError('Pedidos agendados precisam ser pagos integralmente via Pix.');
       return;
     }
 
@@ -914,6 +1097,14 @@
     return;
   }
 
+  if (isScheduledOrder(order) && order.couponCode) {
+    invalidatePixForPriceChange(order);
+    order.couponCode = '';
+    recalculateOrder(order);
+    persistOrder(order);
+  }
+
+  syncScheduledPayment(order);
   renderOrder(order);
   renderPaymentUpsell(order);
   if (order.couponCode === 'taxafree') {
@@ -921,7 +1112,8 @@
   } else if (order.couponCode === 'brasa10') {
     lockCouponInput('Desconto de 10% aplicado ao seu primeiro pedido.');
   }
-  const initialPayment = order.payment === 'cash' ? 'cash' : 'pix';
+  syncCouponAvailability(order);
+  const initialPayment = isScheduledOrder(order) ? 'pix' : (order.payment === 'cash' ? 'cash' : 'pix');
   paymentRadios.forEach((radio) => {
     radio.checked = radio.value === initialPayment;
     radio.addEventListener('change', () => {
