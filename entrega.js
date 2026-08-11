@@ -179,7 +179,7 @@ function getScheduleDiscount(subtotal) {
 }
 
 function formatScheduleLabel() {
-  if (!isScheduledOrder() || !scheduleDateField?.value || !scheduleTimeField?.value) return 'Nao agendado';
+  if (!isScheduledOrder() || !scheduleDateField?.value || !scheduleTimeField?.value) return 'Ainda nao planejado';
   const [year, month, day] = scheduleDateField.value.split('-');
   return `${day}/${month}/${year} as ${scheduleTimeField.value}`;
 }
@@ -489,7 +489,7 @@ function saveOrder(event) {
   }
   const subtotal = getSubtotal();
   if (!isValidSchedule()) {
-    showError('Escolha uma data e um horario futuros entre 10h e 23h para agendar.');
+    showError('Escolha uma data e um horario futuros entre 10h e 23h para planejar seu fim de semana.');
     scheduleDateField?.focus();
     return;
   }

@@ -136,7 +136,7 @@
   function formatScheduleLabel(order) {
     const schedule = order?.schedule && typeof order.schedule === 'object' ? order.schedule : {};
     if (!isScheduledOrder(order) || !/^\d{4}-\d{2}-\d{2}$/.test(schedule.date || '') || !/^\d{2}:\d{2}$/.test(schedule.time || '')) {
-      return 'Nao agendado';
+      return 'Ainda nao planejado';
     }
     const [year, month, day] = schedule.date.split('-');
     return `${day}/${month}/${year} as ${schedule.time}`;
@@ -395,7 +395,7 @@
 
   function renderInstructions(method, order) {
     if (paymentNote && isScheduledOrder(order)) {
-      paymentNote.textContent = 'Pedido agendado: pagamento integral antecipado via Pix. O desconto de 15% foi aplicado aos itens; a taxa de entrega permanece a mesma.';
+      paymentNote.textContent = 'Fim de semana planejado: pagamento integral antecipado via Pix. O desconto de 15% foi aplicado aos itens; a taxa de entrega permanece a mesma.';
     } else if (paymentNote) {
       paymentNote.textContent = 'Pagamento disponivel somente via Pix. O QR Code sera gerado nesta pagina e o valor deve ser pago integralmente. Nao estamos utilizando pagamento na maquina por tempo indeterminado.';
     }
@@ -409,12 +409,12 @@
     } else {
       heading.textContent = 'Pagamento via Pix';
       if (isScheduledOrder(order)) {
-        text.textContent = `Pedido agendado para ${formatScheduleLabel(order)}. O valor integral de ${formatMoney(order.total)} deve ser pago antecipadamente via Pix.`;
+        text.textContent = `Seu pedido para o fim de semana esta planejado para ${formatScheduleLabel(order)}. O valor integral de ${formatMoney(order.total)} deve ser pago antecipadamente via Pix.`;
       }
       text.textContent = `Ao prosseguir, geraremos o QR Code e o código Pix de ${formatMoney(order.total)}. O pagamento deve ser integral.`;
     }
     if (isScheduledOrder(order)) {
-      text.textContent = `Pedido agendado para ${formatScheduleLabel(order)}. O valor integral de ${formatMoney(order.total)} deve ser pago antecipadamente via Pix.`;
+      text.textContent = `Seu pedido para o fim de semana esta planejado para ${formatScheduleLabel(order)}. O valor integral de ${formatMoney(order.total)} deve ser pago antecipadamente via Pix.`;
     }
     paymentInstructions.append(heading, text);
     syncCashChangeVisibility(method, order);
@@ -1007,7 +1007,7 @@
       '',
       `Endereço de entrega: ${cleanText(order.address, 240)}`,
       `Região de entrega: ${cleanText(order.regionLabel, 60)}`,
-      ...(isScheduledOrder(order) ? [`Pedido agendado para: ${formatScheduleLabel(order)}`, 'Pagamento integral antecipado via Pix'] : []),
+      ...(isScheduledOrder(order) ? [`Fim de semana planejado para: ${formatScheduleLabel(order)}`, 'Pagamento integral antecipado via Pix'] : []),
       `Forma de pagamento: ${methodLabel}`,
       ...(Number(order.discountAmount) > 0 ? [`Desconto aplicado: -${formatMoney(order.discountAmount)}`] : []),
       ...(order.couponCode ? [`Cupom de desconto: ${cleanText(order.couponCode, 32).toUpperCase()}`] : []),
@@ -1046,7 +1046,7 @@
     }
 
     if (isScheduledOrder(order) && method !== 'pix') {
-      showError('Pedidos agendados precisam ser pagos integralmente via Pix.');
+      showError('Pedidos planejados para o fim de semana precisam ser pagos integralmente via Pix.');
       return;
     }
 
