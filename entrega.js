@@ -89,7 +89,7 @@ const DELIVERY_REGION_LABELS = Object.freeze({
   'cascavel-regiao-do-lago': 'Região do Lago',
   'cascavel-santa-cruz': 'Santa Cruz',
   'cascavel-santa-felicidade': 'Santa Felicidade',
-  'cascavel-santo-inacio': 'Santo Inácio',
+  'cascavel-santo-inacio': 'FAG',
   'cascavel-santos-dumont': 'Santos Dumont',
   'cascavel-sao-cristovao': 'São Cristóvão',
   'cascavel-universitario': 'Universitário',
@@ -117,7 +117,7 @@ const PRODUCT_PRICES = Object.freeze({
   'Sprite 2L': 13.50,
   'Fanta Uva 2L': 13.50,
   'Fanta Laranja 2L': 13.50,
-  'Coca-Cola 2L Extra da Oferta': 6.50,
+  'Coca-Cola 2L Extra da Oferta': 7.90,
   'Água com Gás': 4.90,
   'Água sem Gás': 4.90,
   'Pudim Cremoso': 12.90,
@@ -295,7 +295,7 @@ function addUpsell(button) {
       price,
       qty: 1,
       details: name === 'Pudim Cremoso'
-        ? 'Sobremesa cremosa com calda de caramelo.'
+        ? 'Pudim cremoso de 320g com calda de caramelo.'
         : 'Brownie bites com chocolate 55%.'
     });
   }

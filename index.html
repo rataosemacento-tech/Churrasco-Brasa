@@ -108,11 +108,11 @@
         <ul class="hero-offer-items" aria-label="Itens da oferta">
           <li>Costela bovina 680g</li>
           <li>Picanha na brasa 730g</li>
-          <li>Costela suína + BBQ</li>
+          <li>Costela suína + BBQ 620g</li>
           <li>Frango na brasa inteiro</li>
           <li class="hero-offer-gift">1x maionese caseira 290g ou queijo coalho de 180g <em>brinde</em></li>
           <li class="hero-offer-extra">
-            <span>Coca-Cola 2L <em>+ outra por R$ 6,50</em></span>
+            <span>Coca-Cola 2L <em>+ outra por R$ 7,90</em></span>
             <button type="button" class="hero-offer-extra-btn" id="btn-hero-offer-coke-extra" disabled>Adicione a oferta primeiro</button>
           </li>
         </ul>
@@ -143,7 +143,7 @@
         </div>
         <div class="badge-divider"></div>
         <div class="badge">
-          <span class="badge-num">+7.000</span>
+          <span class="badge-num">+19.000</span>
           <span class="badge-label"><span class="site-icon site-icon--meat" aria-hidden="true"></span>Pedidos</span>
         </div>
         <div class="badge-divider"></div>
@@ -225,16 +225,33 @@
       </button>
     </div>
 
-    <aside class="menu-cross-sell" aria-labelledby="menu-cross-sell-title">
+    <aside class="menu-cross-sell is-collapsed" aria-labelledby="menu-cross-sell-title">
       <div class="menu-cross-sell-heading">
         <div>
           <p class="section-eyebrow"><span class="site-icon site-icon--spark" aria-hidden="true"></span>Complete seu pedido</p>
           <h2 id="menu-cross-sell-title">Da brasa ao doce</h2>
           <p>Escolhas rápidas para deixar seu pedido ainda mais completo.</p>
         </div>
-        <span class="menu-cross-sell-note">Combinações certeiras</span>
+        <div class="menu-cross-sell-tools">
+          <span class="menu-cross-sell-note">Combinações certeiras</span>
+          <button type="button" class="menu-cross-sell-toggle" id="menu-cross-sell-toggle" aria-expanded="false" aria-controls="menu-cross-sell-content" aria-label="Abrir ofertas de doces e bebidas" title="Abrir ofertas">
+            <span class="menu-cross-sell-toggle-arrow" aria-hidden="true">⌄</span>
+            <span class="menu-cross-sell-toggle-label">Abrir</span>
+          </button>
+        </div>
       </div>
-      <div class="menu-cross-sell-grid">
+      <div class="menu-cross-sell-spoiler" id="menu-cross-sell-spoiler" aria-hidden="true">
+        <span class="menu-cross-sell-spoiler-visual" aria-hidden="true">
+          <img src="menu_brownie_bites_55-2k.jpg" alt="" loading="lazy" decoding="async" />
+          <img src="bebida-coca-2l.jpg" alt="" loading="lazy" decoding="async" />
+        </span>
+        <span>
+          <strong>Coca-Cola 2L + Brownie Bites</strong>
+          <small>Oferta doce para fechar o pedido</small>
+        </span>
+      </div>
+      <div class="menu-cross-sell-content" id="menu-cross-sell-content" hidden>
+        <div class="menu-cross-sell-grid">
         <article class="menu-cross-sell-card menu-cross-sell-card--featured">
           <div class="menu-cross-sell-images" role="group" aria-label="Brownie bites e Coca-Cola 2L">
             <img src="menu_brownie_bites_55-2k.jpg" alt="Brownie bites com chocolate 55%" loading="lazy" decoding="async" />
@@ -269,11 +286,11 @@
           <img src="menu_pudim_cremoso-2k.jpg" alt="Pudim cremoso com calda de caramelo" loading="lazy" decoding="async" />
           <div>
             <span class="menu-cross-sell-kicker">Para finalizar</span>
-            <h3>Pudim Cremoso</h3>
+            <h3>Pudim Cremoso <small>320g</small></h3>
             <p>O toque doce ideal depois de uma refeição na brasa.</p>
             <div class="menu-cross-sell-action">
               <strong>R$ 12,90</strong>
-              <button type="button" class="btn-add" data-cart-name="Pudim Cremoso" data-cart-price="12.90" data-cart-details="Sobremesa cremosa com calda de caramelo.">Adicionar</button>
+              <button type="button" class="btn-add" data-cart-name="Pudim Cremoso" data-cart-price="12.90" data-cart-details="Pudim cremoso de 320g com calda de caramelo.">Adicionar</button>
             </div>
             <div class="menu-cross-sell-promo" aria-label="Oferta de dois pudins cremosos">
               <span class="menu-cross-sell-promo-badge">Oferta</span>
@@ -282,7 +299,7 @@
                 <small>Leve 2 e economize</small>
               </div>
               <strong class="menu-cross-sell-promo-price">R$ 20,90</strong>
-              <button type="button" class="btn-add menu-cross-sell-promo-button" data-cart-name="Pudim Cremoso - Oferta 2 unidades" data-cart-price="20.90" data-cart-details="Oferta com 2 Pudins Cremosos e calda de caramelo.">Adicionar oferta</button>
+              <button type="button" class="btn-add menu-cross-sell-promo-button" data-cart-name="Pudim Cremoso - Oferta 2 unidades" data-cart-price="20.90" data-cart-details="Oferta com 2 Pudins Cremosos de 320g e calda de caramelo.">Adicionar oferta</button>
             </div>
           </div>
         </article>
@@ -290,11 +307,11 @@
           <img src="menu_brownie_bites_55-2k.jpg" alt="Brownie bites com chocolate 55%" loading="lazy" decoding="async" />
           <div>
             <span class="menu-cross-sell-kicker">Favorito da casa</span>
-            <h3>Brownie da Brasa</h3>
+            <h3>Brownie da Brasa <small>320g</small></h3>
             <p>Brownie bites com chocolate 55%, macios e intensos.</p>
             <div class="menu-cross-sell-action">
               <strong>R$ 14,90</strong>
-              <button type="button" class="btn-add" data-cart-name="Brownie da Brasa" data-cart-price="14.90" data-cart-details="Brownie bites com chocolate 55%.">Adicionar</button>
+              <button type="button" class="btn-add" data-cart-name="Brownie da Brasa" data-cart-price="14.90" data-cart-details="Brownie bites de 320g com chocolate 55%.">Adicionar</button>
             </div>
             <div class="menu-cross-sell-promo" aria-label="Oferta de dois Brownies da Brasa">
               <span class="menu-cross-sell-promo-badge">Oferta</span>
@@ -303,10 +320,11 @@
                 <small>Leve 2 e economize R$ 4,90</small>
               </div>
               <strong class="menu-cross-sell-promo-price">R$ 24,90</strong>
-              <button type="button" class="btn-add menu-cross-sell-promo-button" data-cart-name="Brownie da Brasa - Oferta 2 unidades" data-cart-price="24.90" data-cart-details="Oferta com 2 Brownies bites com chocolate 55%.">Adicionar oferta</button>
+              <button type="button" class="btn-add menu-cross-sell-promo-button" data-cart-name="Brownie da Brasa - Oferta 2 unidades" data-cart-price="24.90" data-cart-details="Oferta com 2 Brownies bites de 320g com chocolate 55%.">Adicionar oferta</button>
             </div>
           </div>
         </article>
+        </div>
       </div>
     </aside>
 
@@ -330,6 +348,24 @@
         </div>
       </div>
 
+      <div class="menu-card combo-card combo-card-featured" data-category="acompanhamentos" id="card-arroz-soltinho">
+        <div class="menu-card-img-wrap">
+          <img src="acompanhamento-arroz-soltinho-620g.jpg" alt="Arroz soltinho com salsinha, 620g" class="menu-card-img arroz-soltinho-img" loading="lazy" decoding="async" />
+          <span class="menu-badge best">Oferta</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h3>Arroz Soltinho</h3>
+            <span class="menu-tag">Acompanhamento</span>
+          </div>
+          <p>Leve, soltinho e temperado na medida: o acompanhamento que completa qualquer carne da brasa.</p>
+          <div class="menu-card-footer">
+            <span class="menu-price">R$ 8,90 <small>/ 620g</small></span>
+            <button class="btn-add" id="add-arroz-soltinho" data-cart-name="Arroz Soltinho" data-cart-price="8.90" data-cart-details="Arroz soltinho com salsinha, 620g.">+ Adicionar</button>
+          </div>
+        </div>
+      </div>
+
       <!-- Bovinos -->
       <div class="menu-card" data-category="bovinos" id="card-picanha">
         <div class="menu-card-img-wrap">
@@ -343,7 +379,7 @@
           </div>
           <p>Picanha com capa de gordura, temperada no alho e sal grosso, assada lentamente na brasa.</p>
           <div class="menu-card-footer">
-            <span class="menu-price">R$ 39,90 <small>/ 700g</small></span>
+            <span class="menu-price">R$ 39,90 <small>/ 780g</small></span>
             <button class="btn-add" id="add-picanha" data-cart-name="Picanha na Brasa" data-cart-price="39.90">+ Adicionar</button>
           </div>
         </div>
@@ -761,13 +797,13 @@
         </div>
         <div class="menu-card-body">
           <div class="menu-card-header">
-            <h3>Pudim Cremoso</h3>
+            <h3>Pudim Cremoso <small>320g</small></h3>
             <span class="menu-tag">Sobremesa</span>
           </div>
           <p>Uma sobremesa cremosa e delicada para fechar o pedido com chave de ouro.</p>
           <div class="menu-card-footer">
-            <span class="menu-price">R$ 12,90 <small>/ unid</small></span>
-            <button class="btn-add" id="add-pudim" data-cart-name="Pudim Cremoso" data-cart-price="12.90">+ Adicionar</button>
+            <span class="menu-price">R$ 12,90 <small>/ 320g</small></span>
+            <button class="btn-add" id="add-pudim" data-cart-name="Pudim Cremoso" data-cart-price="12.90" data-cart-details="Pudim cremoso de 320g com calda de caramelo.">+ Adicionar</button>
           </div>
         </div>
       </div>
@@ -779,13 +815,13 @@
         </div>
         <div class="menu-card-body">
           <div class="menu-card-header">
-            <h3>Brownie da Brasa</h3>
+            <h3>Brownie da Brasa <small>320g</small></h3>
             <span class="menu-tag">Sobremesa</span>
           </div>
           <p>Brownie bites com chocolate 55%, macios por dentro e intensos no sabor para fechar o pedido com chave de ouro.</p>
           <div class="menu-card-footer">
-            <span class="menu-price">R$ 14,90 <small>/ unid</small></span>
-            <button class="btn-add" id="add-brownie" data-cart-name="Brownie da Brasa" data-cart-price="14.90">+ Adicionar</button>
+            <span class="menu-price">R$ 14,90 <small>/ 320g</small></span>
+            <button class="btn-add" id="add-brownie" data-cart-name="Brownie da Brasa" data-cart-price="14.90" data-cart-details="Brownie bites de 320g com chocolate 55%.">+ Adicionar</button>
           </div>
         </div>
       </div>
@@ -900,7 +936,7 @@
           Seu navegador não suporta vídeo HTML5.
         </video>
         <div class="sobre-badge-float" id="sobre-badge">
-          <span class="float-num">12</span>
+          <span class="float-num">6</span>
           <span class="float-text">anos de experiência</span>
         </div>
       </div>
@@ -908,7 +944,7 @@
         <p class="section-eyebrow"><span class="site-icon site-icon--fire" aria-hidden="true"></span>Nossa História</p>
         <h2 class="section-title">A PAIXÃO PELO <span class="red">FOGO</span></h2>
         <p class="sobre-desc">
-          Há mais de 12 anos, a família Braga transforma carvão, lenha e carne de qualidade em experiências inesquecíveis. O que começou como um churrasco de domingo virou uma paixão que tomou conta da vida de todos aqui.
+          Há mais de 6 anos, a família Braga transforma carvão, lenha e carne de qualidade em experiências inesquecíveis. O que começou como um churrasco de domingo virou uma paixão que tomou conta da vida de todos aqui.
         </p>
         <p class="sobre-desc">
           Cada peça é selecionada com carinho, temperada com respeito à tradição e assada com paciência — porque churrasco bom não tem pressa. E agora, esse sabor chega até você pelo nosso delivery.
@@ -1105,8 +1141,14 @@
         </div>
       </div>
       <div class="depo-card" id="depo-3">
-        <div class="depo-stars rating-stars" role="img" aria-label="5 de 5 estrelas"><span></span><span></span><span></span><span></span><span></span></div>
-        <p>"A entrega levou 1h30 porque o motoboy teve dificuldade para localizar minha casa; seria ótimo reforçar a confirmação do endereço e pedir um ponto de referência. Tirando isso, a comida estava deliciosa, a embalagem manteve tudo quentinho e o atendimento foi muito ágil e atencioso. Vou pedir novamente!"</p>
+        <div class="depo-stars rating-four-half" role="img" aria-label="4,5 de 5 estrelas">
+          <span class="rating-star" aria-hidden="true"></span>
+          <span class="rating-star" aria-hidden="true"></span>
+          <span class="rating-star" aria-hidden="true"></span>
+          <span class="rating-star" aria-hidden="true"></span>
+          <span class="rating-star half-star" aria-hidden="true"></span>
+        </div>
+        <p>"A entrega levou 50min porque o motoboy teve dificuldade para localizar minha casa; seria ótimo reforçar a confirmação do endereço e pedir um ponto de referência. Tirando isso, a comida estava deliciosa, a embalagem manteve tudo quentinho e o atendimento foi muito ágil e atencioso. Vou pedir novamente!"</p>
         <div class="depo-author">
           <div class="depo-avatar">JP</div>
           <div>
@@ -1283,8 +1325,7 @@
       </div>
       <div class="footer-contact" id="footer-contact">
         <h4>Contato</h4>
-        <p><span class="site-icon site-icon--pin" aria-hidden="true"></span>R. Tersilio Salgo, 575 — Santo Inácio, Cascavel/PR</p>
-        <p><span class="site-icon site-icon--phone" aria-hidden="true"></span>(45) 9953-4025</p>
+        <p><span class="site-icon site-icon--pin" aria-hidden="true"></span>R. Tersilio Salgo, 575 — FAG, Cascavel/PR</p>
         <p><span class="site-icon site-icon--clock" aria-hidden="true"></span>Atendimento diário: das 10h às 23h</p>
       </div>
     </div>
@@ -1339,7 +1380,7 @@
             <div>
               <strong>Pudim Cremoso</strong>
               <small>R$ 12,90 · para finalizar</small>
-              <button type="button" class="cart-upsell-button" data-cart-name="Pudim Cremoso" data-cart-price="12.90" data-cart-details="Sobremesa cremosa com calda de caramelo.">Adicionar</button>
+              <button type="button" class="cart-upsell-button" data-cart-name="Pudim Cremoso" data-cart-price="12.90" data-cart-details="Pudim cremoso de 320g com calda de caramelo.">Adicionar</button>
             </div>
           </article>
         </div>

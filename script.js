@@ -124,6 +124,36 @@ menuCategoryTabs.forEach(tab => {
 
 setMenuCategory('carnes');
 
+// ---- PAINEL DE DOCES E BEBIDAS ----
+const menuCrossSell = document.querySelector('.menu-cross-sell');
+const menuCrossSellToggle = document.getElementById('menu-cross-sell-toggle');
+const menuCrossSellContent = document.getElementById('menu-cross-sell-content');
+const menuCrossSellSpoiler = document.getElementById('menu-cross-sell-spoiler');
+
+function setMenuCrossSellCollapsed(collapsed) {
+  if (!menuCrossSell || !menuCrossSellToggle || !menuCrossSellContent || !menuCrossSellSpoiler) return;
+
+  menuCrossSell.classList.toggle('is-collapsed', collapsed);
+  menuCrossSellToggle.setAttribute('aria-expanded', String(!collapsed));
+  menuCrossSellToggle.setAttribute('aria-label', collapsed ? 'Abrir ofertas de doces e bebidas' : 'Recuar ofertas de doces e bebidas');
+  menuCrossSellToggle.title = collapsed ? 'Abrir ofertas' : 'Recuar ofertas';
+  menuCrossSellContent.hidden = collapsed;
+  menuCrossSellSpoiler.hidden = !collapsed;
+  menuCrossSellSpoiler.setAttribute('aria-hidden', String(!collapsed));
+
+  const arrow = menuCrossSellToggle.querySelector('.menu-cross-sell-toggle-arrow');
+  const label = menuCrossSellToggle.querySelector('.menu-cross-sell-toggle-label');
+  if (arrow) arrow.textContent = collapsed ? '⌄' : '⌃';
+  if (label) label.textContent = collapsed ? 'Abrir' : 'Recuar';
+}
+
+menuCrossSellToggle?.addEventListener('click', () => {
+  setMenuCrossSellCollapsed(!menuCrossSell?.classList.contains('is-collapsed'));
+});
+
+// O painel começa sempre recuado e só abre após o clique no botão.
+setMenuCrossSellCollapsed(true);
+
 // ---- CART STATE ----
 let cart = [];
 const cartStorageKey = 'churrasco-brasa-cart-draft';
@@ -191,7 +221,7 @@ const deliveryRegionLabels = Object.freeze({
   'cascavel-regiao-do-lago': 'Região do Lago',
   'cascavel-santa-cruz': 'Santa Cruz',
   'cascavel-santa-felicidade': 'Santa Felicidade',
-  'cascavel-santo-inacio': 'Santo Inácio',
+  'cascavel-santo-inacio': 'FAG',
   'cascavel-santos-dumont': 'Santos Dumont',
   'cascavel-sao-cristovao': 'São Cristóvão',
   'cascavel-universitario': 'Universitário',
@@ -206,6 +236,7 @@ const productPrices = Object.freeze({
   'Combo Churrasqueiro': 142.90,
   'Combo Iscas da Brasa': 41.90,
   'Vinagrete da Brasa': 9.90,
+  'Arroz Soltinho': 8.90,
   'Coca-Cola Lata': 6.50,
   'Coca-Cola 600ml': 8.50,
   'Budweiser 330ml': 4.60,
@@ -230,7 +261,7 @@ const productPrices = Object.freeze({
   'Sprite 2L': 13.50,
   'Fanta Uva 2L': 13.50,
   'Fanta Laranja 2L': 13.50,
-  'Coca-Cola 2L Extra da Oferta': 6.50,
+  'Coca-Cola 2L Extra da Oferta': 7.90,
   'Água com Gás': 4.90,
   'Água sem Gás': 4.90,
   'Pudim Cremoso': 12.90,
@@ -495,7 +526,7 @@ function addOfferToCart() {
     showToast('O prazo desta oferta terminou.');
     return;
   }
-  const details = 'Costela bovina 680g · Picanha na brasa 730g · Costela suína + BBQ · Frango na brasa inteiro · 1x maionese caseira 290g ou queijo coalho de 180g (brinde) · Coca-Cola 2L inclusa · Coca-Cola 2L extra por R$ 6,50 na oferta';
+  const details = 'Costela bovina 680g · Picanha na brasa 730g · Costela suína + BBQ 620g · Frango na brasa inteiro · 1x maionese caseira 290g ou queijo coalho de 180g (brinde) · Coca-Cola 2L inclusa · Coca-Cola 2L extra por R$ 7,90 na oferta';
   addToCart('Kit Brasa Completo', 88.90, details);
 }
 
@@ -514,7 +545,7 @@ function updateOfferExtraButton() {
     : extraAdded
       ? 'Coca-Cola extra adicionada'
       : offerAdded
-        ? 'Adicionar extra por R$ 6,50'
+        ? 'Adicionar extra por R$ 7,90'
         : 'Adicione a oferta primeiro';
 }
 
@@ -528,7 +559,7 @@ function addOfferCokeExtra() {
     showToast('Adicione primeiro o Kit Brasa Completo.');
     return;
   }
-  addToCart(offerExtraProductName, 6.50, 'Coca-Cola 2L extra com preço promocional da oferta');
+  addToCart(offerExtraProductName, 7.90, 'Coca-Cola 2L extra com preço promocional da oferta');
 }
 
 heroOfferButton?.addEventListener('click', addOfferToCart);
@@ -1133,7 +1164,7 @@ function getBaseChatResponse(message) {
   const text = normalizeChatText(message);
 
   if (/picanha/.test(text)) {
-    return 'A Picanha na Brasa custa R$ 39,90 e vem com 700g. Para pedir, toque em + Adicionar no cardápio e depois revise sua sacola.';
+    return 'A Picanha na Brasa custa R$ 39,90 e vem com 780g. Para pedir, toque em + Adicionar no cardápio e depois revise sua sacola.';
   }
   if (/(costela bovina|costela.*bovina)/.test(text)) {
     return 'A Costela Bovina Assada custa R$ 43,90 e vem com 720g. Ela é assada lentamente, fica suculenta e pode ser adicionada pelo botão + Adicionar.';
@@ -1151,10 +1182,10 @@ function getBaseChatResponse(message) {
     return 'Na aba Bebidas, os refrigerantes estão separados em Latas e 2L. A Coca-Cola 2L custa R$ 14,80. Também temos Budweiser 330ml por R$ 4,60, o Pack Budweiser com 12 latas por R$ 38,90 e Água com Gás e Água sem Gás por R$ 4,90 cada. Toque em + Adicionar na categoria desejada para escolher a opção e revisar a sacola.';
   }
   if (/(sobremesa|sobremesas|pudim|brownie)/.test(text)) {
-    return 'Na aba Doces temos Pudim Cremoso por R$ 12,90 ou 2 por R$ 20,90, além do Brownie da Brasa: brownie bites com chocolate 55% por R$ 14,90 ou 2 por R$ 24,90. Escolha seu doce e toque em + Adicionar para colocar na sacola.';
+    return 'Na aba Doces temos Pudim Cremoso de 320g por R$ 12,90 ou 2 por R$ 20,90, além do Brownie da Brasa de 320g: brownie bites com chocolate 55% por R$ 14,90 ou 2 por R$ 24,90. Escolha seu doce e toque em + Adicionar para colocar na sacola.';
   }
   if (/(oferta|promocao|promoção|kit.*brasa|88,90|88\.90)/.test(text)) {
-    return 'A Oferta Principal de Carnes sai de R$ 168,60 por R$ 88,90, uma economia de R$ 79,70, e inclui costela bovina 680g, picanha na brasa 730g, costela suína + BBQ, frango na brasa inteiro, 1x maionese caseira 290g ou queijo coalho de 180g como brinde e Coca-Cola 2L. Se levar outra Coca-Cola 2L junto com a oferta, ela sai por R$ 6,50. Toque em Adicionar oferta à sacola no hero para pedir.';
+    return 'A Oferta Principal de Carnes sai de R$ 168,60 por R$ 88,90, uma economia de R$ 79,70, e inclui costela bovina 680g, picanha na brasa 730g, costela suína + BBQ 620g, frango na brasa inteiro, 1x maionese caseira 290g ou queijo coalho de 180g como brinde e Coca-Cola 2L. Se levar outra Coca-Cola 2L junto com a oferta, ela sai por R$ 7,90. Toque em Adicionar oferta à sacola no hero para pedir.';
   }
   if (/combo\s*familia|familia.*combo/.test(text)) {
     return 'O Combo Família custa R$ 115,90 e serve até 4 pessoas: 500g de picanha, 600g de costela, farofa, vinagrete e 4 pães de alho.';
@@ -1172,7 +1203,7 @@ function getBaseChatResponse(message) {
     return 'Claro! Vou considerar quantidade de pessoas, preferência e orçamento para indicar a melhor opção para o seu pedido.';
   }
   if (/(cardapio|menu|preco|valor|custa|quanto|carnes|opcoes|opcao)/.test(text) && !/(entrega|prazo|demora|motoboy|taxa|frete|tempo)/.test(text)) {
-    return ['Nosso cardápio está assim:', '• Picanha — R$ 39,90 / 700g', '• Costela Bovina Assada — R$ 43,90 / 720g', '• Costela Suína — R$ 39,90 / 800g', '• Frango — R$ 26,90 / unidade', '• Bebidas — a partir de R$ 4,90', '• Doces — a partir de R$ 12,90', '• Combos — a partir de R$ 41,90'].join('\n');
+    return ['Nosso cardápio está assim:', '• Picanha — R$ 39,90 / 780g', '• Costela Bovina Assada — R$ 43,90 / 720g', '• Costela Suína — R$ 39,90 / 800g', '• Frango — R$ 26,90 / unidade', '• Bebidas — a partir de R$ 4,90', '• Doces — a partir de R$ 12,90', '• Combos — a partir de R$ 41,90'].join('\n');
   }
   if (/(pagamento|pix|cartao|credito|debito|dinheiro|antecip)/.test(text)) {
     return 'Aceitamos Pix ou dinheiro. No Pix, o pagamento é antecipado; em dinheiro, o pagamento acontece no momento da entrega. Não utilizamos máquina de cartão por tempo indeterminado.';
@@ -1185,7 +1216,7 @@ function getBaseChatResponse(message) {
     return 'Atendemos aos sábados e domingos, das 10h às 23h.';
   }
   if (/(endereco|onde fica|localizacao|cascavel|rua)/.test(text)) {
-    return 'Estamos na R. Tersilio Salgo, 575 — Santo Inácio, Cascavel/PR. Para pedir, use o cardápio do site e informe o endereço de entrega.';
+    return 'Estamos na R. Tersilio Salgo, 575 — FAG, Cascavel/PR. Para pedir, use o cardápio do site e informe o endereço de entrega.';
   }
   if (/(status|rastrear|acompanhar|ja fiz|pedido confirmado)/.test(text)) {
     return 'Este chat orienta pedidos feitos pelo site, mas não mostra rastreamento em tempo real. Posso ajudar a revisar itens, pagamento e prazo de entrega.';
@@ -1236,7 +1267,7 @@ function getChatUpsell(normalizedText) {
     return 'Para fechar com chave de ouro, sugiro o combo Coca-Cola 2L + Brownie Bites: de R$ 28,40 por R$ 21,90.';
   }
   if (/(oferta|promocao|kit.*brasa)/.test(normalizedText)) {
-    return 'Na oferta, você também pode adicionar outra Coca-Cola 2L por apenas R$ 6,50; para a sobremesa, o Brownie da Brasa custa R$ 14,90.';
+    return 'Na oferta, você também pode adicionar outra Coca-Cola 2L por apenas R$ 7,90; para a sobremesa, o Brownie da Brasa de 320g custa R$ 14,90.';
   }
   return 'Para completar o pedido, sugiro o combo Coca-Cola 2L + Brownie Bites: de R$ 28,40 por R$ 21,90. É só tocar em + Adicionar.';
 }
@@ -1252,19 +1283,19 @@ function getChatUpsellProducts(normalizedText) {
     name: 'Coca-Cola 2L Extra da Oferta',
     price: productPrices['Coca-Cola 2L Extra da Oferta'],
     image: 'bebida-coca-2l.jpg',
-    details: 'Coca-Cola 2L extra por R$ 6,50 na oferta.'
+    details: 'Coca-Cola 2L extra por R$ 7,90 na oferta.'
   };
   const pudding = {
     name: 'Pudim Cremoso',
     price: productPrices['Pudim Cremoso'],
     image: 'menu_pudim_cremoso-2k.jpg',
-    details: 'Sobremesa cremosa com calda de caramelo.'
+    details: 'Pudim cremoso de 320g com calda de caramelo.'
   };
   const brownie = {
     name: 'Brownie da Brasa',
     price: productPrices['Brownie da Brasa'],
     image: 'menu_brownie_bites_55-2k.jpg',
-    details: 'Brownie bites com chocolate 55%.'
+    details: 'Brownie bites de 320g com chocolate 55%.'
   };
   const dessertCombo = {
     name: 'Combo Coca-Cola 2L + Brownie Bites',
@@ -1337,6 +1368,7 @@ const chatOrderCatalog = Object.freeze([
   { name: 'Combo Churrasqueiro', aliases: ['combo churrasqueiro'] },
   { name: 'Combo Iscas da Brasa', aliases: ['combo iscas', 'iscas da brasa'] },
   { name: 'Vinagrete da Brasa', aliases: ['vinagrete', 'acompanhamento', 'acompanhamentos'] },
+  { name: 'Arroz Soltinho', aliases: ['arroz soltinho', 'arroz'] },
   { name: 'Coca-Cola 2L', aliases: ['coca cola 2l', 'coca 2l'] },
   { name: 'Coca-Cola Lata', aliases: ['coca cola lata', 'coca lata'] },
   { name: 'Budweiser 330ml', aliases: ['budweiser', 'bud 330ml', 'budweiser 330'] },
